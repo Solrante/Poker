@@ -1,0 +1,12 @@
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\bin\Debug\Cliente Poker.exe.config
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\bin\Debug\Cliente Poker.exe
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\bin\Debug\Cliente Poker.pdb
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente Poker.csprojResolveAssemblyReference.cache
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente_Poker.MenuPrincipal.resources
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente_Poker.Properties.Resources.resources
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente_Poker.SalaPoker.resources
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente Poker.csproj.GenerateResource.Cache
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente Poker.csproj.CoreCompileInputs.cache
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente Poker.exe
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente Poker.pdb
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Cliente Poker\obj\Debug\Cliente_Poker.Login.resources
