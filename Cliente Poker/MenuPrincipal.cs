@@ -12,6 +12,7 @@ namespace Cliente_Poker
 {
     public partial class MenuPrincipal : Form
     {
+        Login login;
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -20,9 +21,17 @@ namespace Cliente_Poker
         private void Form1_Load(object sender, EventArgs e)
         {
             Hide();
-            Login login = new Login();
-            login.ShowDialog();
-            Show();
+            login = new Login();
+            DialogResult res;
+            while (!login.loginValido)
+            {
+                res = login.ShowDialog();
+                if (res == DialogResult.Cancel)
+                {
+                    Environment.Exit(0);
+                }                
+            }
+            
         }
     }
 }
