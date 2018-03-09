@@ -14,6 +14,9 @@ namespace Cliente_Poker
     {
         public bool loginValido = false;
         private int centroVertical;
+        private string IP_SERVIDOR = "127.0.0.1";
+        private int puerto = 31416;
+
         public Login()
         {
             InitializeComponent();
@@ -23,7 +26,7 @@ namespace Cliente_Poker
         {
             string credenciales;
             credenciales = txtCorreo.Text + "," + txtContraseña.Text;
-            MessageBox.Show(credenciales);
+            
         }
 
         private void Login_Load(object sender, EventArgs e)

@@ -30,9 +30,18 @@ namespace Servidor_Poker
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
         }
 
-        public Boolean usuarioRegistrado(Usuario usuario)
+        public Boolean usuarioRegistrado(string credenciales)
         {
-            return false;
+            string a = "aecm,casa";
+            if (credenciales==a)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }
