@@ -32,7 +32,7 @@ namespace Servidor_Poker
 
         public Boolean usuarioRegistrado(Usuario usuario)
         {
-            return false;//
+            return false;
         }
     }
 }
