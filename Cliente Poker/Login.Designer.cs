@@ -35,7 +35,7 @@
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.btnEntrar = new System.Windows.Forms.Button();
             this.btnRegistrarse = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblCorreo
@@ -90,16 +90,16 @@
             this.btnRegistrarse.Text = "Registrarse";
             this.btnRegistrarse.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // lblError
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(95, 155);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Datos erroneos";
-            this.label2.Visible = false;
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(95, 155);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(79, 13);
+            this.lblError.TabIndex = 6;
+            this.lblError.Text = "Datos erroneos";
+            this.lblError.Visible = false;
             // 
             // Login
             // 
@@ -107,7 +107,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblError);
             this.Controls.Add(this.btnRegistrarse);
             this.Controls.Add(this.btnEntrar);
             this.Controls.Add(this.txtContraseña);
@@ -134,6 +134,6 @@
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.Button btnEntrar;
         private System.Windows.Forms.Button btnRegistrarse;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblError;
     }
 }

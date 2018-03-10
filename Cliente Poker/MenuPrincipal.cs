@@ -13,6 +13,7 @@ namespace Cliente_Poker
     public partial class MenuPrincipal : Form
     {
         Login login;
+        ConexionServidor conexion;
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -21,7 +22,8 @@ namespace Cliente_Poker
         private void Form1_Load(object sender, EventArgs e)
         {
             Hide();
-            login = new Login();
+            conexion = new ConexionServidor();
+            login = new Login(conexion);            
             DialogResult res;
             while (!login.loginValido)
             {
@@ -32,6 +34,11 @@ namespace Cliente_Poker
                 }                
             }
             
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            conexion.cerrarConexion();
         }
     }
 }

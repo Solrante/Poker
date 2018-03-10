@@ -14,19 +14,31 @@ namespace Cliente_Poker
     {
         public bool loginValido = false;
         private int centroVertical;
-        private string IP_SERVIDOR = "127.0.0.1";
-        private int puerto = 31416;
+        private ConexionServidor conexion;
 
-        public Login()
+        public Login(ConexionServidor conexion)
         {
             InitializeComponent();
+            this.conexion = conexion;
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
             string credenciales;
             credenciales = txtCorreo.Text + "," + txtContraseña.Text;
-            
+            Console.WriteLine("Mando a la conexion las credenciales");
+            conexion.enviarMensaje(credenciales);
+            string respuesta = conexion.recibirMensaje();
+            if (respuesta == "Login - Invalido")
+            {
+                lblError.Visible = true;
+            }
+            else
+            {
+                loginValido = true;
+                DialogResult = DialogResult.OK;
+            }
+
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -37,6 +49,7 @@ namespace Cliente_Poker
             txtCorreo.Location = new Point(centroVertical - txtCorreo.Width / 2, txtCorreo.Location.Y);
             txtContraseña.Location = new Point(centroVertical - txtContraseña.Width / 2, txtContraseña.Location.Y);
             btnEntrar.Location = new Point(centroVertical - btnEntrar.Width / 2, btnEntrar.Location.Y);
+            lblError.Location = new Point(centroVertical - lblError.Width / 2, lblError.Location.Y);
         }
     }
 }

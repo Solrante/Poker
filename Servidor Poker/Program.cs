@@ -40,7 +40,7 @@ namespace Servidor_Poker
             }
             s.Listen(10);
             Socket sCliente = null;
-
+            Console.WriteLine("En espera");
             while (enEjecucion)
             {
                 sCliente = s.Accept();
@@ -53,36 +53,43 @@ namespace Servidor_Poker
 
         static void hiloLogin(object cliente)
         {
+            Console.WriteLine("Entra usuario en login");
             string credenciales = "";
             Socket sCliente = (Socket)cliente;
             IPEndPoint endPoint = (IPEndPoint)sCliente.RemoteEndPoint;
             NetworkStream ns = new NetworkStream(sCliente);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
+            while (true)
+            {
 
-            try
-            {
-                credenciales = sr.ReadLine();
-            }
-            catch (IOException)
-            {
-                credenciales = "";
-            }
-            if (credenciales == null)
-            {
-                credenciales = "";
-            }
+                try
+                {
+                    Console.WriteLine("Intento leer credenciales");
+                    credenciales = sr.ReadLine();
+                }
+                catch (IOException)
+                {
+                    credenciales = "";
+                }
+                if (credenciales == null)
+                {
+                    credenciales = "";
+                }
 
-            if (bd.usuarioRegistrado(credenciales))
-            {
-                sw.WriteLine("Login - Valido");
-                sw.Flush();
-                new Thread(hiloSalaEspera).Start(sCliente);
-            }
-            else
-            {
-                sw.WriteLine("Login - Invalido");
-                sw.Flush();               
+                Console.WriteLine("Credenciales recibidas : " + credenciales);
+                if (bd.usuarioRegistrado(credenciales))
+                {
+                    sw.WriteLine("Login - Valido");
+                    sw.Flush();
+                    new Thread(hiloSalaEspera).Start(sCliente);
+                    break;
+                }
+                else
+                {
+                    sw.WriteLine("Login - Invalido");
+                    sw.Flush();
+                } 
             }
             if (sr != null)
             {
@@ -96,14 +103,16 @@ namespace Servidor_Poker
             {
                 ns.Close();
             }
-            sCliente.Close();
+            //sCliente.Close();
 
         }
 
         static void hiloSalaEspera(object cliente)
         {
+
             Socket sCliente = (Socket)cliente;
             IPEndPoint endPoint = (IPEndPoint)sCliente.RemoteEndPoint;
+            Console.WriteLine("Cliente en sala de espera : " + endPoint.Address);
             NetworkStream ns = new NetworkStream(sCliente);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
