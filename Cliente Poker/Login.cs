@@ -13,7 +13,7 @@ namespace Cliente_Poker
     public partial class Login : Form
     {
         public bool loginValido = false;
-        private int centroVertical;
+        private int centroHorizontal;
         private ConexionServidor conexion;
 
         public Login(ConexionServidor conexion)
@@ -27,6 +27,7 @@ namespace Cliente_Poker
             string credenciales;
             credenciales = txtCorreo.Text + "," + txtContraseña.Text;
             Console.WriteLine("Mando a la conexion las credenciales");
+            conexion.abrirConexion();
             conexion.enviarMensaje(credenciales);
             string respuesta = conexion.recibirMensaje();
             if (respuesta == "Login - Invalido")
@@ -43,13 +44,13 @@ namespace Cliente_Poker
 
         private void Login_Load(object sender, EventArgs e)
         {
-            centroVertical = ClientSize.Width / 2;
-            lblCorreo.Location = new Point(centroVertical - lblCorreo.Width / 2, lblCorreo.Location.Y);
-            lblContraseña.Location = new Point(centroVertical - lblContraseña.Width / 2, lblContraseña.Location.Y);
-            txtCorreo.Location = new Point(centroVertical - txtCorreo.Width / 2, txtCorreo.Location.Y);
-            txtContraseña.Location = new Point(centroVertical - txtContraseña.Width / 2, txtContraseña.Location.Y);
-            btnEntrar.Location = new Point(centroVertical - btnEntrar.Width / 2, btnEntrar.Location.Y);
-            lblError.Location = new Point(centroVertical - lblError.Width / 2, lblError.Location.Y);
+            centroHorizontal = ClientSize.Width / 2;
+            lblCorreo.Location = new Point(centroHorizontal - lblCorreo.Width / 2, lblCorreo.Location.Y);
+            lblContraseña.Location = new Point(centroHorizontal - lblContraseña.Width / 2, lblContraseña.Location.Y);
+            txtCorreo.Location = new Point(centroHorizontal - txtCorreo.Width / 2, txtCorreo.Location.Y);
+            txtContraseña.Location = new Point(centroHorizontal - txtContraseña.Width / 2, txtContraseña.Location.Y);
+            btnEntrar.Location = new Point(centroHorizontal - btnEntrar.Width / 2, btnEntrar.Location.Y);
+            lblError.Location = new Point(centroHorizontal - lblError.Width / 2, lblError.Location.Y);
         }
     }
 }

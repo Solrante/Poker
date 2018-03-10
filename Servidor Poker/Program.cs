@@ -15,11 +15,14 @@ namespace Servidor_Poker
         static private BaseDatos bd;
         static private List<Usuario> usuariosOnline = new List<Usuario>();
         static List<StreamWriter> salidasUsuarios = new List<StreamWriter>();
+        static List<Sala> salas = new List<Sala>();
         static readonly private object l = new object();
         static int puerto = 31416;
+        static int numeroSalas;
         static void Main(string[] args)
         {
             bd = new BaseDatos();
+            crearSalas();
             bool enEjecucion = true;
             bool puertoInvalido = true;
             IPEndPoint ie = new IPEndPoint(IPAddress.Any, puerto);
@@ -51,6 +54,14 @@ namespace Servidor_Poker
             s.Close();
         }
 
+        static void crearSalas()
+        {
+            salas.Add(new Sala("1,1,5"));
+            salas.Add(new Sala("2,2,10"));
+            salas.Add(new Sala("3,4,20"));
+            numeroSalas = salas.Count();
+        }
+
         static void hiloLogin(object cliente)
         {
             Console.WriteLine("Entra usuario en login");
@@ -60,37 +71,37 @@ namespace Servidor_Poker
             NetworkStream ns = new NetworkStream(sCliente);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
-            while (true)
+            //while (true)
+            //{
+
+            try
             {
-
-                try
-                {
-                    Console.WriteLine("Intento leer credenciales");
-                    credenciales = sr.ReadLine();
-                }
-                catch (IOException)
-                {
-                    credenciales = "";
-                }
-                if (credenciales == null)
-                {
-                    credenciales = "";
-                }
-
-                Console.WriteLine("Credenciales recibidas : " + credenciales);
-                if (bd.usuarioRegistrado(credenciales))
-                {
-                    sw.WriteLine("Login - Valido");
-                    sw.Flush();
-                    new Thread(hiloSalaEspera).Start(sCliente);
-                    break;
-                }
-                else
-                {
-                    sw.WriteLine("Login - Invalido");
-                    sw.Flush();
-                } 
+                Console.WriteLine("Intento leer credenciales");
+                credenciales = sr.ReadLine();
             }
+            catch (IOException)
+            {
+                credenciales = "";
+            }
+            if (credenciales == null)
+            {
+                credenciales = "";
+            }
+
+            Console.WriteLine("Credenciales recibidas : " + credenciales);
+            if (bd.usuarioRegistrado(credenciales))
+            {
+                sw.WriteLine("Login - Valido");
+                sw.Flush();
+                new Thread(hiloSalaEspera).Start(sCliente);
+                //break;
+            }
+            else
+            {
+                sw.WriteLine("Login - Invalido");
+                sw.Flush();
+            }
+            //}
             if (sr != null)
             {
                 sr.Close();
@@ -109,13 +120,21 @@ namespace Servidor_Poker
 
         static void hiloSalaEspera(object cliente)
         {
-
             Socket sCliente = (Socket)cliente;
             IPEndPoint endPoint = (IPEndPoint)sCliente.RemoteEndPoint;
             Console.WriteLine("Cliente en sala de espera : " + endPoint.Address);
             NetworkStream ns = new NetworkStream(sCliente);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
+
+            Console.WriteLine("Mandando numero de salas");
+            sw.WriteLine(numeroSalas);
+            sw.Flush();
+            foreach (Sala sala in salas)
+            {
+                sw.WriteLine(sala.ToString());
+                sw.Flush();
+            }
             while (true)
             {
 

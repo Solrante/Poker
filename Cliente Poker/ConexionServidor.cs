@@ -21,6 +21,21 @@ namespace Cliente_Poker
 
         public ConexionServidor()
         {
+            
+        }
+
+        public void enviarMensaje(string mensaje)
+        {
+            sw.WriteLine(mensaje);
+            sw.Flush();
+        }
+        public string recibirMensaje()
+        {
+            return sr.ReadLine();
+        }
+
+        public void abrirConexion()
+        {
             try
             {
                 servidor = new IPEndPoint(IPAddress.Parse(IP_SERVIDOR), puerto);
@@ -41,16 +56,6 @@ namespace Cliente_Poker
             ns = new NetworkStream(sServidor);
             sr = new StreamReader(ns);
             sw = new StreamWriter(ns);
-        }
-
-        public void enviarMensaje(string mensaje)
-        {
-            sw.WriteLine(mensaje);
-            sw.Flush();
-        }
-        public string recibirMensaje()
-        {
-            return sr.ReadLine();
         }
 
         public void cerrarConexion()
