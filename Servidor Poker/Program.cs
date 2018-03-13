@@ -14,15 +14,21 @@ namespace Servidor_Poker
     {
         static private BaseDatos bd;
         static private List<Usuario> usuariosOnline = new List<Usuario>();
-        static List<StreamWriter> salidasUsuarios = new List<StreamWriter>();
         static List<Sala> salas = new List<Sala>();
         static readonly private object l = new object();
         static int puerto = 31416;
         static int numeroSalas;
         static void Main(string[] args)
         {
+            //Creamos conexion a la base da datos
             bd = new BaseDatos();
+            //Creamos los objetos tipo sala y lanzamos un hilo para cada una
             crearSalas();
+            foreach (Sala sala in salas)
+            {
+                new Thread(salaJuego).Start(sala);
+            }
+            //Definimos los datos del servidor y lo ejecutamos
             bool enEjecucion = true;
             bool puertoInvalido = true;
             IPEndPoint ie = new IPEndPoint(IPAddress.Any, puerto);
@@ -56,9 +62,9 @@ namespace Servidor_Poker
 
         static void crearSalas()
         {
-            salas.Add(new Sala("1,1,5"));
-            salas.Add(new Sala("2,2,10"));
-            salas.Add(new Sala("3,4,20"));
+            salas.Add(new Sala("0,1,5"));
+            salas.Add(new Sala("1,2,10"));
+            salas.Add(new Sala("2,4,20"));
             numeroSalas = salas.Count();
         }
 
@@ -71,9 +77,6 @@ namespace Servidor_Poker
             NetworkStream ns = new NetworkStream(sCliente);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
-            //while (true)
-            //{
-
             try
             {
                 Console.WriteLine("Intento leer credenciales");
@@ -93,15 +96,13 @@ namespace Servidor_Poker
             {
                 sw.WriteLine("Login - Valido");
                 sw.Flush();
-                new Thread(hiloSalaEspera).Start(sCliente);
-                //break;
+                new Thread(hiloSalaEspera).Start(new Usuario(sCliente));
             }
             else
             {
                 sw.WriteLine("Login - Invalido");
                 sw.Flush();
             }
-            //}
             if (sr != null)
             {
                 sr.Close();
@@ -114,30 +115,55 @@ namespace Servidor_Poker
             {
                 ns.Close();
             }
-            //sCliente.Close();
-
         }
 
-        static void hiloSalaEspera(object cliente)
+        static void hiloSalaEspera(object usu)
         {
-            Socket sCliente = (Socket)cliente;
-            IPEndPoint endPoint = (IPEndPoint)sCliente.RemoteEndPoint;
-            Console.WriteLine("Cliente en sala de espera : " + endPoint.Address);
-            NetworkStream ns = new NetworkStream(sCliente);
-            StreamReader sr = new StreamReader(ns);
-            StreamWriter sw = new StreamWriter(ns);
-
+            Usuario usuario = usu as Usuario;
+            lock (l)
+            {
+                usuariosOnline.Add(usuario);
+            }
+            Console.WriteLine("Mandando usuario : " + usuario.ToString());
+            usuario.mandarMensaje(usuario.ToString());
             Console.WriteLine("Mandando numero de salas");
-            sw.WriteLine(numeroSalas);
-            sw.Flush();
+            usuario.mandarMensaje(numeroSalas + "");
             foreach (Sala sala in salas)
             {
-                sw.WriteLine(sala.ToString());
-                sw.Flush();
+                usuario.mandarMensaje(sala.ToString());
             }
             while (true)
             {
+                string mensaje = usuario.leerMensaje();
+                if (mensaje == "Desconexion")
+                {
+                    lock (l)
+                    {
+                        Console.WriteLine(usuario.Correo + " : Se desconecta");
+                        usuariosOnline.Remove(usuario);
+                        usuario.cerraSesion();
+                    }
+                }
+                else
+                {
+                    int numSala = Convert.ToInt32(mensaje);
+                    salas[numSala].Usuarios.Add(usuario);
+                }
+            }
+        }
+        static void hiloJuego()
+        {
 
+        }
+
+        static void salaJuego(object s)
+        {
+            Sala sala = s as Sala;
+            Console.WriteLine("Sala arrancada : " + sala.NumSala + "\n\rNumero de usuarios en sala : " + sala.Usuarios.Count);
+            while (true)
+            {
+                Thread.Sleep(1000);
+                Console.WriteLine("Sala : " + sala.NumSala + "\n\rNumero de usuarios en sala : " + sala.Usuarios.Count);
             }
         }
     }

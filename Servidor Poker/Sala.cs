@@ -8,6 +8,7 @@ namespace Servidor_Poker
 {
     class Sala
     {
+        public List<Usuario> Usuarios = new List<Usuario>();
         public Sala(string datos)
         {
             string[] info = datos.Split(',');

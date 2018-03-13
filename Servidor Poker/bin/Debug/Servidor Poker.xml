@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Servidor Poker</name>
+    </assembly>
+    <members>
+        <member name="M:Servidor_Poker.Usuario.mandarMensaje(System.String)">
+            <summary>
+            Envia un mensaje al usuario a través de su flujo de datos
+            </summary>
+            <param name="mensaje">Mensaje a enviar</param>
+        </member>
+    </members>
+</doc>

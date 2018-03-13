@@ -30,7 +30,7 @@ namespace Servidor_Poker
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
         }
 
-        public Boolean usuarioRegistrado(string credenciales)
+        public bool usuarioRegistrado(string credenciales)
         {
             string a = "aecm,casa";
             if (credenciales==a)
