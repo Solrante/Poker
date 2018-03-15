@@ -9,11 +9,11 @@ namespace Servidor_Poker
 {
     class BaseDatos
     {
-        private MySqlConnection connection;
-        private string server;
-        private string database;
-        private string uid;
-        private string password;
+        private MySqlConnection conexion;
+        private const string server = "localhost";
+        private const string database = "poker";
+        private const string uid = "root";
+        private const string password = "";
 
         public BaseDatos()
         {
@@ -22,26 +22,28 @@ namespace Servidor_Poker
 
         private void InicializarConexion()
         {
-            server = "localhost";
-            database = "poker";
-            uid = "root";
-            password = "";
-            connection = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" +
+            conexion = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
         }
 
         public bool usuarioRegistrado(string credenciales)
         {
-            string a = "aecm,casa";
-            if (credenciales==a)
+            string consulta = String.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
+                credenciales.Split(',')[0], credenciales.Split(',')[1]);
+
+            MySqlCommand cmd = new MySqlCommand(consulta, conexion);
+            conexion.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
             {
+                conexion.Close();
                 return true;
             }
             else
             {
+                conexion.Close();
                 return false;
             }
-            
         }
     }
 }

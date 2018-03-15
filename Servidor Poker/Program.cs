@@ -159,11 +159,11 @@ namespace Servidor_Poker
         static void salaJuego(object s)
         {
             Sala sala = s as Sala;
-            Console.WriteLine("Sala arrancada : " + sala.NumSala + "\n\rNumero de usuarios en sala : " + sala.Usuarios.Count);
+            //Console.WriteLine("Sala arrancada : " + sala.NumSala + "\n\rNumero de usuarios en sala : " + sala.Usuarios.Count);
             while (true)
             {
                 Thread.Sleep(1000);
-                Console.WriteLine("Sala : " + sala.NumSala + "\n\rNumero de usuarios en sala : " + sala.Usuarios.Count);
+                //Console.WriteLine("Sala : " + sala.NumSala + "\n\rNumero de usuarios en sala : " + sala.Usuarios.Count);
             }
         }
     }
