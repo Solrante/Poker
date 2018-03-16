@@ -28,7 +28,7 @@ namespace Servidor_Poker
 
         public bool usuarioRegistrado(string credenciales)
         {
-            string consulta = String.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
+            string consulta = string.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
                 credenciales.Split(',')[0], credenciales.Split(',')[1]);
 
             MySqlCommand cmd = new MySqlCommand(consulta, conexion);
@@ -44,6 +44,25 @@ namespace Servidor_Poker
                 conexion.Close();
                 return false;
             }
+        }
+
+        public string leerUsuarioCompleto(string credenciales)
+        {
+            string datos = "";
+            string consulta = string.Format("select * from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
+                credenciales.Split(',')[0], credenciales.Split(',')[1]);
+            MySqlCommand cmd = new MySqlCommand(consulta, conexion);
+            conexion.Open();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                datos += reader.GetInt32("id") + ",";
+                datos += reader.GetString("correo") + ",";
+                datos += reader.GetString(2) + ",";
+                datos += reader.GetFloat("saldo");
+
+            }
+            return datos;
         }
     }
 }

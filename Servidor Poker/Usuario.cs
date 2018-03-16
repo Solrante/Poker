@@ -15,56 +15,37 @@ namespace Servidor_Poker
         private StreamWriter sw;
         private StreamReader sr;
 
-        public Usuario(Socket socket)
+        public Usuario(Socket socket, string datos)
         {
             this.socket = socket;
+
+            guardarDatos(datos);
             generarFlujos();
         }
 
+        private void guardarDatos(string datos)
+        {
+            ID = Convert.ToInt32(datos.Split(',')[0]);
+            Correo = datos.Split(',')[1];
+            Contraseña = datos.Split(',')[2];
+            Saldo = Convert.ToDouble(datos.Split(',')[3]);
+
+        }
         private void generarFlujos()
         {
             ns = new NetworkStream(socket);
             sr = new StreamReader(ns);
             sw = new StreamWriter(ns);
         }
-        private string correo;
-        public string Correo
-        {
-            set
-            {
-                correo = value;
-            }
-            get
-            {
-                return correo;
-            }
-        }
 
-        private string contraseña;
-        public string Contraseña
-        {
-            set
-            {
-                contraseña = value;
-            }
-            get
-            {
-                return contraseña;
-            }
-        }
+        public int ID { get; set; }
+       
+        public string Correo { set; get; }
 
-        private float saldo;
-        public float Saldo
-        {
-            set
-            {
-                saldo = value;
-            }
-            get
-            {
-                return saldo;
-            }
-        }
+        public string Contraseña { set; get; }
+
+        public double Saldo { set; get; }
+
         /// <summary>
         /// Envia un mensaje al usuario a través de su flujo de datos
         /// </summary>
@@ -96,7 +77,7 @@ namespace Servidor_Poker
 
         public override string ToString()
         {
-            return contraseña + "," + saldo;
+            return Correo + "," + Saldo;
         }
 
         public bool cerraSesion()

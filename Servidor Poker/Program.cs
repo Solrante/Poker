@@ -95,8 +95,8 @@ namespace Servidor_Poker
             if (bd.usuarioRegistrado(credenciales))
             {
                 sw.WriteLine("Login - Valido");
-                sw.Flush();
-                new Thread(hiloSalaEspera).Start(new Usuario(sCliente));
+                sw.Flush();                
+                new Thread(hiloSalaEspera).Start(new Usuario(sCliente, bd.leerUsuarioCompleto(credenciales)));
             }
             else
             {

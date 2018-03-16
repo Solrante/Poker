@@ -17,7 +17,7 @@ namespace Cliente_Poker
         List<Sala> salas = new List<Sala>();
         int oriY = 30;
         int centroHorizontal;
-        string datosUsuario = "{0} , Saldo : {1}";
+        string platillaInformacion = "{0} , Saldo : {1}";
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace Cliente_Poker
         private void Form1_Load(object sender, EventArgs e)
         {
             Hide();
-            lblUsuario.Text = datosUsuario;
+            lblUsuario.Text = platillaInformacion;
             centroHorizontal = ClientSize.Width / 2;
             conexion = new ConexionServidor();
             login = new Login(conexion);
@@ -45,7 +45,7 @@ namespace Cliente_Poker
         private void recibirUsuario()
         {
             string[] usuario = conexion.recibirMensaje().Split(',');
-            lblUsuario.Text = String.Format(datosUsuario, usuario[0], usuario[1]);
+            lblUsuario.Text = String.Format(platillaInformacion, usuario[0], usuario[1]);
         }
 
         private void recibirSalas()
@@ -83,7 +83,6 @@ namespace Cliente_Poker
         private void btnSalir_Click(object sender, EventArgs e)
         {
             conexion.enviarMensaje("Desconexion");
-            //conexion.cerrarConexion();
         }
 
         private void btnSala_Click(object sender, EventArgs e)

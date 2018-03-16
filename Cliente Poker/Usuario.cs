@@ -4,10 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Servidor_Poker
+namespace Cliente_Poker
 {
     class Usuario
     {
+
+        public Usuario(string datos)
+        {
+
+        }
+
         private string correo;
         public string Correo
         {
