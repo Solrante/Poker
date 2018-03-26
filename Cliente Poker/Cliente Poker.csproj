@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carta.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Carta.Designer.cs">
+      <DependentUpon>Carta.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConexionServidor.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -61,6 +67,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sala.cs" />
+    <Compile Include="SalaBlackJack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalaBlackJack.Designer.cs">
+      <DependentUpon>SalaBlackJack.cs</DependentUpon>
+    </Compile>
     <Compile Include="SalaPoker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,7 +94,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SalaBlackJack.resx">
+      <DependentUpon>SalaBlackJack.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SalaPoker.resx">
       <DependentUpon>SalaPoker.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +114,177 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardBack_blue3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHeartsQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpades10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpadesA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpadesJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpadesK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardSpadesQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubs10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubsA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubsJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubsK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardClubsQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamonds10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamondsA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamondsJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamondsK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardDiamondsQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHearts10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHeartsA.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHeartsJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cardHeartsK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chipGreenWhite_sideBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chipRedWhite_sideBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chipBlackWhite_sideBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chipBlueWhite_sideBorder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

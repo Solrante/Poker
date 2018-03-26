@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Cliente_Poker
 {
+    enum eSala
+    {
+        BLACKJACK, POKER
+    }
     class Sala
     {
         public Sala(string datos)
@@ -14,8 +18,11 @@ namespace Cliente_Poker
             NumSala = Convert.ToInt32(info[0]);
             ApuestaMinima = Convert.ToInt32(info[1]);
             CuotaEntrada = Convert.ToInt32(info[2]);
+            Tipo = (eSala)Convert.ToInt32(info[3]);
         }
 
+
+        public eSala Tipo { get; set; }
         private int numSala;
         public int NumSala
         {
@@ -55,9 +62,11 @@ namespace Cliente_Poker
             }
         }
 
+
+
         public override string ToString()
         {
-            return string.Format("{0},{1},{2}", NumSala, ApuestaMinima, CuotaEntrada);
+            return string.Format("{0},{1},{2},{3}", NumSala, ApuestaMinima, CuotaEntrada, Tipo);
         }
     }
 }

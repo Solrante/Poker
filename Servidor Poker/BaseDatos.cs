@@ -26,6 +26,11 @@ namespace Servidor_Poker
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
         }
 
+        public void actualizarDatos(string datos)
+        {
+            //Actualizar el nuevo valor de saldo del usuario
+        }
+
         public bool usuarioRegistrado(string credenciales)
         {
             string consulta = string.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",

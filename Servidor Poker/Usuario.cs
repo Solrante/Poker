@@ -39,7 +39,7 @@ namespace Servidor_Poker
         }
 
         public int ID { get; set; }
-       
+
         public string Correo { set; get; }
 
         public string Contraseña { set; get; }
@@ -65,6 +65,10 @@ namespace Servidor_Poker
                 mensaje = sr.ReadLine();
             }
             catch (IOException)
+            {
+                mensaje = "Desconexion";
+            }
+            catch (ObjectDisposedException)
             {
                 mensaje = "Desconexion";
             }

@@ -13,7 +13,8 @@ namespace Cliente_Poker
     public partial class MenuPrincipal : Form
     {
         Login login;
-        ConexionServidor conexion;
+        SalaBlackJack blackJack;
+        public ConexionServidor conexion;
         List<Sala> salas = new List<Sala>();
         int oriY = 30;
         int centroHorizontal;
@@ -67,12 +68,21 @@ namespace Cliente_Poker
             foreach (Sala sala in salas)
             {
                 btn = new Button();
+                btn.Size = new Size(100, 40);
                 lbl = new Label();
                 btn.Click += new EventHandler(btnSala_Click);
-                btn.Text = "Sala - " + (sala.NumSala + 1);
+                switch (sala.Tipo)
+                {
+                    case eSala.BLACKJACK:
+                        btn.Text = "BlackJack - " + (sala.NumSala + 1);
+                        break;
+                    case eSala.POKER:
+                        btn.Text = "Sala - " + (sala.NumSala + 1);
+                        break;
+                }
                 btn.Tag = sala.NumSala + "";
                 btn.Location = new Point(centroHorizontal - btn.Width, oriY);
-                lbl.Location = new Point(btn.Location.X + 20 + btn.Width, btn.Location.Y);
+                lbl.Location = new Point(btn.Location.X + 20 + btn.Width, btn.Location.Y + btn.Size.Height / 2 - lbl.Size.Height / 2);
                 lbl.Text = sala.ApuestaMinima + "/" + sala.CuotaEntrada;
                 Controls.Add(btn);
                 Controls.Add(lbl);
@@ -83,12 +93,17 @@ namespace Cliente_Poker
         private void btnSalir_Click(object sender, EventArgs e)
         {
             conexion.enviarMensaje("Desconexion");
+            Environment.Exit(0);
         }
 
         private void btnSala_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
             conexion.enviarMensaje("Sala - " + (string)btn.Tag);
+            Hide();
+            blackJack = new SalaBlackJack(this);
+            blackJack.Show();
+
         }
     }
 }
