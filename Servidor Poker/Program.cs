@@ -20,8 +20,10 @@ namespace Servidor_Poker
         static readonly private object l = new object();
         static int puerto = 31416;
         static int numeroSalas;
+        static Random random;
         static void Main(string[] args)
         {
+            random = new Random();
             //Creamos conexion a la base da datos
             bd = new BaseDatos();
             //Creamos los objetos tipo sala y lanzamos un hilo para cada una
@@ -70,6 +72,12 @@ namespace Servidor_Poker
 
             }
             s.Close();
+        }
+        static string generarCarta()
+        {
+            string carta = "";
+            carta = random.Next(1, 4) + "-" + random.Next(1, 10);
+            return carta;
         }
 
         static void crearSalas()
@@ -184,11 +192,20 @@ namespace Servidor_Poker
 
             Sala sala = s as Sala;
             Usuario usuario = null;
-            double saldoDisponible = 0;            
+            List<string> cartasUsuario = new List<string>();
+            List<string> cartasCrupier = new List<string>();
+            double saldoDisponible = 0;
+            bool finMano = false;
             while (true)
             {
                 if (sala.Usuarios.Count != 0)
                 {
+                    if (finMano)
+                    {
+                        cartasUsuario.Clear();
+                        cartasCrupier.Clear();
+                        finMano = false;
+                    }
                     //Se comprueba si el usuario para jugar es nulo , de ser así se guarda el usuario de la lista
                     if (usuario == null)
                     {
@@ -198,14 +215,36 @@ namespace Servidor_Poker
                     }
                     usuario.leerMensaje();
                     if (usuario.Mensaje != "Volver")
-                    {                        
+                    {
                         //Si la respuesta de cliente no es la de volver , se comprueba la cabecera del mensaje para ver que acción se ha realizado
                         switch (usuario.Mensaje.Split('-')[0].Trim())
                         {
-                            case "Ficha":                                
+                            case "Ficha":
                                 saldoDisponible -= Convert.ToDouble(usuario.Mensaje.Split('-')[1].Trim());
-                                Console.WriteLine(saldoDisponible);
-                                usuario.mandarMensaje("Repartir cartas");
+                                Console.WriteLine("Saldo actual : " + saldoDisponible);
+                                cartasUsuario.Add(generarCarta());
+                                cartasUsuario.Add(generarCarta());
+                                cartasCrupier.Add(generarCarta());
+                                foreach (string carta in cartasUsuario)
+                                {
+                                    Console.WriteLine("Carta-Jugador-" + carta);
+                                    usuario.mandarMensaje("Carta-Jugador-" + carta);
+                                }
+                                foreach (string carta in cartasCrupier)
+                                {
+                                    Console.WriteLine("Carta-Crupier-" + carta);
+                                    usuario.mandarMensaje("Carta-Crupier-" + carta);
+                                }
+                                usuario.mandarMensaje("Fin envio");
+                                break;
+                            case "Plantarse":
+                                break;
+                            case "Pedir":
+                                string nCarta = generarCarta();
+                                cartasUsuario.Add(nCarta);
+                                Console.WriteLine("Carta-Jugador-" + nCarta);
+                                usuario.mandarMensaje("Carta-Jugador-" + nCarta);
+                                usuario.mandarMensaje("Fin envio");
                                 break;
 
                         }
