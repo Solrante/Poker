@@ -43,7 +43,7 @@ namespace Cliente_Poker
             recibirUsuario();
             recibirSalas();
         }
-        private void recibirUsuario()
+        public void recibirUsuario()
         {
             string[] usuario = conexion.recibirMensaje().Split(',');
             lblUsuario.Text = String.Format(platillaInformacion, usuario[0], usuario[1]);

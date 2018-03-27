@@ -129,7 +129,7 @@ namespace Servidor_Poker
 
         static void hiloSalaEspera(object usu)
         {
-            Usuario usuario = usu as Usuario;           
+            Usuario usuario = usu as Usuario;
             Console.WriteLine("Mandando usuario : " + usuario.ToString());
             usuario.mandarMensaje(usuario.ToString());
             Console.WriteLine("Mandando numero de salas");
@@ -140,29 +140,30 @@ namespace Servidor_Poker
             }
             while (usuario.Mensaje != "Desconexion")
             {
-                usuario.leerMensaje();
-                if (usuario.Mensaje == "Desconexion")
+                if (!usuario.Jugando)
                 {
-                    lock (l)
+                    usuario.leerMensaje();
+                    Console.WriteLine(usuario.Mensaje);
+                    if (usuario.Mensaje == "Desconexion")
                     {
-                        Console.WriteLine(usuario.Correo + " : Se desconecta");
-                        usuario.cerraSesion();
+                        lock (l)
+                        {
+                            Console.WriteLine(usuario.Correo + " : Se desconecta");
+                            usuario.cerraSesion();
+                        }
                     }
-                }
-                else
-                {
-                    switch (usuario.Mensaje.Split('-')[0].Trim())
+                    else
                     {
-                        case "Sala":
-                            Console.WriteLine("METO A USUARIO EN SALA");
-                            int numSala = Convert.ToInt32(usuario.Mensaje.Split('-')[1]);
-                            salas[numSala].Usuarios.Add(usuario);
-                            break;
-                        case "Ficha":
-                            Console.WriteLine("Tiro ficha");
-                            break;
+                        switch (usuario.Mensaje.Split('-')[0].Trim())
+                        {
+                            case "Sala":
+                                Console.WriteLine("METO A USUARIO EN SALA");
+                                usuario.Jugando = true;
+                                int numSala = Convert.ToInt32(usuario.Mensaje.Split('-')[1]);
+                                salas[numSala].Usuarios.Add(usuario);
+                                break;
+                        }
                     }
-
                 }
             }
         }
@@ -180,29 +181,50 @@ namespace Servidor_Poker
 
         static void salaBlackJack(object s)
         {
+
             Sala sala = s as Sala;
             Usuario usuario = null;
-            string mensaje = "";
+            double saldoDisponible = 0;            
             while (true)
             {
-
                 if (sala.Usuarios.Count != 0)
                 {
+                    //Se comprueba si el usuario para jugar es nulo , de ser así se guarda el usuario de la lista
                     if (usuario == null)
                     {
                         usuario = sala.Usuarios[0];
+                        saldoDisponible = usuario.Saldo;
+                        Console.WriteLine("Saldo actual : " + saldoDisponible);
                     }
-                    if (mensaje != "Volver")
-                    {
-                        //Console.WriteLine(mensaje);
+                    usuario.leerMensaje();
+                    if (usuario.Mensaje != "Volver")
+                    {                        
+                        //Si la respuesta de cliente no es la de volver , se comprueba la cabecera del mensaje para ver que acción se ha realizado
+                        switch (usuario.Mensaje.Split('-')[0].Trim())
+                        {
+                            case "Ficha":                                
+                                saldoDisponible -= Convert.ToDouble(usuario.Mensaje.Split('-')[1].Trim());
+                                Console.WriteLine(saldoDisponible);
+                                usuario.mandarMensaje("Repartir cartas");
+                                break;
+
+                        }
                     }
                     else
                     {
-                        int nSaldo = Convert.ToInt32(mensaje.Split('-')[1]);
-                        usuario.Saldo = nSaldo;
+                        //Si se elige volver al menu principal
+                        usuario.Saldo = saldoDisponible;
+                        usuario.Jugando = false;
+                        //Insertamos nuevos valores en la bae da datos
                         bd.actualizarDatos(usuario.ToString());
+                        //Mandamos al cliente la nueva información del usuario
+                        usuario.mandarMensaje(usuario.ToString());
+                        //Eliminamos al usuario de la sala
                         sala.Usuarios.Clear();
+                        Console.WriteLine("Saldo actual : " + usuario.Saldo);
+                        usuario = null;
                     }
+
                 }
             }
         }

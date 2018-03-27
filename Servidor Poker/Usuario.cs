@@ -48,6 +48,8 @@ namespace Servidor_Poker
 
         public string Mensaje { set; get; }
 
+        public bool Jugando { get; set; }
+
         /// <summary>
         /// Envia un mensaje al usuario a través de su flujo de datos
         /// </summary>
@@ -56,6 +58,7 @@ namespace Servidor_Poker
         {
             sw.WriteLine(mensaje);
             sw.Flush();
+            //TODO salta excepcion al salir un cliente
         }
 
         public void leerMensaje()
