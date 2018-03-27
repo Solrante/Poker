@@ -129,8 +129,7 @@ namespace Servidor_Poker
 
         static void hiloSalaEspera(object usu)
         {
-            Usuario usuario = usu as Usuario;
-            string mensaje = "";
+            Usuario usuario = usu as Usuario;           
             Console.WriteLine("Mandando usuario : " + usuario.ToString());
             usuario.mandarMensaje(usuario.ToString());
             Console.WriteLine("Mandando numero de salas");
@@ -139,10 +138,10 @@ namespace Servidor_Poker
             {
                 usuario.mandarMensaje(sala.ToString());
             }
-            while (mensaje != "Desconexion")
+            while (usuario.Mensaje != "Desconexion")
             {
-                mensaje = usuario.leerMensaje();
-                if (mensaje == "Desconexion")
+                usuario.leerMensaje();
+                if (usuario.Mensaje == "Desconexion")
                 {
                     lock (l)
                     {
@@ -152,8 +151,18 @@ namespace Servidor_Poker
                 }
                 else
                 {
-                    int numSala = Convert.ToInt32(mensaje.Split('-')[1]);
-                    salas[numSala].Usuarios.Add(usuario);
+                    switch (usuario.Mensaje.Split('-')[0].Trim())
+                    {
+                        case "Sala":
+                            Console.WriteLine("METO A USUARIO EN SALA");
+                            int numSala = Convert.ToInt32(usuario.Mensaje.Split('-')[1]);
+                            salas[numSala].Usuarios.Add(usuario);
+                            break;
+                        case "Ficha":
+                            Console.WriteLine("Tiro ficha");
+                            break;
+                    }
+
                 }
             }
         }
@@ -176,23 +185,26 @@ namespace Servidor_Poker
             string mensaje = "";
             while (true)
             {
-                if (usuario == null && sala.Usuarios.Count != 0)
-                {
-                    usuario = sala.Usuarios[0];
-                }
-                if (mensaje != "Volver")
-                {
 
-                }
-                else
+                if (sala.Usuarios.Count != 0)
                 {
-                    int nSaldo = Convert.ToInt32(mensaje.Split('-')[1]);
-                    usuario.Saldo = nSaldo;
-                    bd.actualizarDatos(usuario.ToString());
-                    sala.Usuarios.Clear();
+                    if (usuario == null)
+                    {
+                        usuario = sala.Usuarios[0];
+                    }
+                    if (mensaje != "Volver")
+                    {
+                        //Console.WriteLine(mensaje);
+                    }
+                    else
+                    {
+                        int nSaldo = Convert.ToInt32(mensaje.Split('-')[1]);
+                        usuario.Saldo = nSaldo;
+                        bd.actualizarDatos(usuario.ToString());
+                        sala.Usuarios.Clear();
+                    }
                 }
             }
-
         }
     }
 }

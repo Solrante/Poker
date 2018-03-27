@@ -46,6 +46,8 @@ namespace Servidor_Poker
 
         public double Saldo { set; get; }
 
+        public string Mensaje { set; get; }
+
         /// <summary>
         /// Envia un mensaje al usuario a través de su flujo de datos
         /// </summary>
@@ -56,7 +58,7 @@ namespace Servidor_Poker
             sw.Flush();
         }
 
-        public string leerMensaje()
+        public void leerMensaje()
         {
             string mensaje = "Desconexion";
 
@@ -76,7 +78,7 @@ namespace Servidor_Poker
             {
                 mensaje = "Desconexion";
             }
-            return mensaje;
+            Mensaje = mensaje;
         }
 
         public override string ToString()

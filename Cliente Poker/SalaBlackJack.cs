@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cliente_Poker
@@ -23,7 +16,37 @@ namespace Cliente_Poker
         {
             MenuPrincipal.conexion.enviarMensaje("Volver");
             MenuPrincipal.Show();
-            Dispose();            
+            Dispose();
+        }
+
+        private void btnFicha25_Click(object sender, EventArgs e)
+        {
+            MenuPrincipal.conexion.enviarMensaje("Ficha - 25");
+            cambiarVisibilidadFichas(false);
+        }
+
+        private void btnFicha50_Click(object sender, EventArgs e)
+        {
+            MenuPrincipal.conexion.enviarMensaje("Ficha - 50");
+            cambiarVisibilidadFichas(false);
+        }
+
+        private void btnFicha100_Click(object sender, EventArgs e)
+        {
+            MenuPrincipal.conexion.enviarMensaje("Ficha - 100");
+            cambiarVisibilidadFichas(false);
+        }
+
+        private void cambiarVisibilidadFichas(bool estado)
+        {
+            btnFicha100.Visible = estado;
+            btnFicha50.Visible = estado;
+            btnFicha25.Visible = estado;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            cambiarVisibilidadFichas(true);
         }
     }
 }
