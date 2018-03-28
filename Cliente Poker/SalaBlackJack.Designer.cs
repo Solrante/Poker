@@ -33,9 +33,10 @@
             this.btnFicha50 = new System.Windows.Forms.Button();
             this.btnFicha100 = new System.Windows.Forms.Button();
             this.btnPedir = new System.Windows.Forms.Button();
-            this.cartaCrupier1 = new System.Windows.Forms.Label();
-            this.cartaCrupier2 = new System.Windows.Forms.Label();
-            this.cartaJugador1 = new System.Windows.Forms.Label();
+            this.cartaJugador1 = new System.Windows.Forms.PictureBox();
+            this.cartaCrupier1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.cartaJugador1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cartaCrupier1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSalirSala
@@ -95,38 +96,31 @@
             this.btnPedir.UseVisualStyleBackColor = true;
             this.btnPedir.Click += new System.EventHandler(this.button1_Click);
             // 
-            // cartaCrupier1
-            // 
-            this.cartaCrupier1.AutoSize = true;
-            this.cartaCrupier1.Location = new System.Drawing.Point(286, 99);
-            this.cartaCrupier1.Name = "cartaCrupier1";
-            this.cartaCrupier1.Size = new System.Drawing.Size(0, 13);
-            this.cartaCrupier1.TabIndex = 5;
-            // 
-            // cartaCrupier2
-            // 
-            this.cartaCrupier2.AutoSize = true;
-            this.cartaCrupier2.Location = new System.Drawing.Point(388, 99);
-            this.cartaCrupier2.Name = "cartaCrupier2";
-            this.cartaCrupier2.Size = new System.Drawing.Size(0, 13);
-            this.cartaCrupier2.TabIndex = 6;
-            // 
             // cartaJugador1
             // 
-            this.cartaJugador1.AutoSize = true;
-            this.cartaJugador1.Location = new System.Drawing.Point(233, 278);
+            this.cartaJugador1.Location = new System.Drawing.Point(238, 263);
             this.cartaJugador1.Name = "cartaJugador1";
-            this.cartaJugador1.Size = new System.Drawing.Size(0, 13);
-            this.cartaJugador1.TabIndex = 7;
+            this.cartaJugador1.Size = new System.Drawing.Size(50, 70);
+            this.cartaJugador1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.cartaJugador1.TabIndex = 5;
+            this.cartaJugador1.TabStop = false;
+            // 
+            // cartaCrupier1
+            // 
+            this.cartaCrupier1.Location = new System.Drawing.Point(308, 98);
+            this.cartaCrupier1.Name = "cartaCrupier1";
+            this.cartaCrupier1.Size = new System.Drawing.Size(50, 70);
+            this.cartaCrupier1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.cartaCrupier1.TabIndex = 7;
+            this.cartaCrupier1.TabStop = false;
             // 
             // SalaBlackJack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.cartaJugador1);
-            this.Controls.Add(this.cartaCrupier2);
             this.Controls.Add(this.cartaCrupier1);
+            this.Controls.Add(this.cartaJugador1);
             this.Controls.Add(this.btnPedir);
             this.Controls.Add(this.btnFicha100);
             this.Controls.Add(this.btnFicha50);
@@ -135,6 +129,8 @@
             this.Name = "SalaBlackJack";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SalaBlackJack";
+            ((System.ComponentModel.ISupportInitialize)(this.cartaJugador1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cartaCrupier1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,8 +143,7 @@
         private System.Windows.Forms.Button btnFicha50;
         private System.Windows.Forms.Button btnFicha100;
         private System.Windows.Forms.Button btnPedir;
-        private System.Windows.Forms.Label cartaCrupier1;
-        private System.Windows.Forms.Label cartaCrupier2;
-        private System.Windows.Forms.Label cartaJugador1;
+        private System.Windows.Forms.PictureBox cartaJugador1;
+        private System.Windows.Forms.PictureBox cartaCrupier1;
     }
 }

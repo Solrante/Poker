@@ -37,6 +37,7 @@ namespace Servidor_Poker
                 credenciales.Split(',')[0], credenciales.Split(',')[1]);
 
             MySqlCommand cmd = new MySqlCommand(consulta, conexion);
+            //Salta excepcion si el server esta off
             conexion.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)

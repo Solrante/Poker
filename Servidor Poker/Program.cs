@@ -76,7 +76,7 @@ namespace Servidor_Poker
         static string generarCarta()
         {
             string carta = "";
-            carta = random.Next(1, 4) + "-" + random.Next(1, 10);
+            carta = random.Next(1, 4) + "-" + random.Next(1, 13);
             return carta;
         }
 
