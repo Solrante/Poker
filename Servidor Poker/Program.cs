@@ -241,7 +241,7 @@ namespace Servidor_Poker
                                 break;
                             case "Pedir":
                                 string nCarta = generarCarta();
-                                cartasUsuario.Add(nCarta);
+                                cartasUsuario.Add(nCarta);                                
                                 Console.WriteLine("Carta-Jugador-" + nCarta);
                                 usuario.mandarMensaje("Carta-Jugador-" + nCarta);
                                 usuario.mandarMensaje("Fin envio");

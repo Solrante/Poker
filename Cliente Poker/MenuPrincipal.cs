@@ -46,6 +46,7 @@ namespace Cliente_Poker
         public void recibirUsuario()
         {
             string[] usuario = conexion.recibirMensaje().Split(',');
+            //Salta out of range exception al cerrar cliente
             lblUsuario.Text = String.Format(platillaInformacion, usuario[0], usuario[1]);
         }
 

@@ -13,6 +13,7 @@ namespace Cliente_Poker
         private CambiarText c;
         string respuesta;
         bool bRecogerRespuesta;
+        int x;
         public SalaBlackJack(MenuPrincipal menuPrincipal)
         {
             InitializeComponent();
@@ -33,21 +34,18 @@ namespace Cliente_Poker
         private void btnFicha25_Click(object sender, EventArgs e)
         {
             conexion.enviarMensaje("Ficha - 25");
-            //cambiarVisibilidadFichas(false);
             bRecogerRespuesta = true;
         }
 
         private void btnFicha50_Click(object sender, EventArgs e)
         {
             conexion.enviarMensaje("Ficha - 50");
-            //cambiarVisibilidadFichas(false);
             bRecogerRespuesta = true;
         }
 
         private void btnFicha100_Click(object sender, EventArgs e)
         {
             conexion.enviarMensaje("Ficha - 100");
-            //cambiarVisibilidadFichas(false);
             bRecogerRespuesta = true;
         }
 
@@ -60,7 +58,8 @@ namespace Cliente_Poker
 
         private void button1_Click(object sender, EventArgs e)
         {
-            cambiarVisibilidadFichas(true);
+            conexion.enviarMensaje("Pedir");
+            bRecogerRespuesta = true;
         }
 
         private void actualizarEstado(string respuesta)
@@ -74,15 +73,17 @@ namespace Cliente_Poker
                             if (cartaJugador1.Image == null)
                             {
                                 CambiarText c = new CambiarText(cambiarTextoLabel);
+                                x = cartaJugador1.Location.X;
                                 Invoke(c, cartaJugador1, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
                             }
                             else
                             {
                                 PictureBox pb = new PictureBox();
+                                x += 100;
                                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                                 pb.Size = cartaJugador1.Size;
                                 Invoke(c, pb, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
-                                pb.Location = new System.Drawing.Point(cartaJugador1.Location.X + 100, cartaJugador1.Location.Y);
+                                pb.Location = new System.Drawing.Point(x, cartaJugador1.Location.Y);
                                 AñadirControl añadir = new AñadirControl(añadirControlNuevo);
                                 Invoke(añadir, pb);
                             }
