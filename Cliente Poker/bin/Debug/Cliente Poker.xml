@@ -1,0 +1,440 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cliente Poker</name>
+    </assembly>
+    <members>
+        <member name="F:Cliente_Poker.Carta.components">
+            <summary> 
+            Variable del diseñador necesaria.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.Carta.Dispose(System.Boolean)">
+            <summary> 
+            Limpiar los recursos que se estén usando.
+            </summary>
+            <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
+        </member>
+        <member name="M:Cliente_Poker.Carta.InitializeComponent">
+            <summary> 
+            Método necesario para admitir el Diseñador. No se puede modificar
+            el contenido de este método con el editor de código.
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.Login">
+            <summary>
+            Formulario para el acceso al servicio online
+            </summary>
+            <seealso cref="T:System.Windows.Forms.Form" />
+        </member>
+        <member name="F:Cliente_Poker.Login.loginValido">
+            <summary>
+            Contiene el resultado de comprobar las credenciales introducidas
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Login.centroHorizontal">
+            <summary>
+            Variable númerica que contendra el valor en pixel del centro del formulario
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Login.conexion">
+            <summary>
+            Instancia de la clase gestora con la conexion al servidor
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.Login.#ctor(Cliente_Poker.ConexionServidor)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.Login"/> .
+            </summary>
+            <param name="conexion">Instancia del gestor de conexion.</param>
+        </member>
+        <member name="M:Cliente_Poker.Login.btnEntrar_Click(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento Click del control btnEntrar.
+            </summary>
+            <param name="sender">El origen del evento.</param>
+            <param name="e">La instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
+        </member>
+        <member name="M:Cliente_Poker.Login.Login_Load(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento Load del formulario.
+            </summary>
+            <param name="sender">El origen del evento.</param>
+            <param name="e">La instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
+        </member>
+        <member name="F:Cliente_Poker.Login.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.Login.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Cliente_Poker.Login.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.components">
+            <summary>
+            Variable del diseñador necesaria.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.Dispose(System.Boolean)">
+            <summary>
+            Limpiar los recursos que se estén usando.
+            </summary>
+            <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.InitializeComponent">
+            <summary>
+            Método necesario para admitir el Diseñador. No se puede modificar
+            el contenido de este método con el editor de código.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.Program.Main">
+            <summary>
+            Punto de entrada principal para la aplicación.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaPoker.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.SalaPoker.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaPoker.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.Properties.Resources">
+            <summary>
+              Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.ResourceManager">
+            <summary>
+              Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.Culture">
+            <summary>
+              Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
+              búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardBack">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs10">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs2">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs3">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs4">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs5">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs6">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs7">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs8">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubs9">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubsA">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubsJ">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubsK">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardClubsQ">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds10">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds2">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds3">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds4">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds5">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds6">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds7">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds8">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamonds9">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamondsA">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamondsJ">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamondsK">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardDiamondsQ">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts10">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts2">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts3">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts4">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts5">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts6">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts7">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts8">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHearts9">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHeartsA">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHeartsJ">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHeartsK">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardHeartsQ">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades10">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades2">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades3">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades4">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades5">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades6">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades7">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades8">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpades9">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpadesA">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpadesJ">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpadesK">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.cardSpadesQ">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.chipBlackWhite_sideBorder">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.chipBlueWhite_sideBorder">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.chipGreenWhite_sideBorder">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Properties.Resources.chipRedWhite_sideBorder">
+            <summary>
+              Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+    </members>
+</doc>

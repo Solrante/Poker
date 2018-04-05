@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cliente Poker", "Cliente Po
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servidor Poker", "Servidor Poker\Servidor Poker.csproj", "{A8E013DC-3805-4D9F-B24B-3DC695A0A713}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentación Cliente", "Documentación Cliente\Documentación Cliente.shfbproj", "{3DF64995-0FFE-432A-B8CC-6276C1E45E2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A8E013DC-3805-4D9F-B24B-3DC695A0A713}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8E013DC-3805-4D9F-B24B-3DC695A0A713}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8E013DC-3805-4D9F-B24B-3DC695A0A713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF64995-0FFE-432A-B8CC-6276C1E45E2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF64995-0FFE-432A-B8CC-6276C1E45E2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF64995-0FFE-432A-B8CC-6276C1E45E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF64995-0FFE-432A-B8CC-6276C1E45E2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
