@@ -82,7 +82,9 @@ namespace Servidor_Poker
 
         static void crearSalas()
         {
-            salas.Add(new Sala("0,2,10", eSala.BLACKJACK));
+            salas.Add(new Sala("0,0,0", eSala.BLACKJACK));
+            salas.Add(new Sala("1,0,0", eSala.BLACKJACK));
+            salas.Add(new Sala("2,0,0", eSala.BLACKJACK));
             numeroSalas = salas.Count();
         }
 

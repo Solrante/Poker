@@ -79,6 +79,88 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:Cliente_Poker.MenuPrincipal">
+            <summary>
+            Formulario principal del cliente
+            </summary>
+            <seealso cref="T:System.Windows.Forms.Form" />
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.login">
+            <summary>
+            Instancia del formulario de login del cliente
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.blackJack">
+            <summary>
+            Instancia del formulario del juego blackJack
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.conexion">
+            <summary>
+            Instancia del gestor de conexion al servidor
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.salas">
+            <summary>
+            Listado de salas
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.oriY">
+            <summary>
+            Posicion Y inicial para la colocación de botones de salas
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.centroHorizontal">
+            <summary>
+            Posicion en pixel del centro del area del formulario
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.platillaInformacion">
+            <summary>
+            Estructura para mostrar información de usuario
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.#ctor">
+            <summary>
+            Inicializa una instancia de la clase <see cref="T:Cliente_Poker.MenuPrincipal"/> .
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.Form1_Load(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento Load del Form1.
+            </summary>
+            <param name="sender">El origen del evento.</param>
+            <param name="e">La instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.recibirUsuario">
+            <summary>
+            Lee datos sobre el usuario del servidor.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.recibirSalas">
+            <summary>
+            Genera instancias de salas según la información de salas recibida del servidor y ejecuta la generación de botones.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.generarBotonesSalas">
+            <summary>
+            Genera botones según las salas contenidas por el listado de salas de la instancia".
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.btnSalir_Click(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento Click del control btnSalir.
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">Instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.btnSala_Click(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento Click del control multiples botones de las salas.
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">Instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
+        </member>
         <member name="F:Cliente_Poker.MenuPrincipal.components">
             <summary>
             Variable del diseñador necesaria.
@@ -100,6 +182,72 @@
             <summary>
             Punto de entrada principal para la aplicación.
             </summary>
+        </member>
+        <member name="T:Cliente_Poker.eSala">
+            <summary>
+            Determina el tipo de sala
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.eSala.BLACKJACK">
+            <summary>
+            Sala de tipo blackjack
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.eSala.POKER">
+            <summary>
+            Sala de tipo poker
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.Sala">
+            <summary>
+            Definición de una sala de juego
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.Sala.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.Sala"/> .
+            </summary>
+            <param name="datos">Informacion formateada.</param>
+        </member>
+        <member name="P:Cliente_Poker.Sala.Tipo">
+            <summary>
+            Gets or sets el tipo.
+            </summary>
+            <value>
+            Tipo de sala.
+            </value>
+        </member>
+        <member name="P:Cliente_Poker.Sala.NumSala">
+            <summary>
+            Gets or sets el número de sala.
+            </summary>
+            <value>
+            Numero de la sala.
+            </value>        
+        </member>
+        <member name="P:Cliente_Poker.Sala.ApuestaMinima">
+            <summary>
+            Gets or sets la apuesta minima.
+            </summary>
+            <value>
+            La apuesta minima.
+            </value>
+        </member>
+        <member name="P:Cliente_Poker.Sala.CuotaEntrada">
+            <summary>
+            Gets or sets la cuota entrada.
+            </summary>
+            <value>
+            La cuota entrada.
+            </value>
+        </member>
+        <member name="M:Cliente_Poker.Sala.ToString">
+            <summary>
+            Devuelve un <see cref="T:System.String" /> que representa esta instancia.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
         </member>
         <member name="F:Cliente_Poker.SalaBlackJack.components">
             <summary>

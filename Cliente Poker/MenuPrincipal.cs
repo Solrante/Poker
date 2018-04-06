@@ -100,12 +100,15 @@ namespace Cliente_Poker
         {
             int numSalas = Convert.ToInt32(conexion.recibirMensaje());
             Console.WriteLine("Numero de salas recibidas : " + numSalas);
+            ClientSize = new Size(ClientSize.Width, 100 + 70 * numSalas);
             for (int i = 0; i < numSalas; i++)
             {
                 salas.Add(new Sala(conexion.recibirMensaje()));
             }
 
             generarBotonesSalas();
+            btnSalir.Location = new Point(btnSalir.Location.X, ClientSize.Height - btnSalir.Height - 10);
+            lblUsuario.Location = new Point(lblUsuario.Location.X, ClientSize.Height - lblUsuario.Height - 10);
         }
 
         /// <summary>
@@ -119,7 +122,7 @@ namespace Cliente_Poker
             {
                 btn = new Button();
                 btn.Size = new Size(100, 40);
-                lbl = new Label();
+                //lbl = new Label();
                 btn.Click += new EventHandler(btnSala_Click);
                 switch (sala.Tipo)
                 {
@@ -131,11 +134,11 @@ namespace Cliente_Poker
                         break;
                 }
                 btn.Tag = sala.NumSala + "";
-                btn.Location = new Point(centroHorizontal - btn.Width, oriY);
-                lbl.Location = new Point(btn.Location.X + 20 + btn.Width, btn.Location.Y + btn.Size.Height / 2 - lbl.Size.Height / 2);
-                lbl.Text = sala.ApuestaMinima + "/" + sala.CuotaEntrada;
+                btn.Location = new Point(centroHorizontal - btn.Width/2, oriY);
+                //lbl.Location = new Point(btn.Location.X + 20 + btn.Width, btn.Location.Y + btn.Size.Height / 2 - lbl.Size.Height / 2);
+                //lbl.Text = sala.ApuestaMinima + "/" + sala.CuotaEntrada;
                 Controls.Add(btn);
-                Controls.Add(lbl);
+                //Controls.Add(lbl);
                 oriY += 50;
             }
         }
