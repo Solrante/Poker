@@ -10,20 +10,60 @@ using System.Windows.Forms;
 
 namespace Cliente_Poker
 {
+    /// <summary>
+    /// Formulario principal del cliente
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class MenuPrincipal : Form
     {
+        /// <summary>
+        /// Instancia del formulario de login del cliente
+        /// </summary>
         Login login;
+
+        /// <summary>
+        /// Instancia del formulario del juego blackJack
+        /// </summary>
         SalaBlackJack blackJack;
+
+        /// <summary>
+        /// Instancia del gestor de conexion al servidor
+        /// </summary>
         public ConexionServidor conexion;
+
+        /// <summary>
+        /// Listado de salas
+        /// </summary>
         List<Sala> salas = new List<Sala>();
+
+        /// <summary>
+        /// Posicion Y inicial para la colocación de botones de salas
+        /// </summary>
         int oriY = 30;
+
+        /// <summary>
+        /// Posicion en pixel del centro del area del formulario
+        /// </summary>
         int centroHorizontal;
+
+        /// <summary>
+        /// Estructura para mostrar información de usuario
+        /// </summary>
         string platillaInformacion = "{0} , Saldo : {1}";
+
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="MenuPrincipal"/> .
+        /// </summary>
         public MenuPrincipal()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Gestiona el evento Load del Form1.
+        /// </summary>
+        /// <param name="sender">El origen del evento.</param>
+        /// <param name="e">La instancia <see cref="EventArgs"/> contenedora de la información del evento.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
             Hide();
@@ -43,6 +83,9 @@ namespace Cliente_Poker
             recibirUsuario();
             recibirSalas();
         }
+        /// <summary>
+        /// Lee datos sobre el usuario del servidor.
+        /// </summary>
         public void recibirUsuario()
         {
             string[] usuario = conexion.recibirMensaje().Split(',');
@@ -50,6 +93,9 @@ namespace Cliente_Poker
             lblUsuario.Text = String.Format(platillaInformacion, usuario[0], usuario[1]);
         }
 
+        /// <summary>
+        /// Genera instancias de salas según la información de salas recibida del servidor y ejecuta la generación de botones.
+        /// </summary>
         private void recibirSalas()
         {
             int numSalas = Convert.ToInt32(conexion.recibirMensaje());
@@ -62,6 +108,9 @@ namespace Cliente_Poker
             generarBotonesSalas();
         }
 
+        /// <summary>
+        /// Genera botones según las salas contenidas por el listado de salas de la instancia".
+        /// </summary>
         private void generarBotonesSalas()
         {
             Button btn;
@@ -91,12 +140,22 @@ namespace Cliente_Poker
             }
         }
 
+        /// <summary>
+        /// Gestiona el evento Click del control btnSalir.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">Instancia <see cref="EventArgs"/> contenedora de la información del evento.</param>
         private void btnSalir_Click(object sender, EventArgs e)
         {
             conexion.enviarMensaje("Desconexion");
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Gestiona el evento Click del control multiples botones de las salas.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">Instancia <see cref="EventArgs"/> contenedora de la información del evento.</param>
         private void btnSala_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
