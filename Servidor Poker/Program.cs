@@ -194,6 +194,8 @@ namespace Servidor_Poker
             Baraja bar = new Baraja();
             Sala sala = s as Sala;
             Usuario usuario = null;
+            Mano manoJugador = new Mano();
+            Mano manoCrupier = new Mano();
             List<Carta> cartasUsuario = new List<Carta>();
             List<Carta> cartasCrupier = new List<Carta>();
             double saldoDisponible = 0;
@@ -223,16 +225,16 @@ namespace Servidor_Poker
                         {
                             case "Ficha":
                                 saldoDisponible -= Convert.ToDouble(usuario.Mensaje.Split('-')[1].Trim());
-                                Console.WriteLine("Saldo actual : " + saldoDisponible);                                
-                                cartasUsuario.Add(bar.sacarCarta());
-                                cartasUsuario.Add(bar.sacarCarta());
-                                cartasCrupier.Add(bar.sacarCarta());
-                                foreach (Carta carta in cartasUsuario)
+                                Console.WriteLine("Saldo actual : " + saldoDisponible);
+                                manoJugador.añadirCarta(bar.sacarCarta());
+                                manoJugador.añadirCarta(bar.sacarCarta());
+                                manoCrupier.añadirCarta(bar.sacarCarta());
+                                foreach (Carta carta in manoJugador.cartas)
                                 {
                                     Console.WriteLine("Carta-Jugador-" + carta.ToString());
                                     usuario.mandarMensaje("Carta-Jugador-" + carta.ToString());
                                 }
-                                foreach (Carta carta in cartasCrupier)
+                                foreach (Carta carta in manoCrupier.cartas)
                                 {
                                     Console.WriteLine("Carta-Crupier-" + carta);
                                     usuario.mandarMensaje("Carta-Crupier-" + carta);
@@ -243,12 +245,34 @@ namespace Servidor_Poker
                                 break;
                             case "Pedir":
                                 Carta nCarta = bar.sacarCarta();
-                                cartasUsuario.Add(nCarta);
+                                manoJugador.añadirCarta(nCarta);
                                 Console.WriteLine("Carta-Jugador-" + nCarta);
                                 usuario.mandarMensaje("Carta-Jugador-" + nCarta);
                                 usuario.mandarMensaje("Fin envio");
                                 break;
+                        }
 
+                        string resultado = comprobarManos(manoCrupier, manoJugador);
+                        switch (resultado.Split('-')[0])
+                        {
+                            case "BlackJack":
+                                switch (resultado.Split('-')[1])
+                                {
+                                    case "Crupier":
+                                        break;
+                                    case "Jugador":
+                                        break;
+                                }
+                                break;
+                            case "Se paso":
+                                switch (resultado.Split('-')[1])
+                                {
+                                    case "Crupier":
+                                        break;
+                                    case "Jugador":
+                                        break;
+                                }
+                                break;
                         }
                     }
                     else
@@ -268,6 +292,33 @@ namespace Servidor_Poker
 
                 }
             }
+        }
+
+        static private string comprobarManos(Mano crupier, Mano jugador)
+        {
+            string resultado = "";
+
+            int valorCrupier = crupier.valorNumerico();
+            int valorJugador = jugador.valorNumerico();
+
+            if (valorCrupier == 21)
+            {
+                resultado = "BlackJack-Crupier";
+            }
+            if (valorJugador == 21)
+            {
+                resultado = "BlackJack-Jugador";
+            }
+            if (valorCrupier > 21)
+            {
+                resultado = "Se paso-Crupier";
+            }
+            if (valorJugador > 21)
+            {
+                resultado = "Se paso-Jugador";
+            }
+
+            return resultado;
         }
     }
 }

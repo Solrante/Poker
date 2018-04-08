@@ -56,6 +56,7 @@ namespace Servidor_Poker
             a = contenido[aleatorio.Next(0, 3), aleatorio.Next(0, 12)];
             while (cartasRepartidas.Contains(a))
             {
+                Console.WriteLine("Carta Repetida");
                 a = contenido[aleatorio.Next(0, 3), aleatorio.Next(0, 12)];
             }
             cartasRepartidas.Add(a);

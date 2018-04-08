@@ -14,10 +14,12 @@ namespace Cliente_Poker
         string respuesta;
         bool bRecogerRespuesta;
         int x;
+
+
         public SalaBlackJack(MenuPrincipal menuPrincipal)
         {
             InitializeComponent();
-            MenuPrincipal = menuPrincipal; c = new CambiarText(cambiarTextoLabel);
+            MenuPrincipal = menuPrincipal; c = new CambiarText(cambiarImagenCarta);
             conexion = MenuPrincipal.conexion;
             new Thread(HiloComunicacion).Start();
 
@@ -72,7 +74,7 @@ namespace Cliente_Poker
                         case "Jugador":
                             if (cartaJugador1.Image == null)
                             {
-                                CambiarText c = new CambiarText(cambiarTextoLabel);
+                                CambiarText c = new CambiarText(cambiarImagenCarta);
                                 x = cartaJugador1.Location.X;
                                 Invoke(c, cartaJugador1, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
                             }
@@ -91,28 +93,25 @@ namespace Cliente_Poker
                         case "Crupier":
                             if (cartaCrupier1.Image == null)
                             {
-                                CambiarText c = new CambiarText(cambiarTextoLabel);
+                                CambiarText c = new CambiarText(cambiarImagenCarta);
                                 Invoke(c, cartaCrupier1, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
                             }
                             break;
                     }
-                    break;
-                case "Repartir cartas":
-                    break;
+                    break;              
                 case "Fin envio":
                     bRecogerRespuesta = false;
                     break;
-                default:
-                    break;
-            }
-            Thread.Sleep(1000);
+            }            
         }
+
+
         private void añadirControlNuevo(Control c)
         {
             Controls.Add(c);
         }
 
-        private void cambiarTextoLabel(PictureBox lbl, string text)
+        private void cambiarImagenCarta(PictureBox lbl, string text)
         {
             string palo = text.Split('-')[0];
             string numCarta = text.Split('-')[1];
@@ -302,9 +301,8 @@ namespace Cliente_Poker
             while (true)
             {
                 if (bRecogerRespuesta)
-                {
-                    respuesta = conexion.recibirMensaje();
-                    actualizarEstado(respuesta);
+                {                    
+                    actualizarEstado(conexion.recibirMensaje());
                 }
             }
         }

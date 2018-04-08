@@ -144,6 +144,32 @@
             Un <see cref="T:System.String" /> que representa esta instancia.
             </returns>
         </member>
+        <member name="T:Servidor_Poker.Mano">
+            <summary>
+            Definicion de las cartas en juego para una instancia
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Mano.cartas">
+            <summary>
+            Listado de cartas de la mano
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Mano.#ctor">
+            <summary>
+            Inicializa una instancia de la clase <see cref="T:Servidor_Poker.Mano"/>.
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Mano.vaciarMano">
+            <summary>
+            Devuelve la mano a su estado inicial para una nueva partida.
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Mano.añadirCarta(Servidor_Poker.Carta)">
+            <summary>
+            Añade una carta recibida como parametro a las cartas de la mano .
+            </summary>
+            <param name="carta">Carta recibida.</param>
+        </member>
         <member name="F:Servidor_Poker.Program.bd">
             <summary>
             Objeto de tipo BaseDatos el cual gestiona la conexión a la base da datos del servidor

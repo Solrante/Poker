@@ -61,7 +61,7 @@ namespace Servidor_Poker
         /// Valor.
         /// </value>
         public eCarta Valor { get; set; }
-
+     
         /// <summary>
         /// Devuelve un <see cref="System.String" /> que representa esta instancia.
         /// </summary>
