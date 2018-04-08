@@ -9,6 +9,37 @@
             Generador de numeros pseudoaleatorio de la clase
             </summary>
         </member>
+        <member name="F:Servidor_Poker.Baraja.contenido">
+            <summary>
+            Conjuto de cartas que conforman la bajara
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Baraja.cartasRepartidas">
+            <summary>
+            Lista de cartas ya repartidas
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Baraja.#ctor">
+            <summary>
+            Inicializa una instancia de la clase <see cref="T:Servidor_Poker.Baraja"/>.
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Baraja.definirContenido">
+            <summary>
+            Llena el contenido de la bajara con cartas.
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Baraja.sacarCarta">
+            <summary>
+            Devuelve una carta no repartida de la baraja.
+            </summary>
+            <returns>Carta a repartir</returns>
+        </member>
+        <member name="M:Servidor_Poker.Baraja.reiniciar">
+            <summary>
+            Deja la instancia en su estado original
+            </summary>
+        </member>
         <member name="T:Servidor_Poker.BaseDatos">
             <summary>
             Definicion de conexion a la base de datos

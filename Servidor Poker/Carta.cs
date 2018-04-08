@@ -70,8 +70,8 @@ namespace Servidor_Poker
         /// </returns>
         public override string ToString()
         {
-            Console.WriteLine((int)Palo + "-" + (int)Valor);
-            return (int)Palo + "-" + (int)Valor;
+            //Console.WriteLine((int)Palo + "-" + (int)Valor);
+            return Palo + "-" + Valor;
         }
     }
 }

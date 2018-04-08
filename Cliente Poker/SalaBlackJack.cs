@@ -118,166 +118,178 @@ namespace Cliente_Poker
             string numCarta = text.Split('-')[1];
             switch (palo)
             {
-                case "1":
+                case "TREBOLES":
                     switch (numCarta)
                     {
-                        case "1":
+                        case "AS":
                             lbl.Image = Properties.Resources.cardClubsA;
                             break;
-                        case "2":
+                        case "DOS":
                             lbl.Image = Properties.Resources.cardClubs2;
                             break;
-                        case "3":
+                        case "TRES":
                             lbl.Image = Properties.Resources.cardClubs3;
                             break;
-                        case "4":
+                        case "CUATRO":
                             lbl.Image = Properties.Resources.cardClubs4;
                             break;
-                        case "5":
+                        case "CINCO":
                             lbl.Image = Properties.Resources.cardClubs5;
                             break;
-                        case "6":
+                        case "SEIS":
                             lbl.Image = Properties.Resources.cardClubs6;
                             break;
-                        case "7":
+                        case "SIETE":
                             lbl.Image = Properties.Resources.cardClubs7;
                             break;
-                        case "8":
+                        case "OCHO":
                             lbl.Image = Properties.Resources.cardClubs8;
                             break;
-                        case "9":
+                        case "NUEVE":
                             lbl.Image = Properties.Resources.cardClubs9;
                             break;
-                        case "10":
+                        case "DIEZ":
+                            lbl.Image = Properties.Resources.cardClubs10;
+                            break;
+                        case "J":
                             lbl.Image = Properties.Resources.cardClubsJ;
                             break;
-                        case "11":
+                        case "Q":
                             lbl.Image = Properties.Resources.cardClubsQ;
                             break;
-                        case "12":
+                        case "K":
                             lbl.Image = Properties.Resources.cardClubsK;
                             break;
                     }
                     break;
-                case "2":
+                case "DIAMANTES":
                     switch (numCarta)
                     {
-                        case "1":
+                        case "AS":
                             lbl.Image = Properties.Resources.cardDiamondsA;
                             break;
-                        case "2":
+                        case "DOS":
                             lbl.Image = Properties.Resources.cardDiamonds2;
                             break;
-                        case "3":
+                        case "TRES":
                             lbl.Image = Properties.Resources.cardDiamonds3;
                             break;
-                        case "4":
+                        case "CUATRO":
                             lbl.Image = Properties.Resources.cardDiamonds4;
                             break;
-                        case "5":
+                        case "CINCO":
                             lbl.Image = Properties.Resources.cardDiamonds5;
                             break;
-                        case "6":
+                        case "SEIS":
                             lbl.Image = Properties.Resources.cardDiamonds6;
                             break;
-                        case "7":
+                        case "SIETE":
                             lbl.Image = Properties.Resources.cardDiamonds7;
                             break;
-                        case "8":
+                        case "OCHO":
                             lbl.Image = Properties.Resources.cardDiamonds8;
                             break;
-                        case "9":
+                        case "NUEVE":
                             lbl.Image = Properties.Resources.cardDiamonds9;
                             break;
-                        case "10":
+                        case "DIEZ":
+                            lbl.Image = Properties.Resources.cardDiamonds10;
+                            break;
+                        case "J":
                             lbl.Image = Properties.Resources.cardDiamondsJ;
                             break;
-                        case "11":
+                        case "Q":
                             lbl.Image = Properties.Resources.cardDiamondsQ;
                             break;
-                        case "12":
+                        case "K":
                             lbl.Image = Properties.Resources.cardDiamondsK;
                             break;
                     }
                     break;
-                case "3":
+                case "CORAZONES":
                     switch (numCarta)
                     {
-                        case "1":
+                        case "AS":
                             lbl.Image = Properties.Resources.cardHeartsA;
                             break;
-                        case "2":
+                        case "DOS":
                             lbl.Image = Properties.Resources.cardHearts2;
                             break;
-                        case "3":
+                        case "TRES":
                             lbl.Image = Properties.Resources.cardHearts3;
                             break;
-                        case "4":
+                        case "CUATRO":
                             lbl.Image = Properties.Resources.cardHearts4;
                             break;
-                        case "5":
+                        case "CINCO":
                             lbl.Image = Properties.Resources.cardHearts5;
                             break;
-                        case "6":
+                        case "SEIS":
                             lbl.Image = Properties.Resources.cardHearts6;
                             break;
-                        case "7":
+                        case "SIETE":
                             lbl.Image = Properties.Resources.cardHearts7;
                             break;
-                        case "8":
+                        case "OCHO":
                             lbl.Image = Properties.Resources.cardHearts8;
                             break;
-                        case "9":
+                        case "NUEVE":
                             lbl.Image = Properties.Resources.cardHearts9;
                             break;
-                        case "10":
+                        case "DIEZ":
+                            lbl.Image = Properties.Resources.cardHearts10;
+                            break;
+                        case "J":
                             lbl.Image = Properties.Resources.cardHeartsJ;
                             break;
-                        case "11":
+                        case "Q":
                             lbl.Image = Properties.Resources.cardHeartsQ;
                             break;
-                        case "12":
+                        case "K":
                             lbl.Image = Properties.Resources.cardHeartsK;
                             break;
                     }
                     break;
-                case "4":
+                case "PICAS":
                     switch (numCarta)
                     {
-                        case "1":
+                        case "AS":
                             lbl.Image = Properties.Resources.cardSpadesA;
                             break;
-                        case "2":
+                        case "DOS":
                             lbl.Image = Properties.Resources.cardSpades2;
                             break;
-                        case "3":
+                        case "TRES":
                             lbl.Image = Properties.Resources.cardSpades3;
                             break;
-                        case "4":
+                        case "CUATRO":
                             lbl.Image = Properties.Resources.cardSpades4;
                             break;
-                        case "5":
+                        case "CINCO":
                             lbl.Image = Properties.Resources.cardSpades5;
                             break;
-                        case "6":
+                        case "SEIS":
                             lbl.Image = Properties.Resources.cardSpades6;
                             break;
-                        case "7":
+                        case "SIETE":
                             lbl.Image = Properties.Resources.cardSpades7;
                             break;
-                        case "8":
+                        case "OCHO":
                             lbl.Image = Properties.Resources.cardSpades8;
                             break;
-                        case "9":
+                        case "NUEVE":
                             lbl.Image = Properties.Resources.cardSpades9;
                             break;
-                        case "10":
+                        case "DIEZ":
+                            lbl.Image = Properties.Resources.cardSpades10;
+                            break;
+                        case "J":
                             lbl.Image = Properties.Resources.cardSpadesJ;
                             break;
-                        case "11":
+                        case "Q":
                             lbl.Image = Properties.Resources.cardSpadesQ;
                             break;
-                        case "12":
+                        case "K":
                             lbl.Image = Properties.Resources.cardSpadesK;
                             break;
                     }

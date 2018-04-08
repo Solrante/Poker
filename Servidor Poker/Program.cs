@@ -194,8 +194,8 @@ namespace Servidor_Poker
             Baraja bar = new Baraja();
             Sala sala = s as Sala;
             Usuario usuario = null;
-            List<string> cartasUsuario = new List<string>();
-            List<string> cartasCrupier = new List<string>();
+            List<Carta> cartasUsuario = new List<Carta>();
+            List<Carta> cartasCrupier = new List<Carta>();
             double saldoDisponible = 0;
             bool finMano = false;
             while (true)
@@ -223,16 +223,16 @@ namespace Servidor_Poker
                         {
                             case "Ficha":
                                 saldoDisponible -= Convert.ToDouble(usuario.Mensaje.Split('-')[1].Trim());
-                                Console.WriteLine("Saldo actual : " + saldoDisponible);
-                                cartasUsuario.Add(generarCarta());
-                                cartasUsuario.Add(generarCarta());
-                                cartasCrupier.Add(generarCarta());
-                                foreach (string carta in cartasUsuario)
+                                Console.WriteLine("Saldo actual : " + saldoDisponible);                                
+                                cartasUsuario.Add(bar.sacarCarta());
+                                cartasUsuario.Add(bar.sacarCarta());
+                                cartasCrupier.Add(bar.sacarCarta());
+                                foreach (Carta carta in cartasUsuario)
                                 {
-                                    Console.WriteLine("Carta-Jugador-" + carta);
-                                    usuario.mandarMensaje("Carta-Jugador-" + carta);
+                                    Console.WriteLine("Carta-Jugador-" + carta.ToString());
+                                    usuario.mandarMensaje("Carta-Jugador-" + carta.ToString());
                                 }
-                                foreach (string carta in cartasCrupier)
+                                foreach (Carta carta in cartasCrupier)
                                 {
                                     Console.WriteLine("Carta-Crupier-" + carta);
                                     usuario.mandarMensaje("Carta-Crupier-" + carta);
@@ -242,7 +242,7 @@ namespace Servidor_Poker
                             case "Plantarse":
                                 break;
                             case "Pedir":
-                                string nCarta = generarCarta();
+                                Carta nCarta = bar.sacarCarta();
                                 cartasUsuario.Add(nCarta);
                                 Console.WriteLine("Carta-Jugador-" + nCarta);
                                 usuario.mandarMensaje("Carta-Jugador-" + nCarta);

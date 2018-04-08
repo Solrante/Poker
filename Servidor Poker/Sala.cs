@@ -83,7 +83,7 @@ namespace Servidor_Poker
         /// </returns>
         public override string ToString()
         {
-            return string.Format("{0},{1},{2},{3}", NumSala, ApuestaMinima, CuotaEntrada, Tipo);
+            return string.Format("{0},{1},{2},{3}", NumSala, ApuestaMinima, CuotaEntrada, (int)Tipo);
         }
     }
 }
