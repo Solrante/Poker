@@ -83,8 +83,8 @@ namespace Servidor_Poker
         static void crearSalas()
         {
             salas.Add(new Sala("0,0,0", eSala.BLACKJACK));
-            salas.Add(new Sala("1,0,0", eSala.BLACKJACK));
-            salas.Add(new Sala("2,0,0", eSala.BLACKJACK));
+            //salas.Add(new Sala("1,0,0", eSala.BLACKJACK));
+            //salas.Add(new Sala("2,0,0", eSala.BLACKJACK));
             numeroSalas = salas.Count();
         }
 
@@ -159,7 +159,7 @@ namespace Servidor_Poker
                         lock (l)
                         {
                             Console.WriteLine(usuario.Correo + " : Se desconecta");
-                            usuario.cerraSesion();
+                            usuario.cerrarSesion();
                         }
                     }
                     else
@@ -191,7 +191,7 @@ namespace Servidor_Poker
 
         static void salaBlackJack(object s)
         {
-
+            Baraja bar = new Baraja();
             Sala sala = s as Sala;
             Usuario usuario = null;
             List<string> cartasUsuario = new List<string>();
@@ -243,7 +243,7 @@ namespace Servidor_Poker
                                 break;
                             case "Pedir":
                                 string nCarta = generarCarta();
-                                cartasUsuario.Add(nCarta);                                
+                                cartasUsuario.Add(nCarta);
                                 Console.WriteLine("Carta-Jugador-" + nCarta);
                                 usuario.mandarMensaje("Carta-Jugador-" + nCarta);
                                 usuario.mandarMensaje("Fin envio");

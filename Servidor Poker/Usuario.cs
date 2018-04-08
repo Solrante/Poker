@@ -1,28 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Servidor_Poker
 {
     class Usuario
     {
+        /// <summary>
+        /// Conexion del usuario
+        /// </summary>
         private Socket socket;
+
+        /// <summary>
+        /// Flujo de comunicación
+        /// </summary>
         private NetworkStream ns;
+
+        /// <summary>
+        /// Flujo de escritura
+        /// </summary>
         private StreamWriter sw;
+
+        /// <summary>
+        /// Flujo de lectura
+        /// </summary>
         private StreamReader sr;
 
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="Usuario"/>.
+        /// </summary>
+        /// <param name="socket">Socket de conexion.</param>
+        /// <param name="datos">Credenciales del usuario.</param>
         public Usuario(Socket socket, string datos)
         {
             this.socket = socket;
-
             guardarDatos(datos);
             generarFlujos();
         }
 
+        /// <summary>
+        /// Guarda en variables de clase información recogida por parametro.
+        /// </summary>
+        /// <param name="datos">Información recibida.</param>
         private void guardarDatos(string datos)
         {
             ID = Convert.ToInt32(datos.Split(',')[0]);
@@ -31,6 +50,10 @@ namespace Servidor_Poker
             Saldo = Convert.ToDouble(datos.Split(',')[3]);
 
         }
+
+        /// <summary>
+        /// Inicializa los flujos del usuario de su Socket
+        /// </summary>
         private void generarFlujos()
         {
             ns = new NetworkStream(socket);
@@ -38,16 +61,52 @@ namespace Servidor_Poker
             sw = new StreamWriter(ns);
         }
 
+        /// <summary>
+        /// Gets or sets el ID del usuario.
+        /// </summary>
+        /// <value>
+        /// ID.
+        /// </value>
         public int ID { get; set; }
 
+        /// <summary>
+        /// Gets or sets la dirección de correo.
+        /// </summary>
+        /// <value>
+        /// El correo.
+        /// </value>
         public string Correo { set; get; }
 
+        /// <summary>
+        /// Gets or sets la contraseña.
+        /// </summary>
+        /// <value>
+        /// La contraseña.
+        /// </value>
         public string Contraseña { set; get; }
 
+        /// <summary>
+        /// Gets or sets el saldo.
+        /// </summary>
+        /// <value>
+        /// El saldo.
+        /// </value>
         public double Saldo { set; get; }
 
+        /// <summary>
+        /// Gets or sets el mensaje.
+        /// </summary>
+        /// <value>
+        /// El mensaje.
+        /// </value>
         public string Mensaje { set; get; }
 
+        /// <summary>
+        /// Gets or sets un valor indicando si este <see cref="Usuario"/> esta jugando.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> si esta jugando; de otra manera, <c>false</c>.
+        /// </value>
         public bool Jugando { get; set; }
 
         /// <summary>
@@ -61,6 +120,9 @@ namespace Servidor_Poker
             //TODO salta excepcion al salir un cliente
         }
 
+        /// <summary>
+        /// Lee información desde el flujo de entrada del usuario y lo almacena en su variable Mensaje.
+        /// </summary>
         public void leerMensaje()
         {
             string mensaje = "Desconexion";
@@ -84,12 +146,22 @@ namespace Servidor_Poker
             Mensaje = mensaje;
         }
 
+        /// <summary>
+        /// Devuelve un <see cref="System.String" /> que representa esta instancia.
+        /// </summary>
+        /// <returns>
+        /// Un <see cref="System.String" /> que presesenta esta instancia.
+        /// </returns>
         public override string ToString()
         {
             return Correo + "," + Saldo;
         }
 
-        public bool cerraSesion()
+        /// <summary>
+        /// Cierra los flujos y conexion de la sesion del usuario.
+        /// </summary>
+        /// <returns></returns>
+        public bool cerrarSesion()
         {
             bool result = false;
             if (sr != null)

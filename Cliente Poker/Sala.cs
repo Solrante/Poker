@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cliente_Poker
 {
@@ -20,6 +16,7 @@ namespace Cliente_Poker
         /// </summary>
         POKER
     }
+
     /// <summary>
     /// Definición de una sala de juego
     /// </summary>
