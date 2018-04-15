@@ -8,18 +8,27 @@ namespace Cliente_Poker
     {
         MenuPrincipal MenuPrincipal;
         ConexionServidor conexion;
-        private delegate void CambiarText(PictureBox p, string s);
-        private delegate void AñadirControl(Control c);
-        private CambiarText c;
-        string respuesta;
+        private delegate void CambiarImagenPictureBox(PictureBox p, string s);
+        private delegate void CambiarTextoLabel(Label l, string s);
+        private delegate void CambiarVisibilidadControl(Control c, bool b);
+        private delegate void ModificarControls(Control c,bool b);
+        private CambiarImagenPictureBox imagenPictureBox;
+        private CambiarTextoLabel textoLabel;
+        private CambiarVisibilidadControl visibilidad;
+        private ModificarControls controles;
         bool bRecogerRespuesta;
-        int x;
+        int posXJugador;
+        int posXCrupier;
 
 
         public SalaBlackJack(MenuPrincipal menuPrincipal)
         {
             InitializeComponent();
-            MenuPrincipal = menuPrincipal; c = new CambiarText(cambiarImagenCarta);
+            MenuPrincipal = menuPrincipal;
+            imagenPictureBox = new CambiarImagenPictureBox(cambiarImagenCarta);
+            textoLabel = new CambiarTextoLabel(TextoLabel);
+            visibilidad = new CambiarVisibilidadControl(CambiarVisibilidad);
+            controles = new ModificarControls(ModificarListadoControls);
             conexion = MenuPrincipal.conexion;
             new Thread(HiloComunicacion).Start();
 
@@ -33,39 +42,54 @@ namespace Cliente_Poker
             Dispose();
         }
 
-        private void btnFicha25_Click(object sender, EventArgs e)
+        private void ClickListener(object sender, EventArgs e)
         {
-            conexion.enviarMensaje("Ficha - 25");
-            bRecogerRespuesta = true;
-        }
-
-        private void btnFicha50_Click(object sender, EventArgs e)
-        {
-            conexion.enviarMensaje("Ficha - 50");
-            bRecogerRespuesta = true;
-        }
-
-        private void btnFicha100_Click(object sender, EventArgs e)
-        {
-            conexion.enviarMensaje("Ficha - 100");
+            string mensaje = "";
+            bool ficha = false;
+            Button btn = sender as Button;
+            if (btn == btnFicha25)
+            {
+                mensaje = "Ficha - 25";
+                ficha = true;
+            }
+            if (btn == btnFicha50)
+            {
+                mensaje = "Ficha - 50";
+                ficha = true;
+            }
+            if (btn == btnFicha100)
+            {
+                mensaje = "Ficha - 100";
+                ficha = true;
+            }
+            if (btn == btnPedir)
+            {
+                mensaje = "Pedir";
+            }
+            if (btn == btnPlantarse)
+            {
+                mensaje = "Plantarse";
+            }
+            if (ficha)
+            {
+                cambiarVisibilidadFichas(false);
+            }
+            conexion.enviarMensaje(mensaje);
             bRecogerRespuesta = true;
         }
 
         private void cambiarVisibilidadFichas(bool estado)
         {
-            btnFicha100.Visible = estado;
-            btnFicha50.Visible = estado;
-            btnFicha25.Visible = estado;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            conexion.enviarMensaje("Pedir");
-            bRecogerRespuesta = true;
+            Invoke(visibilidad, btnFicha100, estado);
+            Invoke(visibilidad, btnFicha50, estado);
+            Invoke(visibilidad, btnFicha25, estado);
+            Invoke(visibilidad, btnPedir, !estado);
+            Invoke(visibilidad, btnPlantarse, !estado);
         }
 
         private void actualizarEstado(string respuesta)
         {
+            Console.WriteLine(respuesta);
             switch (respuesta.Split('-')[0])
             {
                 case "Carta":
@@ -74,41 +98,91 @@ namespace Cliente_Poker
                         case "Jugador":
                             if (cartaJugador1.Image == null)
                             {
-                                CambiarText c = new CambiarText(cambiarImagenCarta);
-                                x = cartaJugador1.Location.X;
+                                CambiarImagenPictureBox c = new CambiarImagenPictureBox(cambiarImagenCarta);
+                                posXJugador = cartaJugador1.Location.X;
                                 Invoke(c, cartaJugador1, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
                             }
                             else
                             {
                                 PictureBox pb = new PictureBox();
-                                x += 100;
+                                posXJugador += 60;
                                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
                                 pb.Size = cartaJugador1.Size;
-                                Invoke(c, pb, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
-                                pb.Location = new System.Drawing.Point(x, cartaJugador1.Location.Y);
-                                AñadirControl añadir = new AñadirControl(añadirControlNuevo);
-                                Invoke(añadir, pb);
+                                Invoke(imagenPictureBox, pb, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
+                                pb.Location = new System.Drawing.Point(posXJugador, cartaJugador1.Location.Y);
+                                Invoke(controles, pb, true);
                             }
                             break;
                         case "Crupier":
                             if (cartaCrupier1.Image == null)
                             {
-                                CambiarText c = new CambiarText(cambiarImagenCarta);
+                                posXCrupier = cartaCrupier1.Location.X;
+                                CambiarImagenPictureBox c = new CambiarImagenPictureBox(cambiarImagenCarta);
                                 Invoke(c, cartaCrupier1, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
+                            }
+                            else
+                            {
+                                PictureBox pb = new PictureBox();
+                                posXCrupier += 60;
+                                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                                pb.Size = cartaCrupier1.Size;
+                                Invoke(imagenPictureBox, pb, respuesta.Split('-')[2] + "-" + respuesta.Split('-')[3]);
+                                pb.Location = new System.Drawing.Point(posXJugador, cartaCrupier1.Location.Y);                                
+                                Invoke(controles, pb,true);
                             }
                             break;
                     }
-                    break;              
+                    break;
+                case "Fin Mano":
+                    Console.WriteLine("Me llega fin de mano");
+                    switch (respuesta.Split('-')[1])
+                    {
+                        case "Gana Jugador":
+                            Invoke(textoLabel, lblResultado, "Gana Jugador");
+                            break;
+                        case "Gana Crupier":
+                            Invoke(textoLabel, lblResultado, "Gana Crupier");
+                            break;
+                        case "Empate":
+                            Invoke(textoLabel, lblResultado, "Empate");
+                            break;
+                    }
+                    reset();
+                    break;
                 case "Fin envio":
                     bRecogerRespuesta = false;
                     break;
-            }            
+            }
         }
 
-
-        private void añadirControlNuevo(Control c)
+        private void reset()
         {
-            Controls.Add(c);
+            Thread.Sleep(2000);
+            Invoke(textoLabel, lblResultado, "");
+            cambiarVisibilidadFichas(true);
+            for (int i = Controls.Count - 1; i > 0; i--)
+            {                
+                if (Controls[i].GetType() == typeof(PictureBox) && Controls[i] != cartaCrupier1 && Controls[i] != cartaJugador1)
+                {
+                    Console.WriteLine("Picturebox eliminado");
+                    Invoke(controles, Controls[i], false);
+                }
+            }
+            cartaCrupier1.Image = null;
+            cartaJugador1.Image = null;
+        }
+
+        private void ModificarListadoControls(Control c,bool accion)
+        {
+            if (accion)
+            {
+                Controls.Add(c);
+            }
+            else
+            {
+                Controls.Remove(c);
+            }
+            
         }
 
         private void cambiarImagenCarta(PictureBox lbl, string text)
@@ -296,15 +370,26 @@ namespace Cliente_Poker
             }
         }
 
+        private void TextoLabel(Label l, string s)
+        {
+            l.Text = s;
+        }
+
+        private void CambiarVisibilidad(Control c, bool visibilidad)
+        {
+            c.Visible = visibilidad;
+        }
+
         private void HiloComunicacion()
         {
             while (true)
             {
                 if (bRecogerRespuesta)
-                {                    
+                {
                     actualizarEstado(conexion.recibirMensaje());
                 }
             }
         }
+
     }
 }

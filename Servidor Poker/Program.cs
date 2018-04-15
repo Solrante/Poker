@@ -196,20 +196,17 @@ namespace Servidor_Poker
             Usuario usuario = null;
             Mano manoJugador = new Mano();
             Mano manoCrupier = new Mano();
+            Resultado resultado = null;
             List<Carta> cartasUsuario = new List<Carta>();
             List<Carta> cartasCrupier = new List<Carta>();
             double saldoDisponible = 0;
+            int apuesta = 0;
             bool finMano = false;
             while (true)
             {
                 if (sala.Usuarios.Count != 0)
                 {
-                    if (finMano)
-                    {
-                        cartasUsuario.Clear();
-                        cartasCrupier.Clear();
-                        finMano = false;
-                    }
+
                     //Se comprueba si el usuario para jugar es nulo , de ser así se guarda el usuario de la lista
                     if (usuario == null)
                     {
@@ -224,7 +221,8 @@ namespace Servidor_Poker
                         switch (usuario.Mensaje.Split('-')[0].Trim())
                         {
                             case "Ficha":
-                                saldoDisponible -= Convert.ToDouble(usuario.Mensaje.Split('-')[1].Trim());
+                                apuesta = Convert.ToInt32(usuario.Mensaje.Split('-')[1].Trim());
+                                saldoDisponible -= apuesta;
                                 Console.WriteLine("Saldo actual : " + saldoDisponible);
                                 manoJugador.añadirCarta(bar.sacarCarta());
                                 manoJugador.añadirCarta(bar.sacarCarta());
@@ -239,41 +237,67 @@ namespace Servidor_Poker
                                     Console.WriteLine("Carta-Crupier-" + carta);
                                     usuario.mandarMensaje("Carta-Crupier-" + carta);
                                 }
-                                usuario.mandarMensaje("Fin envio");
                                 break;
                             case "Plantarse":
+                                Console.WriteLine("El crupier saca cartas segun las reglas");
+                                while (manoCrupier.valorNumerico() < 17)
+                                {
+                                    Carta carta = bar.sacarCarta();
+                                    usuario.mandarMensaje("Carta-Crupier-" + carta);
+                                    manoCrupier.añadirCarta(carta);
+                                }
+                                if (manoCrupier.valorNumerico() > 21)
+                                {
+                                    resultado = new Resultado(manoCrupier, manoJugador, "se paso");
+                                }
+                                else
+                                {
+                                    resultado = new Resultado(manoCrupier, manoJugador, null);
+                                }
+
+                                finMano = true;
                                 break;
                             case "Pedir":
                                 Carta nCarta = bar.sacarCarta();
                                 manoJugador.añadirCarta(nCarta);
                                 Console.WriteLine("Carta-Jugador-" + nCarta);
                                 usuario.mandarMensaje("Carta-Jugador-" + nCarta);
-                                usuario.mandarMensaje("Fin envio");
+                                if (manoJugador.valorNumerico() > 21)
+                                {
+                                    resultado = new Resultado(manoCrupier, manoJugador, "se paso");
+                                    finMano = true;
+                                }
+                                if (manoJugador.valorNumerico() == 21)
+                                {
+                                    resultado = new Resultado(manoCrupier, manoJugador, null);
+                                    finMano = true;
+                                }
                                 break;
                         }
 
-                        string resultado = comprobarManos(manoCrupier, manoJugador);
-                        switch (resultado.Split('-')[0])
+
+                        if (finMano)
                         {
-                            case "BlackJack":
-                                switch (resultado.Split('-')[1])
-                                {
-                                    case "Crupier":
-                                        break;
-                                    case "Jugador":
-                                        break;
-                                }
-                                break;
-                            case "Se paso":
-                                switch (resultado.Split('-')[1])
-                                {
-                                    case "Crupier":
-                                        break;
-                                    case "Jugador":
-                                        break;
-                                }
-                                break;
+
+                            if (resultado.Valor == "Gana Jugador")
+                            {
+                                saldoDisponible += apuesta * 2;
+                            }
+                            else if (resultado.Valor == "Empate")
+                            {
+                                saldoDisponible += apuesta;
+                            }
+                            Console.WriteLine("Resultado : " + resultado.Valor);
+                            usuario.mandarMensaje("Fin Mano-" + resultado.Valor);
+
+                            manoCrupier.vaciarMano();
+                            manoJugador.vaciarMano();
+                            Console.WriteLine("Manos despues de final - "+manoCrupier.valorNumerico()+":"+manoJugador.valorNumerico());
+                            finMano = false;
                         }
+
+                        Console.WriteLine("Mando fin de envio");
+                        usuario.mandarMensaje("Fin envio");
                     }
                     else
                     {
@@ -292,33 +316,6 @@ namespace Servidor_Poker
 
                 }
             }
-        }
-
-        static private string comprobarManos(Mano crupier, Mano jugador)
-        {
-            string resultado = "";
-
-            int valorCrupier = crupier.valorNumerico();
-            int valorJugador = jugador.valorNumerico();
-
-            if (valorCrupier == 21)
-            {
-                resultado = "BlackJack-Crupier";
-            }
-            if (valorJugador == 21)
-            {
-                resultado = "BlackJack-Jugador";
-            }
-            if (valorCrupier > 21)
-            {
-                resultado = "Se paso-Crupier";
-            }
-            if (valorJugador > 21)
-            {
-                resultado = "Se paso-Jugador";
-            }
-
-            return resultado;
         }
     }
 }
