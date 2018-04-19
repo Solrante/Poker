@@ -4,6 +4,11 @@
         <name>Servidor Poker</name>
     </assembly>
     <members>
+        <member name="T:Servidor_Poker.Baraja">
+            <summary>
+            Definicion de la baraja de juego
+            </summary>
+        </member>
         <member name="F:Servidor_Poker.Baraja.aleatorio">
             <summary>
             Generador de numeros pseudoaleatorio de la clase
@@ -115,6 +120,17 @@
             Definicion de una carta del juego
             </summary>
         </member>
+        <member name="F:Servidor_Poker.Carta.cardValueMap">
+            <summary>
+            Conjunto de valores numericos de las cartas
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Carta.getCardValueMap">
+            <summary>
+            Devuelve el conjunto de valores numericos de las cartas.
+            </summary>
+            <returns>Conjunto de valores numericos.</returns>
+        </member>
         <member name="M:Servidor_Poker.Carta.#ctor(Servidor_Poker.ePalo,Servidor_Poker.eCarta)">
             <summary>
             Inicializa una instancia de la clase  <see cref="T:Servidor_Poker.Carta"/>.
@@ -154,6 +170,11 @@
             Listado de cartas de la mano
             </summary>
         </member>
+        <member name="F:Servidor_Poker.Mano.valorPrimerAs">
+            <summary>
+            Valor númerico del primer as de la mano
+            </summary>
+        </member>
         <member name="M:Servidor_Poker.Mano.#ctor">
             <summary>
             Inicializa una instancia de la clase <see cref="T:Servidor_Poker.Mano"/>.
@@ -170,10 +191,136 @@
             </summary>
             <param name="carta">Carta recibida.</param>
         </member>
+        <member name="M:Servidor_Poker.Mano.valorNumerico">
+            <summary>
+            Devuelve el la suma del valor de las cartas en la mano.
+            </summary>
+            <returns>Valor númerico del total de cartas en la mano</returns>
+        </member>
+        <member name="T:Servidor_Poker.Program">
+            <summary>
+            Clase principal del programa
+            </summary>
+        </member>
         <member name="F:Servidor_Poker.Program.bd">
             <summary>
             Objeto de tipo BaseDatos el cual gestiona la conexión a la base da datos del servidor
             </summary>
+        </member>
+        <member name="F:Servidor_Poker.Program.salas">
+            <summary>
+            Listado de salas activas del servidor
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Program.l">
+            <summary>
+            Objeto para control de uso de elementos comunes
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Program.puerto">
+            <summary>
+            Puerto de conexion al servidor
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Program.random">
+            <summary>
+            Instancia de generador de numeros aleatorios
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Program.Main(System.String[])">
+            <summary>
+            El punto de entrada del programa , donde el control del mismo empieza y acaba
+            </summary>
+            <param name="args">Los parametros de la linea de comandos.</param>
+        </member>
+        <member name="M:Servidor_Poker.Program.crearSalas">
+            <summary>
+            Genera las salas de juego y las añade al listado de salas activas
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Program.hiloLogin(System.Object)">
+            <summary>
+            Gestiona el login al servidor de un cliente recibido como parametro
+            </summary>
+            <param name="cliente">Cliente.</param>
+        </member>
+        <member name="M:Servidor_Poker.Program.hiloSalaEspera(System.Object)">
+            <summary>
+            Gestiona la interaccion del usuario recibido como parametro en el menu principal del juego
+            </summary>
+            <param name="usu">Usuario.</param>
+        </member>
+        <member name="M:Servidor_Poker.Program.salaPoker(System.Object)">
+            <summary>
+            Gestiona la sala recibida como parametro
+            </summary>
+            <param name="s">Sala.</param>
+        </member>
+        <member name="M:Servidor_Poker.Program.salaBlackJack(System.Object)">
+            <summary>
+            Gestiona la sala recibida como parametro
+            </summary>
+            <param name="s">Sala.</param>
+        </member>
+        <member name="T:Servidor_Poker.eModificadorResultado">
+            <summary>
+            Modificador del resultado
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.eModificadorResultado.SEPASO">
+            <summary>
+            Indica que se supero la cifra maxima
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.eModificadorResultado.BLACKJACK">
+            <summary>
+            Indica que se saco un 21
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.eModificadorResultado.SINMODIFICADOR">
+            <summary>
+            Sin modificador
+            </summary>
+        </member>
+        <member name="T:Servidor_Poker.Resultado">
+            <summary>
+            Definición del resultado de una partida
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Resultado.jugador">
+            <summary>
+            Valor de respuesta favorable al jugador
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Resultado.crupier">
+            <summary>
+            Valor de respuesta favorable al crupier
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Resultado.empate">
+            <summary>
+            Valor de respuesta de empate
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Resultado.limitePuntuacion">
+            <summary>
+            Indica la cantidad de puntos limite
+            </summary>
+        </member>
+        <member name="M:Servidor_Poker.Resultado.#ctor(Servidor_Poker.Mano,Servidor_Poker.Mano,Servidor_Poker.eModificadorResultado)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Servidor_Poker.Resultado"/> según
+            parametros recibidos.
+            </summary>
+            <param name="manoCrupier">Mano crupier.</param>
+            <param name="manoJugador">Mano jugador.</param>
+            <param name="modificador">Modificador.</param>
+        </member>
+        <member name="P:Servidor_Poker.Resultado.Valor">
+            <summary>
+            Gets or sets el valor del resultado.
+            </summary>
+            <value>The valor.</value>
         </member>
         <member name="T:Servidor_Poker.eSala">
             <summary>
@@ -246,6 +393,11 @@
             <returns>
             A <see cref="T:System.String" /> that represents this instance.
             </returns>
+        </member>
+        <member name="T:Servidor_Poker.Usuario">
+            <summary>
+            Definicion de usuario
+            </summary>
         </member>
         <member name="F:Servidor_Poker.Usuario.socket">
             <summary>
@@ -357,6 +509,66 @@
             Cierra los flujos y conexion de la sesion del usuario.
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Servidor_Poker.ClaveComunicacion">
+            <summary>
+            Contenedor de claves de comunicacion
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Desconexion">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Sala">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Login">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Separador">
+            <summary>
+            Separador en mensajes
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Valido">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Invalido">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Carta">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Jugador">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.Crupier">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.FinMano">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.ClaveComunicacion.FinEnvio">
+            <summary>
+            Clave de comunicacion.
+            </summary>
         </member>
     </members>
 </doc>

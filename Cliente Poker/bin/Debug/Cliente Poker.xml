@@ -4,21 +4,76 @@
         <name>Cliente Poker</name>
     </assembly>
     <members>
-        <member name="F:Cliente_Poker.Carta.components">
-            <summary> 
-            Variable del diseñador necesaria.
+        <member name="T:Cliente_Poker.ConexionServidor">
+            <summary>
+            Conexion servidor.
             </summary>
         </member>
-        <member name="M:Cliente_Poker.Carta.Dispose(System.Boolean)">
-            <summary> 
-            Limpiar los recursos que se estén usando.
+        <member name="F:Cliente_Poker.ConexionServidor.conexionInicializada">
+            <summary>
+            Indica si la inicialización de la conexion con el servidor se ha completado
             </summary>
-            <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
         </member>
-        <member name="M:Cliente_Poker.Carta.InitializeComponent">
-            <summary> 
-            Método necesario para admitir el Diseñador. No se puede modificar
-            el contenido de este método con el editor de código.
+        <member name="F:Cliente_Poker.ConexionServidor.IP_SERVIDOR">
+            <summary>
+            IP de conexión al servidor.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ConexionServidor.puerto">
+            <summary>
+            Puerto de conexion al servidor
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ConexionServidor.servidor">
+            <summary>
+            EndPoint del servidor
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ConexionServidor.sServidor">
+            <summary>
+            Socket del servidor
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ConexionServidor.ns">
+            <summary>
+            Flujo de conexión con el servidor
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ConexionServidor.sr">
+            <summary>
+            Flujo de lectura del servidor
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ConexionServidor.sw">
+            <summary>
+            Flujo de escritura hacia el servidor
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.ConexionServidor.#ctor">
+            <summary>
+            Inicializa una instancia de la clase <see cref="T:Cliente_Poker.ConexionServidor"/>.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.ConexionServidor.enviarMensaje(System.String)">
+            <summary>
+            Manda un mensaje recibido como parametro al servidor.
+            </summary>
+            <param name="mensaje">Mensaje.</param>
+        </member>
+        <member name="M:Cliente_Poker.ConexionServidor.recibirMensaje">
+            <summary>
+            Lee un mensaje del servidor
+            </summary>
+            <returns>The mensaje.</returns>
+        </member>
+        <member name="M:Cliente_Poker.ConexionServidor.abrirConexion">
+            <summary>
+            Inicializa las variables orientadas a la conexión y comunicación con el servidor
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.ConexionServidor.cerrarConexion">
+            <summary>
+            Cierra todos los flujos y demas variables destinadas a la conexión
             </summary>
         </member>
         <member name="T:Cliente_Poker.Login">
@@ -120,6 +175,16 @@
             Estructura para mostrar información de usuario
             </summary>
         </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.claveDesconexion">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.claveSala">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
         <member name="M:Cliente_Poker.MenuPrincipal.#ctor">
             <summary>
             Inicializa una instancia de la clase <see cref="T:Cliente_Poker.MenuPrincipal"/> .
@@ -132,15 +197,17 @@
             <param name="sender">El origen del evento.</param>
             <param name="e">La instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
         </member>
-        <member name="M:Cliente_Poker.MenuPrincipal.recibirUsuario">
+        <member name="M:Cliente_Poker.MenuPrincipal.recibirUsuario(System.String)">
             <summary>
-            Lee datos sobre el usuario del servidor.
+            Carga la información del usuario de un mensaje recibido como parametro
             </summary>
+            <param name="respuesta">Datos del usuario.</param>
         </member>
-        <member name="M:Cliente_Poker.MenuPrincipal.recibirSalas">
+        <member name="M:Cliente_Poker.MenuPrincipal.recibirSalas(System.String)">
             <summary>
-            Genera instancias de salas según la información de salas recibida del servidor y ejecuta la generación de botones.
+            Recibe y genera salas segun los datos recibidos como parametro
             </summary>
+            <param name="respuesta">Información de salas.</param>
         </member>
         <member name="M:Cliente_Poker.MenuPrincipal.generarBotonesSalas">
             <summary>
@@ -248,6 +315,167 @@
             <returns>
             A <see cref="T:System.String" /> that represents this instance.
             </returns>
+        </member>
+        <member name="T:Cliente_Poker.SalaBlackJack">
+            <summary>
+            Definicion de la vista de juego blackjack
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.MenuPrincipal">
+            <summary>
+            Instancia del formulario principal del cliente
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.conexion">
+            <summary>
+            Instancia de la conexión al servidor
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.SalaBlackJack.DelCambiarImagenPictureBox">
+            <summary>
+            Delegado para cambiar la imagen de un picturebox
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.SalaBlackJack.DelCambiarTextoLabel">
+            <summary>
+            Delegado para cambiar el texto de un label
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.SalaBlackJack.DelCambiarVisibilidadControl">
+            <summary>
+            Delegado para cambiar la visibilidad de un control
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.SalaBlackJack.DelModificarControls">
+            <summary>
+            Delegado para modificar el listado de controles
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.imagenPictureBox">
+            <summary>
+            Instancia del delegado para cambiar imagen a un picturebox
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.textoLabel">
+            <summary>
+            Instancia del delegado para cambiar el texto de un label
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.visibilidad">
+            <summary>
+            Instancia del delegado para cambia la visibilidad de un control
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.controles">
+            <summary>
+            Instancia del delegado para modificar el listado de controles.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.bRecogerRespuesta">
+            <summary>
+            Bandera para la lectura de información del servidor
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.posXJugador">
+            <summary>
+            Posicion dentro del cliente para la colocacion de nuevas cartas del crupier
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.posXCrupier">
+            <summary>
+            Posicion dentro del cliente para la colocacion de nuevas cartas del jugador
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.#ctor(Cliente_Poker.MenuPrincipal)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.SalaBlackJack"/>.
+            </summary>
+            <param name="menuPrincipal">Instancia del formulario principal del cliente.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.btnSalirSala_Click(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento click del boton salir de sala
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">Argumentos del evento.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.ClickListener(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento click de controles del juego
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">Argumentos del evento.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.cambiarVisibilidadFichas(System.Boolean)">
+            <summary>
+            Cambia la visibilidad de los controles del juego segun un parametro recibido como parametro
+            </summary>
+            <param name="estado">Modificador de estado.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.cargarCarta(System.String)">
+            <summary>
+            Carga una carta recibida como cadena
+            </summary>
+            <param name="respuesta">Carta.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.cargarCartaJugador(System.String)">
+            <summary>
+            Carga una carta recibida como cadena
+            </summary>
+            <param name="respuesta">Carta.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.cargarCartaCrupier(System.String)">
+            <summary>
+            Carga una carta recibida como cadena
+            </summary>
+            <param name="respuesta">Carta.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.actualizarEstado(System.String)">
+            <summary>
+            Gestiona las respuestas del servidor recibidas como parametro
+            </summary>
+            <param name="respuesta">Respuesta.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.reset">
+            <summary>
+            Devuelve el juego al estado inicial de partida
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.ModificarListadoControls(System.Windows.Forms.Control,System.Boolean)">
+            <summary>
+            Añade o elimina un control recibido como parametro segun el parametro recibido como accion
+            </summary>
+            <param name="c">Control a tratar.</param>
+            <param name="accion">Si esta definida como <c>true</c> añade si no elimina.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.cambiarImagenCarta(System.Windows.Forms.PictureBox,System.String)">
+            <summary>
+            Cambia la imagen de un picturebox recibido como parametro segun una cadena recibida como parametro
+            </summary>
+            <param name="pb">Picture box a modificar.</param>
+            <param name="text">Clave de busqueda para nueva imagen.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.TextoLabel(System.Windows.Forms.Label,System.String)">
+            <summary>
+            Cambia el texto de un label recibido como parametro por una cadena tambien
+            recibida como parametro
+            </summary>
+            <param name="l">Label a modificar.</param>
+            <param name="s">Cadena a insertar.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.CambiarVisibilidad(System.Windows.Forms.Control,System.Boolean)">
+            <summary>
+            Cambia la visibilidad de un control recibido como parametro
+            al valor recibido tambien como parametro
+            </summary>
+            <param name="c">Control a modificar.</param>
+            <param name="visibilidad">Si es <c>true</c> hace visible al control , si no lo oculta.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.HiloComunicacion">
+            <summary>
+            Si la variable de clase es correcta , lee una respuesta del servidor y la manda
+            al metodo de actualizarEstado
+            </summary>
         </member>
         <member name="F:Cliente_Poker.SalaBlackJack.components">
             <summary>
@@ -582,6 +810,82 @@
         <member name="P:Cliente_Poker.Properties.Resources.chipRedWhite_sideBorder">
             <summary>
               Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.Carta">
+            <summary>
+            Definicion de carta
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Carta.cardMap">
+            <summary>
+            Conjunto de valores de imagen para las cartas
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.Carta.GetMap">
+            <summary>
+            Devuelve el conjuto de valores de imagen de las cartas.
+            </summary>
+            <returns>Conjunto de cartas</returns>
+        </member>
+        <member name="T:Cliente_Poker.ClaveComunicacion">
+            <summary>
+            Contenedor de claves de comunicacion
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Desconexion">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Sala">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Login">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Separador">
+            <summary>
+            Separador en mensajes
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Valido">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Invalido">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Carta">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Jugador">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.Crupier">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.FinMano">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.ClaveComunicacion.FinEnvio">
+            <summary>
+            Clave de comunicacion.
             </summary>
         </member>
     </members>

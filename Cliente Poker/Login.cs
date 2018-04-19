@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cliente_Poker
@@ -20,10 +14,12 @@ namespace Cliente_Poker
         /// Contiene el resultado de comprobar las credenciales introducidas
         /// </summary>
         public bool loginValido = false;
+
         /// <summary>
         /// Variable númerica que contendra el valor en pixel del centro del formulario
         /// </summary>
         private int centroHorizontal;
+
         /// <summary>
         /// Instancia de la clase gestora con la conexion al servidor
         /// </summary>
@@ -45,15 +41,12 @@ namespace Cliente_Poker
         /// <param name="e">La instancia <see cref="EventArgs"/> contenedora de la información del evento.</param>
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            //Se generá el valor a enviar como datos de login según el contenido de los controles siguiendo
-            //el formato establecido en el protocolo.
-            string credenciales = txtCorreo.Text + "," + txtContraseña.Text;
             //Se abre y se mandan dichos datos a través de la conexión al servidor
             conexion.abrirConexion();
-            conexion.enviarMensaje(credenciales);
+            conexion.enviarMensaje(txtCorreo.Text + "," + txtContraseña.Text);
             //Se comprueba la respuesta del servidor a las credenciales mandadas , avisando de información erronea en la misma
             //o accediendo al sistema de ser correcta.
-            if (conexion.recibirMensaje() == "Login - Invalido")
+            if (conexion.recibirMensaje() == ClaveComunicacion.Login + ClaveComunicacion.Separador + ClaveComunicacion.Invalido)
             {
                 lblError.Visible = true;
             }

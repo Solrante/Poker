@@ -1,19 +1,27 @@
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Servidor Poker\bin\Debug\Servidor Poker.exe.config
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Servidor Poker\bin\Debug\Servidor Poker.exe
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Servidor Poker\bin\Debug\Servidor Poker.pdb
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Servidor Poker\bin\Debug\MySql.Data.xml
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Servidor Poker\obj\Debug\Servidor Poker.csprojResolveAssemblyReference.cache
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Servidor Poker\obj\Debug\Servidor Poker.csproj.CoreCompileInputs.cache
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Servidor Poker\obj\Debug\Servidor Poker.exe
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Cliente Poker\Servidor Poker\obj\Debug\Servidor Poker.pdb
+C:/Users/Cristian/Dropbox/Ciclo/CS2/Proyecto Curro/Cliente Poker/Servidor Poker/bin/Debug/Servidor Poker.exe.config
+C:/Users/Cristian/Dropbox/Ciclo/CS2/Proyecto Curro/Cliente Poker/Servidor Poker/bin/Debug/Servidor Poker.exe
+C:/Users/Cristian/Dropbox/Ciclo/CS2/Proyecto Curro/Cliente Poker/Servidor Poker/bin/Debug/Servidor Poker.pdb
+C:/Users/Cristian/Dropbox/Ciclo/CS2/Proyecto Curro/Cliente Poker/Servidor Poker/bin/Debug/MySql.Data.xml
+C:/Users/Cristian/Dropbox/Ciclo/CS2/Proyecto Curro/Cliente Poker/Servidor Poker/obj/Debug/Servidor Poker.csprojResolveAssemblyReference.cache
+C:/Users/Cristian/Dropbox/Ciclo/CS2/Proyecto Curro/Cliente Poker/Servidor Poker/obj/Debug/Servidor Poker.csproj.CoreCompileInputs.cache
+C:/Users/Cristian/Dropbox/Ciclo/CS2/Proyecto Curro/Cliente Poker/Servidor Poker/obj/Debug/Servidor Poker.exe
+C:/Users/Cristian/Dropbox/Ciclo/CS2/Proyecto Curro/Cliente Poker/Servidor Poker/obj/Debug/Servidor Poker.pdb
+/home/imasdetres/Dropbox/Ciclo/CS2/Proyecto Curro/Poker/Servidor Poker/bin/Debug/Servidor Poker.exe.config
+/home/imasdetres/Dropbox/Ciclo/CS2/Proyecto Curro/Poker/Servidor Poker/bin/Debug/Servidor Poker.xml
+/home/imasdetres/Dropbox/Ciclo/CS2/Proyecto Curro/Poker/Servidor Poker/bin/Debug/Servidor Poker.exe
+/home/imasdetres/Dropbox/Ciclo/CS2/Proyecto Curro/Poker/Servidor Poker/bin/Debug/Servidor Poker.pdb
+/home/imasdetres/Dropbox/Ciclo/CS2/Proyecto Curro/Poker/Servidor Poker/obj/Debug/Servidor Poker.csprojResolveAssemblyReference.cache
+/home/imasdetres/Dropbox/Ciclo/CS2/Proyecto Curro/Poker/Servidor Poker/obj/Debug/Servidor Poker.csproj.CoreCompileInputs.cache
+/home/imasdetres/Dropbox/Ciclo/CS2/Proyecto Curro/Poker/Servidor Poker/obj/Debug/Servidor Poker.exe
+/home/imasdetres/Dropbox/Ciclo/CS2/Proyecto Curro/Poker/Servidor Poker/obj/Debug/Servidor Poker.pdb
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\Servidor Poker.exe.config
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\Servidor Poker.xml
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\Servidor Poker.exe
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\Servidor Poker.pdb
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\MySql.Data.dll
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\MySql.Data.xml
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csprojResolveAssemblyReference.cache
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csproj.CoreCompileInputs.cache
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csproj.CopyComplete
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.exe
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.pdb
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csprojResolveAssemblyReference.cache
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\Servidor Poker.xml
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\MySql.Data.dll
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csproj.CopyComplete

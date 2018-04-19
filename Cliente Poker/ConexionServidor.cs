@@ -1,39 +1,92 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cliente_Poker
 {
+    /// <summary>
+    /// Conexion servidor.
+    /// </summary>
     public class ConexionServidor
     {
+        /// <summary>
+        /// Indica si la inicialización de la conexion con el servidor se ha completado
+        /// </summary>
+        private bool conexionInicializada = false;
+
+        /// <summary>
+        /// IP de conexión al servidor.
+        /// </summary>
         private string IP_SERVIDOR = "127.0.0.1";
+
+        /// <summary>
+        /// Puerto de conexion al servidor
+        /// </summary>
         private int puerto = 31416;
-        IPEndPoint servidor = null;
-        Socket sServidor = null;
-        NetworkStream ns = null;
-        StreamReader sr = null;
-        StreamWriter sw = null;
 
-        public ConexionServidor()
-        {
-            
-        }
+        /// <summary>
+        /// EndPoint del servidor
+        /// </summary>
+        private IPEndPoint servidor = null;
 
+        /// <summary>
+        /// Socket del servidor
+        /// </summary>
+        private Socket sServidor = null;
+
+        /// <summary>
+        /// Flujo de conexión con el servidor
+        /// </summary>
+        private NetworkStream ns = null;
+
+        /// <summary>
+        /// Flujo de lectura del servidor
+        /// </summary>
+        private StreamReader sr = null;
+
+        /// <summary>
+        /// Flujo de escritura hacia el servidor
+        /// </summary>
+        private StreamWriter sw = null;
+
+        /// <summary>
+        /// Inicializa una instancia de la clase <see cref="T:Cliente_Poker.ConexionServidor"/>.
+        /// </summary>
+        public ConexionServidor() { }
+
+        /// <summary>
+        /// Manda un mensaje recibido como parametro al servidor.
+        /// </summary>
+        /// <param name="mensaje">Mensaje.</param>
         public void enviarMensaje(string mensaje)
         {
-            sw.WriteLine(mensaje);
-            sw.Flush();
-        }
-        public string recibirMensaje()
-        {
-            return sr.ReadLine();
+            if (conexionInicializada)
+            {
+                sw.WriteLine(mensaje);
+                sw.Flush();
+            }
         }
 
+        /// <summary>
+        /// Lee un mensaje del servidor
+        /// </summary>
+        /// <returns>The mensaje.</returns>
+        public string recibirMensaje()
+        {
+            if (conexionInicializada)
+            {
+                return sr.ReadLine();
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// Inicializa las variables orientadas a la conexión y comunicación con el servidor
+        /// </summary>
         public void abrirConexion()
         {
             try
@@ -44,20 +97,26 @@ namespace Cliente_Poker
             }
             catch (SocketException ex)
             {
-                Console.WriteLine(
-               "Error de conexión con servidor: {0}\nCódigo de error: {1}({2})", ex.Message, (SocketError)ex.ErrorCode, ex.ErrorCode);
+                Console.WriteLine("Error de conexión con servidor: {0}\nCódigo de error: {1}({2})",
+                                  ex.Message, (SocketError)ex.ErrorCode, ex.ErrorCode);
             }
-            catch (OutOfMemoryException)
+            catch (OutOfMemoryException) { }
+            catch (ArgumentOutOfRangeException) { }
+            if (sServidor != null)
             {
+                ns = new NetworkStream(sServidor);
             }
-            catch (ArgumentOutOfRangeException)
+            if (ns != null)
             {
+                sr = new StreamReader(ns);
+                sw = new StreamWriter(ns);
+                conexionInicializada = true;
             }
-            ns = new NetworkStream(sServidor);
-            sr = new StreamReader(ns);
-            sw = new StreamWriter(ns);
         }
 
+        /// <summary>
+        /// Cierra todos los flujos y demas variables destinadas a la conexión
+        /// </summary>
         public void cerrarConexion()
         {
             if (sr != null)

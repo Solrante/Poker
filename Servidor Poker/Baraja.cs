@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Servidor_Poker
 {
+    /// <summary>
+    /// Definicion de la baraja de juego
+    /// </summary>
     class Baraja
     {
         /// <summary>
@@ -52,15 +52,14 @@ namespace Servidor_Poker
         /// <returns>Carta a repartir</returns>
         public Carta sacarCarta()
         {
-            Carta a = null;
-            a = contenido[aleatorio.Next(0, 3), aleatorio.Next(0, 12)];
-            while (cartasRepartidas.Contains(a))
+            Carta carta = null;
+            carta = contenido[aleatorio.Next(0, 3), aleatorio.Next(0, 12)];
+            while (cartasRepartidas.Contains(carta))
             {
-                Console.WriteLine("Carta Repetida");
-                a = contenido[aleatorio.Next(0, 3), aleatorio.Next(0, 12)];
+                carta = contenido[aleatorio.Next(0, 3), aleatorio.Next(0, 12)];
             }
-            cartasRepartidas.Add(a);
-            return a;
+            cartasRepartidas.Add(carta);
+            return carta;
         }
 
         /// <summary>

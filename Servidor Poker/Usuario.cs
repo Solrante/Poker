@@ -4,6 +4,9 @@ using System.Net.Sockets;
 
 namespace Servidor_Poker
 {
+    /// <summary>
+    /// Definicion de usuario
+    /// </summary>
     class Usuario
     {
         /// <summary>
@@ -56,9 +59,14 @@ namespace Servidor_Poker
         /// </summary>
         private void generarFlujos()
         {
-            ns = new NetworkStream(socket);
-            sr = new StreamReader(ns);
-            sw = new StreamWriter(ns);
+            try
+            {
+                ns = new NetworkStream(socket);
+                sr = new StreamReader(ns);
+                sw = new StreamWriter(ns);
+            }
+            catch (IOException) { }
+
         }
 
         /// <summary>
@@ -125,23 +133,22 @@ namespace Servidor_Poker
         /// </summary>
         public void leerMensaje()
         {
-            string mensaje = "Desconexion";
-
+            string mensaje = ClaveComunicacion.Desconexion;
             try
             {
                 mensaje = sr.ReadLine();
             }
             catch (IOException)
             {
-                mensaje = "Desconexion";
+                mensaje = ClaveComunicacion.Desconexion;
             }
             catch (ObjectDisposedException)
             {
-                mensaje = "Desconexion";
+                mensaje = ClaveComunicacion.Desconexion;
             }
             if (mensaje == null)
             {
-                mensaje = "Desconexion";
+                mensaje = ClaveComunicacion.Desconexion;
             }
             Mensaje = mensaje;
         }
@@ -161,9 +168,8 @@ namespace Servidor_Poker
         /// Cierra los flujos y conexion de la sesion del usuario.
         /// </summary>
         /// <returns></returns>
-        public bool cerrarSesion()
+        public void cerrarSesion()
         {
-            bool result = false;
             if (sr != null)
             {
                 sr.Close();
@@ -176,8 +182,10 @@ namespace Servidor_Poker
             {
                 ns.Close();
             }
-            socket.Close();
-            return result;
+            if (socket != null)
+            {
+                socket.Close();
+            }
         }
     }
 }

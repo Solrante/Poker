@@ -1,37 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Servidor_Poker
+﻿namespace Servidor_Poker
 {
+
+    /// <summary>
+    /// Modificador del resultado
+    /// </summary>
+    public enum eModificadorResultado
+    {
+        /// <summary>
+        /// Indica que se supero la cifra maxima
+        /// </summary>
+        SEPASO,
+        /// <summary>
+        /// Indica que se saco un 21
+        /// </summary>
+        BLACKJACK,
+        /// <summary>
+        /// Sin modificador
+        /// </summary>
+        SINMODIFICADOR
+    }
+
+    /// <summary>
+    /// Definición del resultado de una partida
+    /// </summary>
     class Resultado
     {
-        private string jugador = "Gana Jugador";
-        private string crupier = "Gana Crupier";
-        private string empate = "Empate";
+        /// <summary>
+        /// Valor de respuesta favorable al jugador
+        /// </summary>
+        private const string jugador = "Gana Jugador";
 
-        public Resultado(Mano manoCrupier, Mano manoJugador, string modificador)
+        /// <summary>
+        /// Valor de respuesta favorable al crupier
+        /// </summary>
+        private const string crupier = "Gana Crupier";
+
+        /// <summary>
+        /// Valor de respuesta de empate
+        /// </summary>
+        private const string empate = "Empate";
+
+        /// <summary>
+        /// Indica la cantidad de puntos limite
+        /// </summary>
+        private const int limitePuntuacion = 21;
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="T:Servidor_Poker.Resultado"/> según
+        /// parametros recibidos.
+        /// </summary>
+        /// <param name="manoCrupier">Mano crupier.</param>
+        /// <param name="manoJugador">Mano jugador.</param>
+        /// <param name="modificador">Modificador.</param>
+        public Resultado(Mano manoCrupier, Mano manoJugador, eModificadorResultado modificador)
         {
-            if (modificador == "se paso")
+            if (modificador == eModificadorResultado.SEPASO)
             {
-                if (manoCrupier.valorNumerico() > 21)
+                if (manoCrupier.valorNumerico() > limitePuntuacion)
                 {
                     Valor = jugador;
                 }
-                if (manoJugador.valorNumerico() > 21)
+                if (manoJugador.valorNumerico() > limitePuntuacion)
                 {
                     Valor = crupier;
                 }
             }
-            else if (modificador == "blackjack")
+            else if (modificador == eModificadorResultado.BLACKJACK)
             {
-                if (manoCrupier.valorNumerico() == 21 && manoJugador.valorNumerico() == 21)
+                if (manoCrupier.valorNumerico() == limitePuntuacion && manoJugador.valorNumerico() == limitePuntuacion)
                 {
                     Valor = empate;
                 }
-                else if (manoJugador.valorNumerico() == 21)
+                else if (manoJugador.valorNumerico() == limitePuntuacion)
                 {
                     Valor = jugador;
                 }
@@ -58,6 +98,10 @@ namespace Servidor_Poker
 
         }
 
+        /// <summary>
+        /// Gets or sets el valor del resultado.
+        /// </summary>
+        /// <value>The valor.</value>
         public string Valor { get; set; }
     }
 }

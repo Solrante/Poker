@@ -56,23 +56,22 @@ namespace Servidor_Poker
         /// <value>
         /// Numero de la sala.
         /// </value>        
-
         public int NumSala { get; set; }
+
         /// <summary>
         /// Gets or sets la apuesta minima.
         /// </summary>
         /// <value>
         /// La apuesta minima.
         /// </value>
-
         public int ApuestaMinima { get; set; }
+
         /// <summary>
         /// Gets or sets la cuota entrada.
         /// </summary>
         /// <value>
         /// La cuota entrada.
         /// </value>
-
         public int CuotaEntrada { get; set; }
 
         /// <summary>
