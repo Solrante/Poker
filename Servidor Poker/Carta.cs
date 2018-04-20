@@ -104,7 +104,7 @@ namespace Servidor_Poker
         /// </returns>
         public override string ToString()
         {
-            return Palo + "-" + Valor;
+            return ""+Palo + Clave.Separador + Valor;
         }
     }
 }

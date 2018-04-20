@@ -160,6 +160,11 @@
             Listado de salas
             </summary>
         </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.botonesSalas">
+            <summary>
+            Listado de botones de salas
+            </summary>
+        </member>
         <member name="F:Cliente_Poker.MenuPrincipal.oriY">
             <summary>
             Posicion Y inicial para la colocación de botones de salas
@@ -175,14 +180,24 @@
             Estructura para mostrar información de usuario
             </summary>
         </member>
-        <member name="F:Cliente_Poker.MenuPrincipal.claveDesconexion">
+        <member name="F:Cliente_Poker.MenuPrincipal.separaciónVerticalBotones">
             <summary>
-            Clave de comunicacion
+            Cantidad en pixels entre botones de salas en vertical
             </summary>
         </member>
-        <member name="F:Cliente_Poker.MenuPrincipal.claveSala">
+        <member name="F:Cliente_Poker.MenuPrincipal.separacionBotonLabel">
             <summary>
-            Clave de comunicacion
+            Cantidad en pixels entre el botón y su etiqueta descriptiva
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.tamañoBoton">
+            <summary>
+            Tamaño para botones
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.MenuPrincipal.usuario">
+            <summary>
+            Usuario del juego
             </summary>
         </member>
         <member name="M:Cliente_Poker.MenuPrincipal.#ctor">
@@ -227,6 +242,11 @@
             </summary>
             <param name="sender">Origen del evento.</param>
             <param name="e">Instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
+        </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.actualizarSalas">
+            <summary>
+            Actualiza el estado de las salas del cliente segun el estado del server
+            </summary>
         </member>
         <member name="F:Cliente_Poker.MenuPrincipal.components">
             <summary>
@@ -308,6 +328,12 @@
             La cuota entrada.
             </value>
         </member>
+        <member name="P:Cliente_Poker.Sala.Llena">
+            <summary>
+            Gets or sets un valor que indice si <see cref="T:Servidor_Poker.Sala"/> esta llena.
+            </summary>
+            <value><c>true</c> si esta llena; de otra manera, <c>false</c>.</value>
+        </member>
         <member name="M:Cliente_Poker.Sala.ToString">
             <summary>
             Devuelve un <see cref="T:System.String" /> que representa esta instancia.
@@ -384,6 +410,16 @@
         <member name="F:Cliente_Poker.SalaBlackJack.posXCrupier">
             <summary>
             Posicion dentro del cliente para la colocacion de nuevas cartas del jugador
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.separaciónCartas">
+            <summary>
+            Cantidad de pixel entre cartas
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.l">
+            <summary>
+            Objeto para control de uso de elementos comunes
             </summary>
         </member>
         <member name="M:Cliente_Poker.SalaBlackJack.#ctor(Cliente_Poker.MenuPrincipal)">
@@ -510,6 +546,47 @@
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
+        </member>
+        <member name="T:Cliente_Poker.Usuario">
+            <summary>
+            Definicion de usuario
+            </summary>
+        </member>
+        <member name="P:Cliente_Poker.Usuario.Correo">
+            <summary>
+            Gets or sets la dirección de correo.
+            </summary>
+            <value>
+            El correo.
+            </value>
+        </member>
+        <member name="P:Cliente_Poker.Usuario.Saldo">
+            <summary>
+            Gets or sets el saldo.
+            </summary>
+            <value>
+            El saldo.
+            </value>
+        </member>
+        <member name="M:Cliente_Poker.Usuario.#ctor(System.String)">
+            <summary>
+            Inicializa una instancia de la clase <see cref="T:Cliente_Poker.Usuario"/>.
+            </summary>
+            <param name="datos">Credenciales del usuario.</param>
+        </member>
+        <member name="M:Cliente_Poker.Usuario.guardarDatos(System.String)">
+            <summary>
+            Guarda en variables de clase información recogida por parametro.
+            </summary>
+            <param name="datos">Información recibida.</param>
+        </member>
+        <member name="M:Cliente_Poker.Usuario.ToString">
+            <summary>
+            Devuelve un <see cref="T:System.String" /> que representa esta instancia.
+            </summary>
+            <returns>
+            Un <see cref="T:System.String" /> que presesenta esta instancia.
+            </returns>
         </member>
         <member name="T:Cliente_Poker.Properties.Resources">
             <summary>
@@ -828,62 +905,122 @@
             </summary>
             <returns>Conjunto de cartas</returns>
         </member>
-        <member name="T:Cliente_Poker.ClaveComunicacion">
+        <member name="T:Cliente_Poker.Clave">
             <summary>
             Contenedor de claves de comunicacion
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Desconexion">
+        <member name="F:Cliente_Poker.Clave.Desconexion">
             <summary>
             Clave de comunicacion
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Sala">
+        <member name="F:Cliente_Poker.Clave.Sala">
             <summary>
             Clave de comunicacion
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Login">
+        <member name="F:Cliente_Poker.Clave.Login">
             <summary>
             Clave de comunicacion.
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Separador">
+        <member name="F:Cliente_Poker.Clave.Separador">
             <summary>
             Separador en mensajes
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Valido">
+        <member name="F:Cliente_Poker.Clave.SeparadorCredenciales">
+            <summary>
+            Separador en mensajes
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Valido">
             <summary>
             Clave de comunicacion.
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Invalido">
+        <member name="F:Cliente_Poker.Clave.Invalido">
             <summary>
             Clave de comunicacion.
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Carta">
+        <member name="F:Cliente_Poker.Clave.Carta">
             <summary>
             Clave de comunicacion.
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Jugador">
+        <member name="F:Cliente_Poker.Clave.Jugador">
             <summary>
             Clave de comunicacion.
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.Crupier">
+        <member name="F:Cliente_Poker.Clave.Crupier">
             <summary>
             Clave de comunicacion.
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.FinMano">
+        <member name="F:Cliente_Poker.Clave.FinMano">
             <summary>
             Clave de comunicacion.
             </summary>
         </member>
-        <member name="F:Cliente_Poker.ClaveComunicacion.FinEnvio">
+        <member name="F:Cliente_Poker.Clave.FinEnvio">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Volver">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Ficha">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Retirarse">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Doblar">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Plantarse">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Pedir">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Saldo">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Valor">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.ListaSalas">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.LoginValido">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.LoginInvalido">
             <summary>
             Clave de comunicacion.
             </summary>

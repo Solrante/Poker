@@ -43,10 +43,10 @@ namespace Cliente_Poker
         {
             //Se abre y se mandan dichos datos a través de la conexión al servidor
             conexion.abrirConexion();
-            conexion.enviarMensaje(txtCorreo.Text + "," + txtContraseña.Text);
+            conexion.enviarMensaje(txtCorreo.Text + Clave.SeparadorCredenciales + txtContraseña.Text);
             //Se comprueba la respuesta del servidor a las credenciales mandadas , avisando de información erronea en la misma
             //o accediendo al sistema de ser correcta.
-            if (conexion.recibirMensaje() == ClaveComunicacion.Login + ClaveComunicacion.Separador + ClaveComunicacion.Invalido)
+            if (conexion.recibirMensaje() == Clave.LoginInvalido)
             {
                 lblError.Visible = true;
             }

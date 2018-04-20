@@ -61,5 +61,14 @@ namespace Servidor_Poker
             }
             return valor;
         }
+
+        public bool esPrimeraMano()
+        {
+            if (cartas.Count == 2)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

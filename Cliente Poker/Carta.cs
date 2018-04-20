@@ -19,7 +19,6 @@ namespace Cliente_Poker
         /// <returns>Conjunto de cartas</returns>
         public static Dictionary<string, Bitmap> GetMap()
         {
-
             if (cardMap == null)
             {
                 cardMap = new Dictionary<string, Bitmap>();
@@ -84,7 +83,6 @@ namespace Cliente_Poker
                 cardMap.Add("CORAZONES-Q", Properties.Resources.cardHeartsQ);
                 cardMap.Add("CORAZONES-K", Properties.Resources.cardHeartsK);
             }
-
             return cardMap;
         }
     }

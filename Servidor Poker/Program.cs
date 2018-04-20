@@ -38,7 +38,25 @@ namespace Servidor_Poker
         /// </summary>
         static Random random;
 
+        /// <summary>
+        /// Gestiona la ejecucion del servidor.
+        /// </summary>
+        static bool enEjecucion = true;
 
+        /// <summary>
+        /// Bandera para la asignacion de un puerto valido
+        /// </summary>
+        static bool puertoInvalido = true;
+
+        /// <summary>
+        /// IE del servidor
+        /// </summary>
+        static IPEndPoint ie;
+
+        /// <summary>
+        /// Socket del servidor
+        /// </summary>
+        static Socket s;
 
         /// <summary>
         /// El punto de entrada del programa , donde el control del mismo empieza y acaba
@@ -51,39 +69,8 @@ namespace Servidor_Poker
             bd = new BaseDatos();
             //Creamos los objetos tipo sala y lanzamos un hilo para cada una
             crearSalas();
-            foreach (Sala sala in salas)
-            {
-                switch (sala.Tipo)
-                {
-                    case eSala.BLACKJACK:
-                        new Thread(salaBlackJack).Start(sala);
-                        break;
-                    case eSala.POKER:
-                        new Thread(salaPoker).Start(sala);
-                        break;
-                }
-            }
-            //Definimos los datos del servidor y lo ejecutamos
-            bool enEjecucion = true;
-            bool puertoInvalido = true;
-            IPEndPoint ie = new IPEndPoint(IPAddress.Any, puerto);
-            Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            //Mientras no tengamos un puerto disponible seguira buscando hasta encontrar uno.
-            while (puertoInvalido)
-            {
-                try
-                {
-                    s.Bind(ie);
-                    puertoInvalido = false;
-                }
-                catch (SocketException)
-                {
-                    Console.WriteLine("Error asignando puerto {0} , probando el siguiente ", puerto);
-                    puerto++;
-                    ie = new IPEndPoint(IPAddress.Any, puerto);
-                }
-            }
-            s.Listen(10);
+            lanzarSalas();
+            inicializarEscuchaServer();
             Socket sCliente = null;
             Console.WriteLine("En espera");
             while (enEjecucion)
@@ -131,13 +118,13 @@ namespace Servidor_Poker
 
             if (bd.usuarioRegistrado(credenciales))
             {
-                sw.WriteLine(ClaveComunicacion.Login + ClaveComunicacion.Separador + ClaveComunicacion.Valido);
+                sw.WriteLine(Clave.LoginValido);
                 sw.Flush();
                 new Thread(hiloSalaEspera).Start(new Usuario(sCliente, bd.leerUsuarioCompleto(credenciales)));
             }
             else
             {
-                sw.WriteLine(ClaveComunicacion.Login + ClaveComunicacion.Separador + ClaveComunicacion.Invalido);
+                sw.WriteLine(Clave.LoginInvalido);
                 sw.Flush();
             }
             if (sr != null)
@@ -167,24 +154,72 @@ namespace Servidor_Poker
             {
                 usuario.mandarMensaje(sala.ToString());
             }
-            while (usuario.Mensaje != ClaveComunicacion.Desconexion)
+            while (usuario.Mensaje != Clave.Desconexion)
             {
                 if (!usuario.Jugando)
                 {
                     usuario.leerMensaje();
-                    if (usuario.Mensaje == ClaveComunicacion.Desconexion)
+                    if (usuario.Mensaje == Clave.Desconexion)
                     {
                         lock (l)
                         {
                             usuario.cerrarSesion();
                         }
                     }
-                    else if (usuario.Mensaje.Split(ClaveComunicacion.Separador)[0] == ClaveComunicacion.Sala)
+                    else if (usuario.Mensaje.Split(Clave.Separador)[0] == Clave.Sala)
                     {
                         usuario.Jugando = true;
-                        int numSala = Convert.ToInt32(usuario.Mensaje.Split(ClaveComunicacion.Separador)[1]);
-                        salas[numSala].Usuarios.Add(usuario);
+                        int numSala = Convert.ToInt32(usuario.Mensaje.Split(Clave.Separador)[1]);
+                        lock (l)
+                        {
+                            salas[numSala].Usuarios.Add(usuario);
+                            salas[numSala].Llena = true;
+                        }
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Inicializa la escucha del socket del servidor
+        /// </summary>
+        static void inicializarEscuchaServer()
+        {
+            ie = new IPEndPoint(IPAddress.Any, puerto);
+            s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            //Mientras no tengamos un puerto disponible seguira buscando hasta encontrar uno.
+            while (puertoInvalido)
+            {
+                try
+                {
+                    s.Bind(ie);
+                    puertoInvalido = false;
+                }
+                catch (SocketException)
+                {
+                    Console.WriteLine("Error asignando puerto {0} , probando el siguiente ", puerto);
+                    puerto++;
+                    ie = new IPEndPoint(IPAddress.Any, puerto);
+                }
+            }
+            s.Listen(10);
+        }
+
+        /// <summary>
+        /// Lanza los hilos ligados a cada sala de juego
+        /// </summary>
+        static void lanzarSalas()
+        {
+            foreach (Sala sala in salas)
+            {
+                switch (sala.Tipo)
+                {
+                    case eSala.BLACKJACK:
+                        new Thread(salaBlackJack).Start(sala);
+                        break;
+                    case eSala.POKER:
+                        new Thread(salaPoker).Start(sala);
+                        break;
                 }
             }
         }
@@ -198,121 +233,49 @@ namespace Servidor_Poker
             Sala sala = s as Sala;
         }
 
-
         /// <summary>
         /// Gestiona la sala recibida como parametro
         /// </summary>
         /// <param name="s">Sala.</param>
         static void salaBlackJack(object s)
         {
-            Baraja bar = new Baraja(); //Bajara con la que se jugará.
             Sala sala = s as Sala; // Sala
+            GestorJuegoBlackJack gestor = null;
             Usuario usuario = null; //Usuario en juego
-            Mano manoJugador = new Mano(); //Conjunto de cartas del jugador
-            Mano manoCrupier = new Mano(); //Conjunto de cartas del crupier
-            Resultado resultado = null; //Resultado de la partida
-            double saldoDisponible = 0; //Saldo del usuario actual
-            int apuesta = 0; //Apuesta realizada
-            bool finMano = false; //Bandera para determinal si la partida ha finalizado
-            while (true)
+            while (enEjecucion)
             {
                 if (sala.Usuarios.Count != 0)
                 {
-
                     //Se comprueba si el usuario para jugar es nulo , de ser así se guarda el usuario de la lista
                     if (usuario == null)
                     {
                         usuario = sala.Usuarios[0];
-                        saldoDisponible = usuario.Saldo;
-                        Console.WriteLine("Saldo actual : " + saldoDisponible);
+                    }
+                    if (gestor == null)
+                    {
+                        gestor = new GestorJuegoBlackJack(usuario);
                     }
                     usuario.leerMensaje();
-                    if (usuario.Mensaje != "Volver")
+                    if (usuario.Mensaje != Clave.Volver)
                     {
-                        //Si la respuesta de cliente no es la de volver , se comprueba la cabecera del mensaje para ver que acción se ha realizado
-                        switch (usuario.Mensaje.Split(ClaveComunicacion.Separador)[0].Trim())
+                        if (usuario.Mensaje == Clave.ListaSalas)
                         {
-                            case "Ficha":
-                                apuesta = Convert.ToInt32(usuario.Mensaje.Split(ClaveComunicacion.Separador)[1].Trim());
-                                saldoDisponible -= apuesta;
-                                Console.WriteLine("Saldo actual : " + saldoDisponible);
-                                manoJugador.añadirCarta(bar.sacarCarta());
-                                manoJugador.añadirCarta(bar.sacarCarta());
-                                manoCrupier.añadirCarta(bar.sacarCarta());
-                                foreach (Carta carta in manoJugador.cartas)
-                                {
-                                    usuario.mandarMensaje(ClaveComunicacion.Carta + ClaveComunicacion.Separador + ClaveComunicacion.Jugador + ClaveComunicacion.Separador + carta);
-                                }
-                                foreach (Carta carta in manoCrupier.cartas)
-                                {
-                                    usuario.mandarMensaje(ClaveComunicacion.Carta + ClaveComunicacion.Separador + ClaveComunicacion.Crupier + ClaveComunicacion.Separador + carta);
-                                }
-                                break;
-                            case "Plantarse":
-                                while (manoCrupier.valorNumerico() < 17)
-                                {
-                                    
-                                    Carta carta = bar.sacarCarta();
-                                    Console.WriteLine(ClaveComunicacion.Carta + ClaveComunicacion.Separador + ClaveComunicacion.Crupier + ClaveComunicacion.Separador + carta);
-                                    Console.WriteLine(manoCrupier.valorNumerico());
-                                    usuario.mandarMensaje(ClaveComunicacion.Carta + ClaveComunicacion.Separador + ClaveComunicacion.Crupier + ClaveComunicacion.Separador + carta);
-                                    manoCrupier.añadirCarta(carta);
-                                }
-                                if (manoCrupier.valorNumerico() > 21)
-                                {
-                                    resultado = new Resultado(manoCrupier, manoJugador, eModificadorResultado.SEPASO);
-                                }
-                                else
-                                {
-                                    resultado = new Resultado(manoCrupier, manoJugador, eModificadorResultado.SINMODIFICADOR);
-                                }
-
-                                finMano = true;
-                                break;
-                            case "Pedir":
-                                Carta nCarta = bar.sacarCarta();
-                                manoJugador.añadirCarta(nCarta);
-                                usuario.mandarMensaje(ClaveComunicacion.Carta + ClaveComunicacion.Separador + ClaveComunicacion.Jugador + ClaveComunicacion.Separador + nCarta);
-                                if (manoJugador.valorNumerico() > 21)
-                                {
-                                    resultado = new Resultado(manoCrupier, manoJugador, eModificadorResultado.SEPASO);
-                                    finMano = true;
-                                }
-                                if (manoJugador.valorNumerico() == 21)
-                                {
-                                    resultado = new Resultado(manoCrupier, manoJugador, eModificadorResultado.SINMODIFICADOR);
-                                    finMano = true;
-                                }
-                                break;
-                        }
-
-                        //Si llegamos a un resultado se ejecutara la comprobacion del mismo
-                        if (finMano)
-                        {
-
-                            if (resultado.Valor == "Gana Jugador")
+                            lock (l)
                             {
-                                saldoDisponible += apuesta * 2;
+                                foreach (Sala sl in salas)
+                                {
+                                    usuario.mandarMensaje(sl.ToString());
+                                }
                             }
-                            else if (resultado.Valor == "Empate")
-                            {
-                                saldoDisponible += apuesta;
-                            }
-                            usuario.mandarMensaje(ClaveComunicacion.FinMano + ClaveComunicacion.Separador + resultado.Valor);
-
-                            manoCrupier.vaciarMano();
-                            manoJugador.vaciarMano();
-                            Console.WriteLine("Manos despues de final : " + manoCrupier.valorNumerico() + ":" + manoJugador.valorNumerico());
-                            finMano = false;
-                        }
-
-                        usuario.mandarMensaje(ClaveComunicacion.FinEnvio);
+                        }                    
+                        gestor.ActualizarEstado();
                     }
                     else
                     {
                         //Si se elige volver al menu principal
-                        usuario.Saldo = saldoDisponible;
+                        usuario.Saldo = gestor.getSaldo();
                         usuario.Jugando = false;
+                        sala.Llena = false;
                         //Insertamos nuevos valores en la bae da datos
                         bd.actualizarDatos(usuario.ToString());
                         //Mandamos al cliente la nueva información del usuario
@@ -321,8 +284,8 @@ namespace Servidor_Poker
                         sala.Usuarios.Clear();
                         Console.WriteLine("Saldo actual : " + usuario.Saldo);
                         usuario = null;
+                        gestor = null;
                     }
-
                 }
             }
         }

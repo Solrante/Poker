@@ -68,7 +68,8 @@
     <Compile Include="Resultado.cs" />
     <Compile Include="Sala.cs" />
     <Compile Include="Usuario.cs" />
-    <Compile Include="ClaveComunicacion.cs" />
+    <Compile Include="Clave.cs" />
+    <Compile Include="GestorJuegoBlackJack.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

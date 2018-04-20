@@ -28,74 +28,112 @@
         /// <summary>
         /// Valor de respuesta favorable al jugador
         /// </summary>
-        private const string jugador = "Gana Jugador";
+        public const string rJugador = "Gana Jugador";
 
         /// <summary>
         /// Valor de respuesta favorable al crupier
         /// </summary>
-        private const string crupier = "Gana Crupier";
+        public const string rCrupier = "Gana Crupier";
 
         /// <summary>
         /// Valor de respuesta de empate
         /// </summary>
-        private const string empate = "Empate";
+        public const string rEmpate = "Empate";
 
         /// <summary>
         /// Indica la cantidad de puntos limite
         /// </summary>
-        private const int limitePuntuacion = 21;
+        public const int limitePuntuacion = 21;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="T:Servidor_Poker.Resultado"/> según
-        /// parametros recibidos.
+        /// Modificador del resultado de la partida
         /// </summary>
-        /// <param name="manoCrupier">Mano crupier.</param>
-        /// <param name="manoJugador">Mano jugador.</param>
-        /// <param name="modificador">Modificador.</param>
-        public Resultado(Mano manoCrupier, Mano manoJugador, eModificadorResultado modificador)
+        private eModificadorResultado modificador;
+
+        public Resultado()
         {
-            if (modificador == eModificadorResultado.SEPASO)
+
+        }
+
+        
+
+        public bool comprobarManos(Mano crupier, Mano jugador, bool plantarse = false)
+        {
+            if (plantarse)
             {
-                if (manoCrupier.valorNumerico() > limitePuntuacion)
-                {
-                    Valor = jugador;
-                }
-                if (manoJugador.valorNumerico() > limitePuntuacion)
-                {
-                    Valor = crupier;
-                }
+                calcularValor(crupier, jugador);
+                return true;
             }
-            else if (modificador == eModificadorResultado.BLACKJACK)
+            else if (crupier.valorNumerico() >= limitePuntuacion || jugador.valorNumerico() >= limitePuntuacion)
             {
-                if (manoCrupier.valorNumerico() == limitePuntuacion && manoJugador.valorNumerico() == limitePuntuacion)
+                calcularValor(crupier, jugador);
+                return true;
+            }
+            return false;
+        }
+
+        private void calcularValor(Mano crupier, Mano jugador)
+        {
+
+            if (crupier.valorNumerico() > limitePuntuacion)
+            {
+                Valor = rJugador;
+            }
+            else if (jugador.valorNumerico() > limitePuntuacion)
+            {
+                Valor = rCrupier;
+            }
+            else if (crupier.valorNumerico() == jugador.valorNumerico())
+            {
+                Valor = rEmpate;
+            }
+            else if (crupier.valorNumerico() > jugador.valorNumerico())
+            {
+                Valor = rCrupier;
+            }
+            else if (crupier.valorNumerico() < jugador.valorNumerico())
+            {
+                Valor = rJugador;
+            }
+            else if (jugador.esPrimeraMano() && jugador.valorNumerico() == limitePuntuacion)
+            {
+                Valor = rJugador;
+                modificador = eModificadorResultado.BLACKJACK;
+            }
+            else if (crupier.esPrimeraMano() && crupier.valorNumerico() == limitePuntuacion)
+            {
+                Valor = rCrupier;
+                modificador = eModificadorResultado.BLACKJACK;
+            }
+        }
+
+        /// <summary>
+        /// Genera el valor de ganancia dado el resultado y una cantidad apostada
+        /// </summary>
+        /// <returns>Ganancia.</returns>
+        /// <param name="apuesta">Apuesta.</param>
+        public int calcularGanancia(int apuesta)
+        {
+            if (Valor == rJugador)
+            {
+                if (modificador == eModificadorResultado.BLACKJACK)
                 {
-                    Valor = empate;
-                }
-                else if (manoJugador.valorNumerico() == limitePuntuacion)
-                {
-                    Valor = jugador;
+                    return apuesta * 2 + apuesta / 2;
                 }
                 else
                 {
-                    Valor = crupier;
+                    return apuesta * 2;
                 }
+
+            }
+            else if (Valor == rEmpate)
+            {
+                return apuesta;
             }
             else
             {
-                if (manoCrupier.valorNumerico() < manoJugador.valorNumerico())
-                {
-                    Valor = jugador;
-                }
-                if (manoCrupier.valorNumerico() > manoJugador.valorNumerico())
-                {
-                    Valor = crupier;
-                }
-                if (manoCrupier.valorNumerico() == manoJugador.valorNumerico())
-                {
-                    Valor = empate;
-                }
+                return 0;
             }
-
         }
 
         /// <summary>

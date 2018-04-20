@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder and Tools" version="2017.12.30.2" projectFile="C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentación Cliente\Documentación Cliente.shfbproj" started="19/04/2018 20:46:35">
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2017.12.30.2" projectFile="C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentación Cliente\Documentación Cliente.shfbproj" started="20/04/2018 15:46:38">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -34,16 +34,16 @@ Copying XML comments files
 <buildStep step="GenerateSharedContent">
 Generating shared content files (es-ES, Espa&#241;ol (Espa&#241;a))...
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:00,1810
+</plugIn>    Last step completed in 00:00:00,1060
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00,0160
+    Last step completed in 00:00:00,0190
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
 [C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe - GenerateRefInfo.proj]
-Compilaci&#162;n iniciada a las 19/04/2018 20:46:44.
+Compilaci&#162;n iniciada a las 20/04/2018 15:46:43.
 Proyecto &quot;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\GenerateRefInfo.proj&quot; en nodo 1 (destinos predeterminados).
 PrepareForBuild:
   Creando directorio &quot;obj\Debug\&quot;.
@@ -53,19 +53,19 @@ GenerateRefInfo:
   Portions Copyright &#184; 2006-2016, Eric Woodruff, All Rights Reserved.
   No source code context base path specified.  Source context information is unavailable.
   Loaded 1 assemblies for reflection and 1 dependency assemblies.
-  Wrote information on 1 namespaces, 7 types, and 30 members
+  Wrote information on 1 namespaces, 7 types, and 43 members
   Copiando el archivo de &quot;reflection.org&quot; en &quot;reflection.all&quot;.
   XslTransform (v2017.12.30.2)
   Copyright &#184; 2006-2017, Microsoft Corporation, All Rights Reserved.
   Portions Copyright &#184; 2006-2016, Eric Woodruff, All Rights Reserved.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\MergeDuplicates.xsl&#39;.
 Compilaci&#162;n del proyecto terminada &quot;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\GenerateRefInfo.proj&quot; (destinos predeterminados).
-    Last step completed in 00:00:02,5231
+    Last step completed in 00:00:02,1261
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
 [C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe - TransformManifest.proj]
-Compilaci&#162;n iniciada a las 19/04/2018 20:46:47.
+Compilaci&#162;n iniciada a las 20/04/2018 15:46:45.
 Proyecto &quot;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\TransformManifest.proj&quot; en nodo 1 (destinos predeterminados).
 TransformManifest:
   XslTransform (v2017.12.30.2)
@@ -82,11 +82,11 @@ TransformManifest:
   Portions Copyright &#184; 2006-2016, Eric Woodruff, All Rights Reserved.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ReflectionToManifest.xsl&#39;.
 Compilaci&#162;n del proyecto terminada &quot;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\TransformManifest.proj&quot; (destinos predeterminados).
-    Last step completed in 00:00:04,7993
+    Last step completed in 00:00:05,7953
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00,1100
+    Last step completed in 00:00:00,2160
 </buildStep>
 <buildStep step="CopyConceptualContent">
 Copying conceptual content...
@@ -101,28 +101,28 @@ Generating conceptual topic files
     C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Content\VersionHistory\VersionHistory.aml -&gt; C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\ddueXml\82da8b9f-9cdf-4e73-84a0-bb8dbb920aba.xml
     Parsing topic file &#39;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Content\VersionHistory\v1.0.0.0.aml&#39;
     C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Content\VersionHistory\v1.0.0.0.aml -&gt; C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\ddueXml\362046d3-7771-4b91-95d8-48bcb8e0fa1a.xml
-    Last step completed in 00:00:00,2260
+    Last step completed in 00:00:00,2570
 </buildStep>
 <buildStep step="CreateConceptualTopicConfigs">
 Creating conceptual topic configuration files...
     Companion files
     _ContentMetadata_.xml
     Merging topic IDs into manifest.xml
-    Last step completed in 00:00:00,0340
+    Last step completed in 00:00:00,1100
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\icons\Help.png -&gt; C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\Output\HtmlHelp1\icons\Help.png
-    Last step completed in 00:00:00,0330
+    Last step completed in 00:00:00,0650
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00,0050
+    Last step completed in 00:00:00,0070
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
 [C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe - GenerateIntermediateTOC.proj]
-Compilaci&#162;n iniciada a las 19/04/2018 20:46:52.
+Compilaci&#162;n iniciada a las 20/04/2018 15:46:52.
 Proyecto &quot;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\GenerateIntermediateTOC.proj&quot; en nodo 1 (destinos predeterminados).
 GenerateIntermediateTOC:
   XslTransform (v2017.12.30.2)
@@ -131,12 +131,12 @@ GenerateIntermediateTOC:
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\CreateVSToc.xsl&#39;.
 Compilaci&#162;n del proyecto terminada &quot;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\GenerateIntermediateTOC.proj&quot; (destinos predeterminados).
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00,5830
+    Last step completed in 00:00:00,7330
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:02,1101
+    Last step completed in 00:00:02,2511
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
@@ -144,12 +144,12 @@ C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Clie
   Updating reference topic configurations.
   Updating conceptual topic configurations.
     Removing unused ExampleComponent.
-    Last step completed in 00:00:00,0190
+    Last step completed in 00:00:00,0800
 </buildStep>
 <buildStep step="BuildTopics">
 Building help topics...
 [C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe - BuildTopics.proj]
-Compilaci&#162;n iniciada a las 19/04/2018 20:46:55.
+Compilaci&#162;n iniciada a las 20/04/2018 15:46:55.
 Proyecto &quot;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\BuildTopics.proj&quot; en nodo 1 (destinos predeterminados).
 BuildTopics:
   BuildAssembler (v2017.12.30.2)
@@ -159,20 +159,18 @@ BuildTopics:
   Processing topics...
 BuildAssembler : warning : ShowMissingComponent: [N:Cliente_Poker] Missing &lt;summary&gt; documentation [C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\BuildTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [T:Cliente_Poker.SalaPoker] Missing &lt;summary&gt; documentation [C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\BuildTopics.proj]
-  Processed 63 topic(s)
+  Processed 76 topic(s)
   2 warning(s)
   CopyFromIndexComponent: &quot;metadata&quot; in-memory cache entries used: 1 of 15.
   ResolveArtLinksComponent: Copying media files...
-  ResolveReferenceLinksComponent: 3 entries added to the MSDN content ID cache.  New cache size: 573 entries
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 4 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 4 of 30.
-  SaveComponent: Waiting for the document writer task to finish (3 Help1 API file(s) remaining)...
 Compilaci&#162;n del proyecto terminada &quot;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\BuildTopics.proj&quot; (destinos predeterminados).
-    Last step completed in 00:00:28,3876
+    Last step completed in 00:00:36,2631
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
-    Last step completed in 00:00:00,0030
+    Last step completed in 00:00:00,0100
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -184,11 +182,11 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;3082&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
 
 Processing Help 1 files in C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\Output\HtmlHelp1
-Processed 63 HTML files
+Processed 76 HTML files
 Sorting keywords and generating See Also indices
 Saving HTML Help 1 keyword index to C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\Documentaci&#162;n_Cliente.hhk
 Saving HTML Help 1 table of contents to C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#162;n Cliente\Help\Working\Documentaci&#162;n_Cliente.hhc
-    Last step completed in 00:00:00,6340
+    Last step completed in 00:00:00,9941
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -254,11 +252,11 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyle
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-CN.css -&gt; C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\Output\HtmlHelp1\styles\branding-zh-CN.css
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding-zh-TW.css -&gt; C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\Output\HtmlHelp1\styles\branding-zh-TW.css
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\styles\branding.css -&gt; C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\Output\HtmlHelp1\styles\branding.css
-    Last step completed in 00:00:01,7481
+    Last step completed in 00:00:01,2721
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
-    Last step completed in 00:00:00,0000
+    Last step completed in 00:00:00,0010
 </buildStep>
 <buildStep step="GenerateHelpFileIndex">
 Generating HTML Help 1 index file...
@@ -266,7 +264,7 @@ Generating HTML Help 1 index file...
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00,0170
+    Last step completed in 00:00:00,0120
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
@@ -281,13 +279,13 @@ Compiling HTML Help 1 file...
   
   
   
-  Compile time: 0 minutes, 6 seconds
+  Compile time: 0 minutes, 4 seconds
   
-  65	Topics
+  78	Topics
   
-  566	Local links
+  709	Local links
   
-  9,283	Internet links
+  9,295	Internet links
   
   0	Graphics
   
@@ -295,21 +293,20 @@ Compiling HTML Help 1 file...
   
   
   
-  Created c:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\Output\HtmlHelp1\Documentaci&#243;n_Cliente.chm, 356,137 bytes
+  Created c:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\Output\HtmlHelp1\Documentaci&#243;n_Cliente.chm, 365,115 bytes
   
-  Compression decreased file by 1,965,092 bytes.
+  Compression decreased file by 2,033,716 bytes.
   
-    Last step completed in 00:00:09,4505
+    Last step completed in 00:00:06,7624
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Not all build output was removed from &#39;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\&#39;: El directorio no est&#225; vac&#237;o.
-
-    Last step completed in 00:00:00,0780
+    Not all build output was removed from &#39;C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Documentaci&#243;n Cliente\Help\Working\&#39;: El proceso no puede obtener acceso al archivo &#39;6149fcd3-c0bf-95a4-b0ea-ab70d8ae879c.htm&#39; porque est&#225; siendo utilizado en otro proceso.
+    Last step completed in 00:00:00,0880
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 19/04/2018 20:47:35.  Total time: 00:01:00,2805
+Build completed successfully at 20/04/2018 15:47:40.  Total time: 00:01:02,0856
 
 </buildStep>
 </shfbBuild>

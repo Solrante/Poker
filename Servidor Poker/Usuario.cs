@@ -30,46 +30,6 @@ namespace Servidor_Poker
         private StreamReader sr;
 
         /// <summary>
-        /// Inicializa una instancia de la clase <see cref="Usuario"/>.
-        /// </summary>
-        /// <param name="socket">Socket de conexion.</param>
-        /// <param name="datos">Credenciales del usuario.</param>
-        public Usuario(Socket socket, string datos)
-        {
-            this.socket = socket;
-            guardarDatos(datos);
-            generarFlujos();
-        }
-
-        /// <summary>
-        /// Guarda en variables de clase información recogida por parametro.
-        /// </summary>
-        /// <param name="datos">Información recibida.</param>
-        private void guardarDatos(string datos)
-        {
-            ID = Convert.ToInt32(datos.Split(',')[0]);
-            Correo = datos.Split(',')[1];
-            Contraseña = datos.Split(',')[2];
-            Saldo = Convert.ToDouble(datos.Split(',')[3]);
-
-        }
-
-        /// <summary>
-        /// Inicializa los flujos del usuario de su Socket
-        /// </summary>
-        private void generarFlujos()
-        {
-            try
-            {
-                ns = new NetworkStream(socket);
-                sr = new StreamReader(ns);
-                sw = new StreamWriter(ns);
-            }
-            catch (IOException) { }
-
-        }
-
-        /// <summary>
         /// Gets or sets el ID del usuario.
         /// </summary>
         /// <value>
@@ -118,6 +78,46 @@ namespace Servidor_Poker
         public bool Jugando { get; set; }
 
         /// <summary>
+        /// Inicializa una instancia de la clase <see cref="Usuario"/>.
+        /// </summary>
+        /// <param name="socket">Socket de conexion.</param>
+        /// <param name="datos">Credenciales del usuario.</param>
+        public Usuario(Socket socket, string datos)
+        {
+            Console.WriteLine(datos);
+            this.socket = socket;
+            guardarDatos(datos);
+            generarFlujos();
+        }
+
+        /// <summary>
+        /// Guarda en variables de clase información recogida por parametro.
+        /// </summary>
+        /// <param name="datos">Información recibida.</param>
+        private void guardarDatos(string datos)
+        {           
+            ID = Convert.ToInt32(datos.Split(Clave.SeparadorCredenciales)[0]);
+            Correo = datos.Split(Clave.SeparadorCredenciales)[1];
+            Contraseña = datos.Split(Clave.SeparadorCredenciales)[2];
+            Saldo = Convert.ToDouble(datos.Split(Clave.SeparadorCredenciales)[3]);
+
+        }
+
+        /// <summary>
+        /// Inicializa los flujos del usuario de su Socket
+        /// </summary>
+        private void generarFlujos()
+        {
+            try
+            {
+                ns = new NetworkStream(socket);
+                sr = new StreamReader(ns);
+                sw = new StreamWriter(ns);
+            }
+            catch (IOException) { }
+        }
+
+        /// <summary>
         /// Envia un mensaje al usuario a través de su flujo de datos
         /// </summary>
         /// <param name="mensaje">Mensaje a enviar</param>
@@ -133,22 +133,22 @@ namespace Servidor_Poker
         /// </summary>
         public void leerMensaje()
         {
-            string mensaje = ClaveComunicacion.Desconexion;
+            string mensaje = Clave.Desconexion;
             try
             {
                 mensaje = sr.ReadLine();
             }
             catch (IOException)
             {
-                mensaje = ClaveComunicacion.Desconexion;
+                mensaje = Clave.Desconexion;
             }
             catch (ObjectDisposedException)
             {
-                mensaje = ClaveComunicacion.Desconexion;
+                mensaje = Clave.Desconexion;
             }
             if (mensaje == null)
             {
-                mensaje = ClaveComunicacion.Desconexion;
+                mensaje = Clave.Desconexion;
             }
             Mensaje = mensaje;
         }
@@ -161,7 +161,7 @@ namespace Servidor_Poker
         /// </returns>
         public override string ToString()
         {
-            return Correo + "," + Saldo;
+            return Correo + Clave.SeparadorCredenciales + Saldo;
         }
 
         /// <summary>

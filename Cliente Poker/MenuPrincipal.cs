@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cliente_Poker
@@ -37,6 +32,11 @@ namespace Cliente_Poker
         List<Sala> salas = new List<Sala>();
 
         /// <summary>
+        /// Listado de botones de salas
+        /// </summary>
+        List<Button> botonesSalas = new List<Button>();
+
+        /// <summary>
         /// Posicion Y inicial para la colocación de botones de salas
         /// </summary>
         int oriY = 30;
@@ -52,14 +52,24 @@ namespace Cliente_Poker
         string platillaInformacion = "{0} , Saldo : {1}";
 
         /// <summary>
-        /// Clave de comunicacion
+        /// Cantidad en pixels entre botones de salas en vertical
         /// </summary>
-        private string claveDesconexion = "Desconexion";
+        private int separaciónVerticalBotones = 50;
 
         /// <summary>
-        /// Clave de comunicacion
+        /// Cantidad en pixels entre el botón y su etiqueta descriptiva
         /// </summary>
-        private string claveSala = "Sala";
+        private int separacionBotonLabel = 20;
+
+        /// <summary>
+        /// Tamaño para botones
+        /// </summary>
+        private Size tamañoBoton = new Size(100, 40);
+
+        /// <summary>
+        /// Usuario del juego
+        /// </summary>
+        public Usuario usuario;
 
         /// <summary>
         /// Inicializa una instancia de la clase <see cref="MenuPrincipal"/> .
@@ -100,11 +110,8 @@ namespace Cliente_Poker
         /// <param name="respuesta">Datos del usuario.</param>
         public void recibirUsuario(string respuesta)
         {
-            string[] usuario = respuesta.Split(',');
-            if (usuario.Length > 1)
-            {
-                lblUsuario.Text = String.Format(platillaInformacion, usuario[0], usuario[1]);
-            }
+            usuario = new Usuario(respuesta);        
+            lblUsuario.Text = String.Format(platillaInformacion, usuario.Correo, usuario.Saldo);
         }
 
         /// <summary>
@@ -134,29 +141,31 @@ namespace Cliente_Poker
             foreach (Sala sala in salas)
             {
                 btn = new Button();
-                btn.Size = new Size(100, 40);
+                btn.Size = tamañoBoton;
                 btn.Click += new EventHandler(btnSala_Click);
                 switch (sala.Tipo)
                 {
                     case eSala.BLACKJACK:
-                        btn.Text = "" + eSala.BLACKJACK + " - " + (sala.NumSala + 1);
+                        btn.Text = "" + eSala.BLACKJACK + Clave.Separador + (sala.NumSala + 1);
                         break;
                     case eSala.POKER:
-                        btn.Text = "" + eSala.POKER + " - " + (sala.NumSala + 1);
+                        btn.Text = "" + eSala.POKER + Clave.Separador + (sala.NumSala + 1);
                         break;
                 }
-                btn.Tag = sala.NumSala + "";
+                btn.Tag = Clave.Sala + Clave.Separador + sala.NumSala + "";
                 btn.Location = new Point(centroHorizontal - btn.Width / 2, oriY);
+                //Desactivo el boton si la sala ya esta ocupada
+                btn.Enabled = !sala.Llena;
+                botonesSalas.Add(btn);
                 Controls.Add(btn);
-
                 if (sala.Tipo == eSala.POKER)
                 {
                     lbl = new Label();
-                    lbl.Location = new Point(btn.Location.X + 20 + btn.Width, btn.Location.Y + btn.Size.Height / 2 - lbl.Size.Height / 2);
+                    lbl.Location = new Point(btn.Location.X + separacionBotonLabel + btn.Width, btn.Location.Y + btn.Size.Height / 2 - lbl.Size.Height / 2);
                     lbl.Text = sala.ApuestaMinima + "/" + sala.CuotaEntrada;
                     Controls.Add(lbl);
                 }
-                oriY += 50;
+                oriY += separaciónVerticalBotones;
             }
         }
 
@@ -167,7 +176,7 @@ namespace Cliente_Poker
         /// <param name="e">Instancia <see cref="EventArgs"/> contenedora de la información del evento.</param>
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            conexion.enviarMensaje(claveDesconexion);
+            conexion.enviarMensaje(Clave.Desconexion);
             Environment.Exit(0);
         }
 
@@ -179,11 +188,11 @@ namespace Cliente_Poker
         private void btnSala_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            conexion.enviarMensaje(claveSala + "-" + (string)btn.Tag);
+            conexion.enviarMensaje((string)btn.Tag);
             Hide();
-            if (btn.Text.Split('-')[1].Trim() == eSala.POKER.ToString())
+            if (btn.Text.Split(Clave.Separador)[1].Trim() == eSala.POKER.ToString())
             {
-
+                //Si se implementan salas de poker se abririán aqui.
             }
             else
             {
@@ -191,5 +200,19 @@ namespace Cliente_Poker
                 blackJack.Show();
             }
         }
+
+        /// <summary>
+        /// Actualiza el estado de las salas del cliente segun el estado del server
+        /// </summary>
+        public void actualizarSalas()
+        {
+            foreach (var sala in salas)
+            {
+                sala.actualizarDatos(conexion.recibirMensaje());
+                //Si el nuevo estado de sala ha cambiado se ajustara el boton
+                botonesSalas[salas.IndexOf(sala)].Enabled = !sala.Llena;
+            }
+        }
+
     }
 }

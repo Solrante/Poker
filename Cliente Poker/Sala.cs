@@ -28,13 +28,9 @@ namespace Cliente_Poker
         /// <param name="datos">Informacion formateada.</param>
         public Sala(string datos)
         {
-            string[] info = datos.Split(',');
-            NumSala = Convert.ToInt32(info[0]);
-            ApuestaMinima = Convert.ToInt32(info[1]);
-            CuotaEntrada = Convert.ToInt32(info[2]);
-            Tipo = (eSala)Convert.ToInt32(info[3]);
+            actualizarDatos(datos);
         }
-        
+
         /// <summary>
         /// Gets or sets el tipo.
         /// </summary>
@@ -49,24 +45,29 @@ namespace Cliente_Poker
         /// <value>
         /// Numero de la sala.
         /// </value>        
-
         public int NumSala { get; set; }
+
         /// <summary>
         /// Gets or sets la apuesta minima.
         /// </summary>
         /// <value>
         /// La apuesta minima.
         /// </value>
-
         public int ApuestaMinima { get; set; }
+
         /// <summary>
         /// Gets or sets la cuota entrada.
         /// </summary>
         /// <value>
         /// La cuota entrada.
         /// </value>
-
         public int CuotaEntrada { get; set; }
+
+        /// <summary>
+        /// Gets or sets un valor que indice si <see cref="T:Servidor_Poker.Sala"/> esta llena.
+        /// </summary>
+        /// <value><c>true</c> si esta llena; de otra manera, <c>false</c>.</value>
+        public bool Llena { get; set; }
 
         /// <summary>
         /// Devuelve un <see cref="System.String" /> que representa esta instancia.
@@ -77,6 +78,16 @@ namespace Cliente_Poker
         public override string ToString()
         {
             return string.Format("{0},{1},{2},{3}", NumSala, ApuestaMinima, CuotaEntrada, Tipo);
+        }
+
+        public void actualizarDatos(string datos)
+        {
+            string[] info = datos.Split(Clave.SeparadorCredenciales);
+            NumSala = Convert.ToInt32(info[0]);
+            ApuestaMinima = Convert.ToInt32(info[1]);
+            CuotaEntrada = Convert.ToInt32(info[2]);
+            Tipo = (eSala)Convert.ToInt32(info[3]);
+            Llena = Convert.ToBoolean(info[4]);
         }
     }
 }

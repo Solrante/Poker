@@ -39,6 +39,11 @@
             this.btnPlantarse = new System.Windows.Forms.Button();
             this.lbl = new System.Windows.Forms.Label();
             this.lblResultado = new System.Windows.Forms.Label();
+            this.btnRetirarse = new System.Windows.Forms.Button();
+            this.btnDoblar = new System.Windows.Forms.Button();
+            this.lblValorCrupier = new System.Windows.Forms.Label();
+            this.lblValorJugador = new System.Windows.Forms.Label();
+            this.lblSaldo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cartaJugador1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cartaCrupier1)).BeginInit();
             this.SuspendLayout();
@@ -107,7 +112,7 @@
             // 
             // cartaJugador1
             // 
-            this.cartaJugador1.Location = new System.Drawing.Point(238, 263);
+            this.cartaJugador1.Location = new System.Drawing.Point(238, 211);
             this.cartaJugador1.Name = "cartaJugador1";
             this.cartaJugador1.Size = new System.Drawing.Size(50, 70);
             this.cartaJugador1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -116,7 +121,7 @@
             // 
             // cartaCrupier1
             // 
-            this.cartaCrupier1.Location = new System.Drawing.Point(308, 98);
+            this.cartaCrupier1.Location = new System.Drawing.Point(238, 74);
             this.cartaCrupier1.Name = "cartaCrupier1";
             this.cartaCrupier1.Size = new System.Drawing.Size(50, 70);
             this.cartaCrupier1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -152,11 +157,62 @@
             this.lblResultado.Size = new System.Drawing.Size(0, 13);
             this.lblResultado.TabIndex = 10;
             // 
+            // btnRetirarse
+            // 
+            this.btnRetirarse.Location = new System.Drawing.Point(450, 344);
+            this.btnRetirarse.Name = "btnRetirarse";
+            this.btnRetirarse.Size = new System.Drawing.Size(75, 23);
+            this.btnRetirarse.TabIndex = 11;
+            this.btnRetirarse.Text = "Retirarse";
+            this.btnRetirarse.UseVisualStyleBackColor = true;
+            this.btnRetirarse.Visible = false;
+            this.btnRetirarse.Click += new System.EventHandler(this.ClickListener);
+            // 
+            // btnDoblar
+            // 
+            this.btnDoblar.Location = new System.Drawing.Point(332, 306);
+            this.btnDoblar.Name = "btnDoblar";
+            this.btnDoblar.Size = new System.Drawing.Size(75, 23);
+            this.btnDoblar.TabIndex = 12;
+            this.btnDoblar.Text = "Doblar";
+            this.btnDoblar.UseVisualStyleBackColor = true;
+            this.btnDoblar.Visible = false;
+            this.btnDoblar.Click += new System.EventHandler(this.ClickListener);
+            // 
+            // lblValorCrupier
+            // 
+            this.lblValorCrupier.AutoSize = true;
+            this.lblValorCrupier.Location = new System.Drawing.Point(170, 74);
+            this.lblValorCrupier.Name = "lblValorCrupier";
+            this.lblValorCrupier.Size = new System.Drawing.Size(0, 13);
+            this.lblValorCrupier.TabIndex = 13;
+            // 
+            // lblValorJugador
+            // 
+            this.lblValorJugador.AutoSize = true;
+            this.lblValorJugador.Location = new System.Drawing.Point(173, 211);
+            this.lblValorJugador.Name = "lblValorJugador";
+            this.lblValorJugador.Size = new System.Drawing.Size(0, 13);
+            this.lblValorJugador.TabIndex = 14;
+            // 
+            // lblSaldo
+            // 
+            this.lblSaldo.AutoSize = true;
+            this.lblSaldo.Location = new System.Drawing.Point(55, 388);
+            this.lblSaldo.Name = "lblSaldo";
+            this.lblSaldo.Size = new System.Drawing.Size(0, 13);
+            this.lblSaldo.TabIndex = 15;
+            // 
             // SalaBlackJack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblSaldo);
+            this.Controls.Add(this.lblValorJugador);
+            this.Controls.Add(this.lblValorCrupier);
+            this.Controls.Add(this.btnDoblar);
+            this.Controls.Add(this.btnRetirarse);
             this.Controls.Add(this.lblResultado);
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.btnPlantarse);
@@ -190,5 +246,10 @@
         private System.Windows.Forms.Button btnPlantarse;
         private System.Windows.Forms.Label lbl;
         private System.Windows.Forms.Label lblResultado;
+        private System.Windows.Forms.Button btnRetirarse;
+        private System.Windows.Forms.Button btnDoblar;
+        private System.Windows.Forms.Label lblValorCrupier;
+        private System.Windows.Forms.Label lblValorJugador;
+        private System.Windows.Forms.Label lblSaldo;
     }
 }

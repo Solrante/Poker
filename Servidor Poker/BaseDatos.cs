@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace Servidor_Poker
 {
@@ -66,8 +67,7 @@ namespace Servidor_Poker
         public bool usuarioRegistrado(string credenciales)
         {
             string consulta = string.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
-                credenciales.Split(',')[0], credenciales.Split(',')[1]);
-
+                                            credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
             MySqlCommand cmd = new MySqlCommand(consulta, conexion);
             //Salta excepcion si el server esta off
             conexion.Open();
@@ -93,17 +93,17 @@ namespace Servidor_Poker
         {
             string datos = "";
             string consulta = string.Format("select * from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
-                credenciales.Split(',')[0], credenciales.Split(',')[1]);
+                                            credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
             MySqlCommand cmd = new MySqlCommand(consulta, conexion);
             conexion.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                datos += reader.GetInt32("id") + ",";
-                datos += reader.GetString("correo") + ",";
-                datos += reader.GetString(2) + ",";
+                datos += reader.GetInt32("id");
+                datos += Clave.SeparadorCredenciales;
+                datos += reader.GetString("correo") + Clave.SeparadorCredenciales;
+                datos += reader.GetString(2) + Clave.SeparadorCredenciales;
                 datos += reader.GetFloat("saldo");
-
             }
             return datos;
         }
