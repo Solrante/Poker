@@ -77,17 +77,19 @@ namespace Servidor_Poker
         /// </summary>
         public void ActualizarEstado()
         {
-            Console.WriteLine(usuario.Mensaje); 
             switch (usuario.Mensaje.Split(Clave.Separador)[0].Trim())
             {
                 case Clave.Ficha:
-                    apuesta = Convert.ToInt32(usuario.Mensaje.Split(Clave.Separador)[1].Trim());
-                    saldoDisponible -= apuesta;
-                    generarCartasIniciales();
-                    usuario.mandarMensaje(Clave.ValorJugador + manoJugador.valorNumerico());
-                    usuario.mandarMensaje(Clave.ValorCrupier + manoCrupier.valorNumerico());
-                    usuario.mandarMensaje(Clave.Saldo + Clave.Separador + saldoDisponible);
-                    partidaEmpezada = true;
+                    if (!partidaEmpezada)
+                    {
+                        apuesta = Convert.ToInt32(usuario.Mensaje.Split(Clave.Separador)[1].Trim());
+                        saldoDisponible -= apuesta;
+                        generarCartasIniciales();
+                        usuario.mandarMensaje(Clave.ValorJugador + manoJugador.valorNumerico());
+                        usuario.mandarMensaje(Clave.ValorCrupier + manoCrupier.valorNumerico());
+                        usuario.mandarMensaje(Clave.Saldo + Clave.Separador + saldoDisponible);
+                        partidaEmpezada = true;
+                    }
                     break;
                 case Clave.Plantarse:
                     if (partidaEmpezada)
@@ -108,7 +110,7 @@ namespace Servidor_Poker
                     {
                         retirado = true;
                         finMano();
-                    }                    
+                    }
                     break;
                 case Clave.Pedir:
                     if (partidaEmpezada)
@@ -121,7 +123,7 @@ namespace Servidor_Poker
                         {
                             finMano();
                         }
-                    }                    
+                    }
                     break;
             }
             usuario.mandarMensaje(Clave.FinEnvio);
@@ -147,12 +149,11 @@ namespace Servidor_Poker
                     }
                     usuario.mandarMensaje(Clave.FinMano + Clave.Separador + resultado.Valor);
                     usuario.mandarMensaje(Clave.Saldo + Clave.Separador + saldoDisponible);
-                    Console.WriteLine("Manos despues de final : " + manoCrupier.valorNumerico() + ":" + manoJugador.valorNumerico());
                     manoCrupier.vaciarMano();
                     manoJugador.vaciarMano();
                     retirado = false;
                     partidaEmpezada = false;
-                }               
+                }
             }
         }
 
@@ -170,14 +171,12 @@ namespace Servidor_Poker
                 if (resultado.comprobarManos(manoCrupier, manoJugador))
                 {
                     finMano();
-                    Console.WriteLine("Repeticion 1");
                 }
             }
             //Una vez sacas las cartas y no haber resultado por pasarse o blackjack le indicamos al resultado que fuerce el calculo del resultado
             if (resultado.comprobarManos(manoCrupier, manoJugador, true))
             {
                 finMano();
-                Console.WriteLine("Repeticion 2");
             }
 
         }
@@ -206,7 +205,10 @@ namespace Servidor_Poker
             }
         }
 
-
+        /// <summary>
+        /// Devuelve el saldo actual
+        /// </summary>
+        /// <returns>Saldo.</returns>
         public double getSaldo()
         {
             return saldoDisponible;

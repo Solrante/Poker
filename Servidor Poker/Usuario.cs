@@ -84,7 +84,6 @@ namespace Servidor_Poker
         /// <param name="datos">Credenciales del usuario.</param>
         public Usuario(Socket socket, string datos)
         {
-            Console.WriteLine(datos);
             this.socket = socket;
             guardarDatos(datos);
             generarFlujos();

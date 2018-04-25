@@ -35,6 +35,7 @@
             // 
             // btnSalir
             // 
+            this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSalir.Location = new System.Drawing.Point(197, 226);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
@@ -45,6 +46,7 @@
             // 
             // lblUsuario
             // 
+            this.lblUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblUsuario.AutoSize = true;
             this.lblUsuario.Location = new System.Drawing.Point(13, 226);
             this.lblUsuario.Name = "lblUsuario";
@@ -64,6 +66,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PokerCurro";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.MenuPrincipal_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

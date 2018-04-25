@@ -214,5 +214,17 @@ namespace Cliente_Poker
             }
         }
 
+        /// <summary>
+        /// Gestiona el evento SizeChanged del menu principal.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">La instancia <see cref="EventArgs"/> contenedora de los datos del evento.</param>
+        private void MenuPrincipal_SizeChanged(object sender, EventArgs e)
+        {
+            foreach (Button boton in botonesSalas)
+            {
+                boton.Location = new Point(ClientSize.Width / 2 - boton.Width / 2, boton.Location.Y);
+            }
+        }
     }
 }

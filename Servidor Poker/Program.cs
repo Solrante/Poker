@@ -103,6 +103,7 @@ namespace Servidor_Poker
             NetworkStream ns = new NetworkStream(sCliente);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
+            bool loginInvalido = false;
             try
             {
                 credenciales = sr.ReadLine();
@@ -115,30 +116,48 @@ namespace Servidor_Poker
             {
                 credenciales = "";
             }
+            try
+            {
+                if (bd.usuarioRegistrado(credenciales))
+                {
+                    sw.WriteLine(Clave.LoginValido);
+                    sw.Flush();
+                    new Thread(hiloSalaEspera).Start(new Usuario(sCliente, bd.leerUsuarioCompleto(credenciales)));
+                }
+                else
+                {
+                    loginInvalido = true;
+                }
+            }
+            catch
+            {
+                loginInvalido = true;
+            }
+            finally
+            {
+                if (loginInvalido)
+                {
+                    sw.WriteLine(Clave.LoginInvalido);
+                    sw.Flush();
+                    if (sr != null)
+                    {
+                        sr.Close();
+                    }
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+                    if (ns != null)
+                    {
+                        ns.Close();
+                    }
+                    if (sCliente != null)
+                    {
+                        sCliente.Close();
+                    }
+                }
+            }
 
-            if (bd.usuarioRegistrado(credenciales))
-            {
-                sw.WriteLine(Clave.LoginValido);
-                sw.Flush();
-                new Thread(hiloSalaEspera).Start(new Usuario(sCliente, bd.leerUsuarioCompleto(credenciales)));
-            }
-            else
-            {
-                sw.WriteLine(Clave.LoginInvalido);
-                sw.Flush();
-            }
-            if (sr != null)
-            {
-                sr.Close();
-            }
-            if (sw != null)
-            {
-                sw.Close();
-            }
-            if (ns != null)
-            {
-                ns.Close();
-            }
         }
 
         /// <summary>
@@ -156,27 +175,34 @@ namespace Servidor_Poker
             }
             while (usuario.Mensaje != Clave.Desconexion)
             {
-                if (!usuario.Jugando)
-                {
-                    usuario.leerMensaje();
-                    if (usuario.Mensaje == Clave.Desconexion)
+                //try
+                //{
+                    if (!usuario.Jugando)
                     {
-                        lock (l)
+                        usuario.leerMensaje();
+                        if (usuario.Mensaje == Clave.Desconexion)
                         {
-                            usuario.cerrarSesion();
+                            lock (l)
+                            {
+                                usuario.cerrarSesion();
+                            }
+                        }
+                        else if (usuario.Mensaje.Split(Clave.Separador)[0] == Clave.Sala)
+                        {
+                            usuario.Jugando = true;
+                            int numSala = Convert.ToInt32(usuario.Mensaje.Split(Clave.Separador)[1]);
+                            lock (l)
+                            {
+                                salas[numSala].Usuarios.Add(usuario);
+                                salas[numSala].Llena = true;
+                            }
                         }
                     }
-                    else if (usuario.Mensaje.Split(Clave.Separador)[0] == Clave.Sala)
-                    {
-                        usuario.Jugando = true;
-                        int numSala = Convert.ToInt32(usuario.Mensaje.Split(Clave.Separador)[1]);
-                        lock (l)
-                        {
-                            salas[numSala].Usuarios.Add(usuario);
-                            salas[numSala].Llena = true;
-                        }
-                    }
-                }
+                //}
+                //catch (Exception)
+                //{
+                //    usuario.mandarMensaje(Clave.ComandoInvalido);
+                //}
             }
         }
 
@@ -267,7 +293,7 @@ namespace Servidor_Poker
                                     usuario.mandarMensaje(sl.ToString());
                                 }
                             }
-                        }                    
+                        }
                         gestor.ActualizarEstado();
                     }
                     else

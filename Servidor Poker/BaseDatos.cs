@@ -66,22 +66,30 @@ namespace Servidor_Poker
         /// <returns> <c>true</c> si esta registado; de otra manera, <c>false</c>.</returns>
         public bool usuarioRegistrado(string credenciales)
         {
-            string consulta = string.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
-                                            credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
-            MySqlCommand cmd = new MySqlCommand(consulta, conexion);
-            //Salta excepcion si el server esta off
-            conexion.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
+            try
             {
-                conexion.Close();
-                return true;
+                string consulta = string.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
+                                                    credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
+                MySqlCommand cmd = new MySqlCommand(consulta, conexion);
+                //Salta excepcion si el server esta off
+                conexion.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    conexion.Close();
+                    return true;
+                }
+                else
+                {
+                    conexion.Close();
+                    return false;
+                }
             }
-            else
-            {
-                conexion.Close();
-                return false;
+            catch (Exception)
+            {              
+                throw;
             }
+           
         }
 
         /// <summary>

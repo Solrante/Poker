@@ -55,6 +55,11 @@ namespace Cliente_Poker
         private DelCambiarVisibilidadControl visibilidad;
 
         /// <summary>
+        /// Instancia de delegado que cambia el atributo enable de un control
+        /// </summary>
+        private DelCambiarVisibilidadControl activo;
+
+        /// <summary>
         /// Instancia del delegado para modificar el listado de controles.
         /// </summary>
         private DelModificarControls controles;
@@ -84,6 +89,11 @@ namespace Cliente_Poker
         /// </summary>
         static readonly private object l = new object();
 
+        /// <summary>
+        /// Saldo
+        /// </summary>
+        private double saldo;
+
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.SalaBlackJack"/>.
@@ -97,10 +107,12 @@ namespace Cliente_Poker
             textoLabel = new DelCambiarTextoLabel(TextoLabel);
             visibilidad = new DelCambiarVisibilidadControl(CambiarVisibilidad);
             controles = new DelModificarControls(ModificarListadoControls);
+            activo = new DelCambiarVisibilidadControl(CambiarActivo);
             conexion = MenuPrincipal.conexion;
-            lblSaldo.Text = menuPrincipal.usuario.Saldo.ToString();
+            saldo = menuPrincipal.usuario.Saldo;
+            lblSaldo.Text = saldo.ToString();
+            comprobarSaldo();
             new Thread(HiloComunicacion).Start();
-
         }
 
         /// <summary>
@@ -128,19 +140,9 @@ namespace Cliente_Poker
             string mensaje = "";
             bool ficha = false;
             Button btn = sender as Button;
-            if (btn == btnFicha25)
+            if (btn == btnFichaUno || btn == btnFichaDos || btn == btnFichaTres)
             {
-                mensaje = Clave.Ficha + Clave.Separador + "25";
-                ficha = true;
-            }
-            if (btn == btnFicha50)
-            {
-                mensaje = Clave.Ficha + Clave.Separador + "50";
-                ficha = true;
-            }
-            if (btn == btnFicha100)
-            {
-                mensaje = Clave.Ficha + Clave.Separador + "100";
+                mensaje = Clave.Ficha + Clave.Separador + btn.Tag.ToString();
                 ficha = true;
             }
             if (btn == btnPedir)
@@ -176,13 +178,13 @@ namespace Cliente_Poker
         /// <param name="estado">Modificador de estado.</param>
         private void cambiarVisibilidadFichas(bool estado)
         {
-            Invoke(visibilidad, btnFicha100, estado);
-            Invoke(visibilidad, btnFicha50, estado);
-            Invoke(visibilidad, btnFicha25, estado);
+            Invoke(visibilidad, btnFichaTres, estado);
+            Invoke(visibilidad, btnFichaDos, estado);
+            Invoke(visibilidad, btnFichaUno, estado);
             Invoke(visibilidad, btnPedir, !estado);
             Invoke(visibilidad, btnPlantarse, !estado);
             Invoke(visibilidad, btnDoblar, !estado);
-            Invoke(visibilidad, btnRetirarse, !estado);     
+            Invoke(visibilidad, btnRetirarse, !estado);
         }
 
         /// <summary>
@@ -249,7 +251,6 @@ namespace Cliente_Poker
 
         private void actualizarValor(string respuesta)
         {
-            Console.WriteLine("Valor : " + respuesta);
             if (respuesta.Split(Clave.Separador)[1] == Clave.Jugador)
             {
                 Invoke(textoLabel, lblValorJugador, respuesta.Split(Clave.Separador)[2]);
@@ -273,8 +274,9 @@ namespace Cliente_Poker
                 case Clave.Carta:
                     cargarCarta(respuesta);
                     break;
-                case Clave.Saldo:                
-                    Invoke(textoLabel, lblSaldo, respuesta.Split(Clave.Separador)[1]);
+                case Clave.Saldo:
+                    saldo = Convert.ToInt32(respuesta.Split(Clave.Separador)[1]);
+                    Invoke(textoLabel, lblSaldo, saldo.ToString());
                     break;
                 case Clave.Valor:
                     actualizarValor(respuesta);
@@ -310,7 +312,19 @@ namespace Cliente_Poker
                 }
                 cartaCrupier1.Image = null;
                 cartaJugador1.Image = null;
-            }            
+                comprobarSaldo();
+              
+            }
+        }
+
+        /// <summary>
+        /// Comprueba el saldo actual activando o desactivando las fichas si se tiene el suficiente o no.
+        /// </summary>
+        private void comprobarSaldo()
+        {           
+            Invoke(activo, btnFichaUno, Convert.ToInt32(btnFichaUno.Tag) > saldo);
+            Invoke(activo, btnFichaDos, Convert.ToInt32(btnFichaDos.Tag) > saldo);
+            Invoke(activo, btnFichaTres, Convert.ToInt32(btnFichaTres.Tag) > saldo);
         }
 
         /// <summary>
@@ -328,7 +342,6 @@ namespace Cliente_Poker
             {
                 Controls.Remove(c);
             }
-
         }
 
         /// <summary>
@@ -351,6 +364,12 @@ namespace Cliente_Poker
         {
             l.Text = s;
         }
+
+        private void CambiarActivo(Control c, bool activo)
+        {            
+                c.Enabled = !activo;
+        }
+
 
         /// <summary>
         /// Cambia la visibilidad de un control recibido como parametro

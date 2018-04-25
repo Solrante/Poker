@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalaBlackJack));
             this.btnSalirSala = new System.Windows.Forms.Button();
-            this.btnFicha25 = new System.Windows.Forms.Button();
-            this.btnFicha50 = new System.Windows.Forms.Button();
-            this.btnFicha100 = new System.Windows.Forms.Button();
+            this.btnFichaUno = new System.Windows.Forms.Button();
+            this.btnFichaDos = new System.Windows.Forms.Button();
+            this.btnFichaTres = new System.Windows.Forms.Button();
             this.btnPedir = new System.Windows.Forms.Button();
             this.cartaJugador1 = new System.Windows.Forms.PictureBox();
             this.cartaCrupier1 = new System.Windows.Forms.PictureBox();
@@ -58,45 +58,45 @@
             this.btnSalirSala.UseVisualStyleBackColor = true;
             this.btnSalirSala.Click += new System.EventHandler(this.btnSalirSala_Click);
             // 
-            // btnFicha25
+            // btnFichaUno
             // 
-            this.btnFicha25.AutoSize = true;
-            this.btnFicha25.Image = global::Cliente_Poker.Properties.Resources.chipGreenWhite_sideBorder;
-            this.btnFicha25.Location = new System.Drawing.Point(213, 366);
-            this.btnFicha25.Name = "btnFicha25";
-            this.btnFicha25.Size = new System.Drawing.Size(75, 53);
-            this.btnFicha25.TabIndex = 1;
-            this.btnFicha25.Tag = "Ficha25";
-            this.btnFicha25.Text = "25";
-            this.btnFicha25.UseVisualStyleBackColor = true;
-            this.btnFicha25.Click += new System.EventHandler(this.ClickListener);
+            this.btnFichaUno.AutoSize = true;
+            this.btnFichaUno.Image = global::Cliente_Poker.Properties.Resources.chipGreenWhite_sideBorder;
+            this.btnFichaUno.Location = new System.Drawing.Point(213, 366);
+            this.btnFichaUno.Name = "btnFichaUno";
+            this.btnFichaUno.Size = new System.Drawing.Size(75, 53);
+            this.btnFichaUno.TabIndex = 1;
+            this.btnFichaUno.Tag = "25";
+            this.btnFichaUno.Text = "25";
+            this.btnFichaUno.UseVisualStyleBackColor = true;
+            this.btnFichaUno.Click += new System.EventHandler(this.ClickListener);
             // 
-            // btnFicha50
+            // btnFichaDos
             // 
-            this.btnFicha50.AutoSize = true;
-            this.btnFicha50.Image = global::Cliente_Poker.Properties.Resources.chipBlueWhite_sideBorder;
-            this.btnFicha50.Location = new System.Drawing.Point(332, 368);
-            this.btnFicha50.Name = "btnFicha50";
-            this.btnFicha50.Size = new System.Drawing.Size(75, 48);
-            this.btnFicha50.TabIndex = 2;
-            this.btnFicha50.Tag = "Ficha50";
-            this.btnFicha50.Text = "50";
-            this.btnFicha50.UseVisualStyleBackColor = true;
-            this.btnFicha50.Click += new System.EventHandler(this.ClickListener);
+            this.btnFichaDos.AutoSize = true;
+            this.btnFichaDos.Image = global::Cliente_Poker.Properties.Resources.chipBlueWhite_sideBorder;
+            this.btnFichaDos.Location = new System.Drawing.Point(332, 368);
+            this.btnFichaDos.Name = "btnFichaDos";
+            this.btnFichaDos.Size = new System.Drawing.Size(75, 48);
+            this.btnFichaDos.TabIndex = 2;
+            this.btnFichaDos.Tag = "50";
+            this.btnFichaDos.Text = "50";
+            this.btnFichaDos.UseVisualStyleBackColor = true;
+            this.btnFichaDos.Click += new System.EventHandler(this.ClickListener);
             // 
-            // btnFicha100
+            // btnFichaTres
             // 
-            this.btnFicha100.AutoSize = true;
-            this.btnFicha100.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnFicha100.Image = global::Cliente_Poker.Properties.Resources.chipBlackWhite_sideBorder;
-            this.btnFicha100.Location = new System.Drawing.Point(450, 368);
-            this.btnFicha100.Name = "btnFicha100";
-            this.btnFicha100.Size = new System.Drawing.Size(75, 48);
-            this.btnFicha100.TabIndex = 3;
-            this.btnFicha100.Tag = "Ficha100";
-            this.btnFicha100.Text = "100";
-            this.btnFicha100.UseVisualStyleBackColor = true;
-            this.btnFicha100.Click += new System.EventHandler(this.ClickListener);
+            this.btnFichaTres.AutoSize = true;
+            this.btnFichaTres.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnFichaTres.Image = global::Cliente_Poker.Properties.Resources.chipBlackWhite_sideBorder;
+            this.btnFichaTres.Location = new System.Drawing.Point(450, 368);
+            this.btnFichaTres.Name = "btnFichaTres";
+            this.btnFichaTres.Size = new System.Drawing.Size(75, 48);
+            this.btnFichaTres.TabIndex = 3;
+            this.btnFichaTres.Tag = "100";
+            this.btnFichaTres.Text = "100";
+            this.btnFichaTres.UseVisualStyleBackColor = true;
+            this.btnFichaTres.Click += new System.EventHandler(this.ClickListener);
             // 
             // btnPedir
             // 
@@ -219,9 +219,9 @@
             this.Controls.Add(this.cartaCrupier1);
             this.Controls.Add(this.cartaJugador1);
             this.Controls.Add(this.btnPedir);
-            this.Controls.Add(this.btnFicha100);
-            this.Controls.Add(this.btnFicha50);
-            this.Controls.Add(this.btnFicha25);
+            this.Controls.Add(this.btnFichaTres);
+            this.Controls.Add(this.btnFichaDos);
+            this.Controls.Add(this.btnFichaUno);
             this.Controls.Add(this.btnSalirSala);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SalaBlackJack";
@@ -237,9 +237,9 @@
         #endregion
 
         private System.Windows.Forms.Button btnSalirSala;
-        private System.Windows.Forms.Button btnFicha25;
-        private System.Windows.Forms.Button btnFicha50;
-        private System.Windows.Forms.Button btnFicha100;
+        private System.Windows.Forms.Button btnFichaUno;
+        private System.Windows.Forms.Button btnFichaDos;
+        private System.Windows.Forms.Button btnFichaTres;
         private System.Windows.Forms.Button btnPedir;
         private System.Windows.Forms.PictureBox cartaJugador1;
         private System.Windows.Forms.PictureBox cartaCrupier1;

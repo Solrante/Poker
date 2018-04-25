@@ -50,13 +50,6 @@
         /// </summary>
         private eModificadorResultado modificador;
 
-        public Resultado()
-        {
-
-        }
-
-        
-
         public bool comprobarManos(Mano crupier, Mano jugador, bool plantarse = false)
         {
             if (plantarse)

@@ -80,6 +80,10 @@ namespace Cliente_Poker
             return string.Format("{0},{1},{2},{3}", NumSala, ApuestaMinima, CuotaEntrada, Tipo);
         }
 
+        /// <summary>
+        /// Actualiza los valores de la variables de clase , dado un string contenedor de los nuevos valores.
+        /// </summary>
+        /// <param name="datos">Datos.</param>
         public void actualizarDatos(string datos)
         {
             string[] info = datos.Split(Clave.SeparadorCredenciales);

@@ -248,6 +248,13 @@
             Actualiza el estado de las salas del cliente segun el estado del server
             </summary>
         </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.MenuPrincipal_SizeChanged(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento SizeChanged del menu principal.
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">La instancia <see cref="T:System.EventArgs"/> contenedora de los datos del evento.</param>
+        </member>
         <member name="F:Cliente_Poker.MenuPrincipal.components">
             <summary>
             Variable del diseñador necesaria.
@@ -342,6 +349,12 @@
             A <see cref="T:System.String" /> that represents this instance.
             </returns>
         </member>
+        <member name="M:Cliente_Poker.Sala.actualizarDatos(System.String)">
+            <summary>
+            Actualiza los valores de la variables de clase , dado un string contenedor de los nuevos valores.
+            </summary>
+            <param name="datos">Datos.</param>
+        </member>
         <member name="T:Cliente_Poker.SalaBlackJack">
             <summary>
             Definicion de la vista de juego blackjack
@@ -390,6 +403,11 @@
         <member name="F:Cliente_Poker.SalaBlackJack.visibilidad">
             <summary>
             Instancia del delegado para cambia la visibilidad de un control
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.activo">
+            <summary>
+            Instancia de delegado que cambia el atributo enable de un control
             </summary>
         </member>
         <member name="F:Cliente_Poker.SalaBlackJack.controles">

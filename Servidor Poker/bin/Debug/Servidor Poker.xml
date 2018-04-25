@@ -659,6 +659,11 @@
             Clave de comunicacion.
             </summary>
         </member>
+        <member name="F:Servidor_Poker.Clave.ComandoInvalido">
+            <summary>
+            Clave de comunicacion.
+            </summary>
+        </member>
         <member name="F:Servidor_Poker.Clave.ValorJugador">
             <summary>
             Clave de comunicacion.
@@ -774,6 +779,12 @@
             <summary>
             Genera las cartas iniciales de la partida y las envia al usuario
             </summary>
+        </member>
+        <member name="M:Servidor_Poker.GestorJuegoBlackJack.getSaldo">
+            <summary>
+            Devuelve el saldo actual
+            </summary>
+            <returns>Saldo.</returns>
         </member>
     </members>
 </doc>
