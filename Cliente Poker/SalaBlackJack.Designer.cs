@@ -50,17 +50,20 @@
             // 
             // btnSalirSala
             // 
+            this.btnSalirSala.BackColor = System.Drawing.Color.Sienna;
+            this.btnSalirSala.ForeColor = System.Drawing.Color.White;
             this.btnSalirSala.Location = new System.Drawing.Point(713, 415);
             this.btnSalirSala.Name = "btnSalirSala";
             this.btnSalirSala.Size = new System.Drawing.Size(75, 23);
             this.btnSalirSala.TabIndex = 0;
             this.btnSalirSala.Text = "Salir de sala";
-            this.btnSalirSala.UseVisualStyleBackColor = true;
+            this.btnSalirSala.UseVisualStyleBackColor = false;
             this.btnSalirSala.Click += new System.EventHandler(this.btnSalirSala_Click);
             // 
             // btnFichaUno
             // 
             this.btnFichaUno.AutoSize = true;
+            this.btnFichaUno.BackColor = System.Drawing.Color.Sienna;
             this.btnFichaUno.Image = global::Cliente_Poker.Properties.Resources.chipGreenWhite_sideBorder;
             this.btnFichaUno.Location = new System.Drawing.Point(213, 366);
             this.btnFichaUno.Name = "btnFichaUno";
@@ -68,12 +71,13 @@
             this.btnFichaUno.TabIndex = 1;
             this.btnFichaUno.Tag = "25";
             this.btnFichaUno.Text = "25";
-            this.btnFichaUno.UseVisualStyleBackColor = true;
+            this.btnFichaUno.UseVisualStyleBackColor = false;
             this.btnFichaUno.Click += new System.EventHandler(this.ClickListener);
             // 
             // btnFichaDos
             // 
             this.btnFichaDos.AutoSize = true;
+            this.btnFichaDos.BackColor = System.Drawing.Color.Sienna;
             this.btnFichaDos.Image = global::Cliente_Poker.Properties.Resources.chipBlueWhite_sideBorder;
             this.btnFichaDos.Location = new System.Drawing.Point(332, 368);
             this.btnFichaDos.Name = "btnFichaDos";
@@ -81,12 +85,13 @@
             this.btnFichaDos.TabIndex = 2;
             this.btnFichaDos.Tag = "50";
             this.btnFichaDos.Text = "50";
-            this.btnFichaDos.UseVisualStyleBackColor = true;
+            this.btnFichaDos.UseVisualStyleBackColor = false;
             this.btnFichaDos.Click += new System.EventHandler(this.ClickListener);
             // 
             // btnFichaTres
             // 
             this.btnFichaTres.AutoSize = true;
+            this.btnFichaTres.BackColor = System.Drawing.Color.Sienna;
             this.btnFichaTres.ForeColor = System.Drawing.SystemColors.Control;
             this.btnFichaTres.Image = global::Cliente_Poker.Properties.Resources.chipBlackWhite_sideBorder;
             this.btnFichaTres.Location = new System.Drawing.Point(450, 368);
@@ -95,18 +100,20 @@
             this.btnFichaTres.TabIndex = 3;
             this.btnFichaTres.Tag = "100";
             this.btnFichaTres.Text = "100";
-            this.btnFichaTres.UseVisualStyleBackColor = true;
+            this.btnFichaTres.UseVisualStyleBackColor = false;
             this.btnFichaTres.Click += new System.EventHandler(this.ClickListener);
             // 
             // btnPedir
             // 
+            this.btnPedir.BackColor = System.Drawing.Color.Sienna;
+            this.btnPedir.ForeColor = System.Drawing.Color.White;
             this.btnPedir.Location = new System.Drawing.Point(213, 344);
             this.btnPedir.Name = "btnPedir";
             this.btnPedir.Size = new System.Drawing.Size(75, 23);
             this.btnPedir.TabIndex = 4;
             this.btnPedir.Tag = "Pedir";
             this.btnPedir.Text = "Pedir";
-            this.btnPedir.UseVisualStyleBackColor = true;
+            this.btnPedir.UseVisualStyleBackColor = false;
             this.btnPedir.Visible = false;
             this.btnPedir.Click += new System.EventHandler(this.ClickListener);
             // 
@@ -130,13 +137,15 @@
             // 
             // btnPlantarse
             // 
+            this.btnPlantarse.BackColor = System.Drawing.Color.Sienna;
+            this.btnPlantarse.ForeColor = System.Drawing.Color.White;
             this.btnPlantarse.Location = new System.Drawing.Point(332, 344);
             this.btnPlantarse.Name = "btnPlantarse";
             this.btnPlantarse.Size = new System.Drawing.Size(75, 23);
             this.btnPlantarse.TabIndex = 8;
             this.btnPlantarse.Tag = "Plantarse";
             this.btnPlantarse.Text = "Plantarse";
-            this.btnPlantarse.UseVisualStyleBackColor = true;
+            this.btnPlantarse.UseVisualStyleBackColor = false;
             this.btnPlantarse.Visible = false;
             this.btnPlantarse.Click += new System.EventHandler(this.ClickListener);
             // 
@@ -159,23 +168,27 @@
             // 
             // btnRetirarse
             // 
+            this.btnRetirarse.BackColor = System.Drawing.Color.Sienna;
+            this.btnRetirarse.ForeColor = System.Drawing.Color.White;
             this.btnRetirarse.Location = new System.Drawing.Point(450, 344);
             this.btnRetirarse.Name = "btnRetirarse";
             this.btnRetirarse.Size = new System.Drawing.Size(75, 23);
             this.btnRetirarse.TabIndex = 11;
             this.btnRetirarse.Text = "Retirarse";
-            this.btnRetirarse.UseVisualStyleBackColor = true;
+            this.btnRetirarse.UseVisualStyleBackColor = false;
             this.btnRetirarse.Visible = false;
             this.btnRetirarse.Click += new System.EventHandler(this.ClickListener);
             // 
             // btnDoblar
             // 
+            this.btnDoblar.BackColor = System.Drawing.Color.Sienna;
+            this.btnDoblar.ForeColor = System.Drawing.Color.White;
             this.btnDoblar.Location = new System.Drawing.Point(332, 306);
             this.btnDoblar.Name = "btnDoblar";
             this.btnDoblar.Size = new System.Drawing.Size(75, 23);
             this.btnDoblar.TabIndex = 12;
             this.btnDoblar.Text = "Doblar";
-            this.btnDoblar.UseVisualStyleBackColor = true;
+            this.btnDoblar.UseVisualStyleBackColor = false;
             this.btnDoblar.Visible = false;
             this.btnDoblar.Click += new System.EventHandler(this.ClickListener);
             // 
@@ -207,6 +220,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lblSaldo);
             this.Controls.Add(this.lblValorJugador);

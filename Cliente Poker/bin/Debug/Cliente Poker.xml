@@ -440,6 +440,11 @@
             Objeto para control de uso de elementos comunes
             </summary>
         </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.saldo">
+            <summary>
+            Saldo
+            </summary>
+        </member>
         <member name="M:Cliente_Poker.SalaBlackJack.#ctor(Cliente_Poker.MenuPrincipal)">
             <summary>
             Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.SalaBlackJack"/>.
@@ -493,6 +498,11 @@
         <member name="M:Cliente_Poker.SalaBlackJack.reset">
             <summary>
             Devuelve el juego al estado inicial de partida
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.comprobarSaldo">
+            <summary>
+            Comprueba el saldo actual activando o desactivando las fichas si se tiene el suficiente o no.
             </summary>
         </member>
         <member name="M:Cliente_Poker.SalaBlackJack.ModificarListadoControls(System.Windows.Forms.Control,System.Boolean)">

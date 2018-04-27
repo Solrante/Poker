@@ -156,6 +156,8 @@ namespace Cliente_Poker
                 btn.Location = new Point(centroHorizontal - btn.Width / 2, oriY);
                 //Desactivo el boton si la sala ya esta ocupada
                 btn.Enabled = !sala.Llena;
+                btn.BackColor = Color.Sienna;
+                btn.ForeColor = Color.White;
                 botonesSalas.Add(btn);
                 Controls.Add(btn);
                 if (sala.Tipo == eSala.POKER)

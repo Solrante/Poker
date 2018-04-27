@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -72,6 +73,11 @@ namespace Cliente_Poker
             txtContraseña.Location = new Point(centroHorizontal - txtContraseña.Width / 2, txtContraseña.Location.Y);
             btnEntrar.Location = new Point(centroHorizontal - btnEntrar.Width / 2, btnEntrar.Location.Y);
             lblError.Location = new Point(centroHorizontal - lblError.Width / 2, lblError.Location.Y);
+        }
+
+        private void btnRegistrarse_Click(object sender, EventArgs e)
+        {
+            Process.Start("chrome.exe", "localhost");
         }
     }
 }

@@ -111,7 +111,6 @@ namespace Cliente_Poker
             conexion = MenuPrincipal.conexion;
             saldo = menuPrincipal.usuario.Saldo;
             lblSaldo.Text = saldo.ToString();
-            comprobarSaldo();
             new Thread(HiloComunicacion).Start();
         }
 
