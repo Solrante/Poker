@@ -94,7 +94,7 @@ namespace Servidor_Poker
         /// </summary>
         /// <param name="datos">Información recibida.</param>
         private void guardarDatos(string datos)
-        {           
+        {
             ID = Convert.ToInt32(datos.Split(Clave.SeparadorCredenciales)[0]);
             Correo = datos.Split(Clave.SeparadorCredenciales)[1];
             Contraseña = datos.Split(Clave.SeparadorCredenciales)[2];
@@ -115,6 +115,16 @@ namespace Servidor_Poker
             }
             catch (IOException) { }
         }
+
+        /// <summary>
+        /// Devuelve las credenciales.
+        /// </summary>
+        /// <returns></returns>
+        public string getCredenciales()
+        {
+            return Correo + Clave.SeparadorCredenciales + Contraseña;
+        }
+
 
         /// <summary>
         /// Envia un mensaje al usuario a través de su flujo de datos

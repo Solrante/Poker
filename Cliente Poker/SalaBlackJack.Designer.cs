@@ -37,7 +37,7 @@
             this.cartaJugador1 = new System.Windows.Forms.PictureBox();
             this.cartaCrupier1 = new System.Windows.Forms.PictureBox();
             this.btnPlantarse = new System.Windows.Forms.Button();
-            this.lbl = new System.Windows.Forms.Label();
+            this.lblCabeceraSaldo = new System.Windows.Forms.Label();
             this.lblResultado = new System.Windows.Forms.Label();
             this.btnRetirarse = new System.Windows.Forms.Button();
             this.btnDoblar = new System.Windows.Forms.Button();
@@ -65,7 +65,7 @@
             this.btnFichaUno.AutoSize = true;
             this.btnFichaUno.BackColor = System.Drawing.Color.Sienna;
             this.btnFichaUno.Image = global::Cliente_Poker.Properties.Resources.chipGreenWhite_sideBorder;
-            this.btnFichaUno.Location = new System.Drawing.Point(213, 366);
+            this.btnFichaUno.Location = new System.Drawing.Point(245, 386);
             this.btnFichaUno.Name = "btnFichaUno";
             this.btnFichaUno.Size = new System.Drawing.Size(75, 53);
             this.btnFichaUno.TabIndex = 1;
@@ -79,7 +79,7 @@
             this.btnFichaDos.AutoSize = true;
             this.btnFichaDos.BackColor = System.Drawing.Color.Sienna;
             this.btnFichaDos.Image = global::Cliente_Poker.Properties.Resources.chipBlueWhite_sideBorder;
-            this.btnFichaDos.Location = new System.Drawing.Point(332, 368);
+            this.btnFichaDos.Location = new System.Drawing.Point(364, 388);
             this.btnFichaDos.Name = "btnFichaDos";
             this.btnFichaDos.Size = new System.Drawing.Size(75, 48);
             this.btnFichaDos.TabIndex = 2;
@@ -94,7 +94,7 @@
             this.btnFichaTres.BackColor = System.Drawing.Color.Sienna;
             this.btnFichaTres.ForeColor = System.Drawing.SystemColors.Control;
             this.btnFichaTres.Image = global::Cliente_Poker.Properties.Resources.chipBlackWhite_sideBorder;
-            this.btnFichaTres.Location = new System.Drawing.Point(450, 368);
+            this.btnFichaTres.Location = new System.Drawing.Point(482, 388);
             this.btnFichaTres.Name = "btnFichaTres";
             this.btnFichaTres.Size = new System.Drawing.Size(75, 48);
             this.btnFichaTres.TabIndex = 3;
@@ -107,7 +107,7 @@
             // 
             this.btnPedir.BackColor = System.Drawing.Color.Sienna;
             this.btnPedir.ForeColor = System.Drawing.Color.White;
-            this.btnPedir.Location = new System.Drawing.Point(213, 344);
+            this.btnPedir.Location = new System.Drawing.Point(245, 364);
             this.btnPedir.Name = "btnPedir";
             this.btnPedir.Size = new System.Drawing.Size(75, 23);
             this.btnPedir.TabIndex = 4;
@@ -128,7 +128,7 @@
             // 
             // cartaCrupier1
             // 
-            this.cartaCrupier1.Location = new System.Drawing.Point(238, 74);
+            this.cartaCrupier1.Location = new System.Drawing.Point(238, 31);
             this.cartaCrupier1.Name = "cartaCrupier1";
             this.cartaCrupier1.Size = new System.Drawing.Size(50, 70);
             this.cartaCrupier1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -139,7 +139,7 @@
             // 
             this.btnPlantarse.BackColor = System.Drawing.Color.Sienna;
             this.btnPlantarse.ForeColor = System.Drawing.Color.White;
-            this.btnPlantarse.Location = new System.Drawing.Point(332, 344);
+            this.btnPlantarse.Location = new System.Drawing.Point(364, 364);
             this.btnPlantarse.Name = "btnPlantarse";
             this.btnPlantarse.Size = new System.Drawing.Size(75, 23);
             this.btnPlantarse.TabIndex = 8;
@@ -149,28 +149,30 @@
             this.btnPlantarse.Visible = false;
             this.btnPlantarse.Click += new System.EventHandler(this.ClickListener);
             // 
-            // lbl
+            // lblCabeceraSaldo
             // 
-            this.lbl.AutoSize = true;
-            this.lbl.Location = new System.Drawing.Point(30, 177);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(55, 13);
-            this.lbl.TabIndex = 9;
-            this.lbl.Text = "Resultado";
+            this.lblCabeceraSaldo.AutoSize = true;
+            this.lblCabeceraSaldo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCabeceraSaldo.Location = new System.Drawing.Point(36, 353);
+            this.lblCabeceraSaldo.Name = "lblCabeceraSaldo";
+            this.lblCabeceraSaldo.Size = new System.Drawing.Size(63, 18);
+            this.lblCabeceraSaldo.TabIndex = 9;
+            this.lblCabeceraSaldo.Text = "SALDO";
             // 
             // lblResultado
             // 
             this.lblResultado.AutoSize = true;
-            this.lblResultado.Location = new System.Drawing.Point(33, 211);
+            this.lblResultado.Font = new System.Drawing.Font("Verdana", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultado.Location = new System.Drawing.Point(250, 145);
             this.lblResultado.Name = "lblResultado";
-            this.lblResultado.Size = new System.Drawing.Size(0, 13);
+            this.lblResultado.Size = new System.Drawing.Size(0, 32);
             this.lblResultado.TabIndex = 10;
             // 
             // btnRetirarse
             // 
             this.btnRetirarse.BackColor = System.Drawing.Color.Sienna;
             this.btnRetirarse.ForeColor = System.Drawing.Color.White;
-            this.btnRetirarse.Location = new System.Drawing.Point(450, 344);
+            this.btnRetirarse.Location = new System.Drawing.Point(482, 364);
             this.btnRetirarse.Name = "btnRetirarse";
             this.btnRetirarse.Size = new System.Drawing.Size(75, 23);
             this.btnRetirarse.TabIndex = 11;
@@ -183,7 +185,7 @@
             // 
             this.btnDoblar.BackColor = System.Drawing.Color.Sienna;
             this.btnDoblar.ForeColor = System.Drawing.Color.White;
-            this.btnDoblar.Location = new System.Drawing.Point(332, 306);
+            this.btnDoblar.Location = new System.Drawing.Point(364, 326);
             this.btnDoblar.Name = "btnDoblar";
             this.btnDoblar.Size = new System.Drawing.Size(75, 23);
             this.btnDoblar.TabIndex = 12;
@@ -211,9 +213,10 @@
             // lblSaldo
             // 
             this.lblSaldo.AutoSize = true;
-            this.lblSaldo.Location = new System.Drawing.Point(55, 388);
+            this.lblSaldo.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaldo.Location = new System.Drawing.Point(36, 386);
             this.lblSaldo.Name = "lblSaldo";
-            this.lblSaldo.Size = new System.Drawing.Size(0, 13);
+            this.lblSaldo.Size = new System.Drawing.Size(0, 18);
             this.lblSaldo.TabIndex = 15;
             // 
             // SalaBlackJack
@@ -228,7 +231,7 @@
             this.Controls.Add(this.btnDoblar);
             this.Controls.Add(this.btnRetirarse);
             this.Controls.Add(this.lblResultado);
-            this.Controls.Add(this.lbl);
+            this.Controls.Add(this.lblCabeceraSaldo);
             this.Controls.Add(this.btnPlantarse);
             this.Controls.Add(this.cartaCrupier1);
             this.Controls.Add(this.cartaJugador1);
@@ -258,7 +261,7 @@
         private System.Windows.Forms.PictureBox cartaJugador1;
         private System.Windows.Forms.PictureBox cartaCrupier1;
         private System.Windows.Forms.Button btnPlantarse;
-        private System.Windows.Forms.Label lbl;
+        private System.Windows.Forms.Label lblCabeceraSaldo;
         private System.Windows.Forms.Label lblResultado;
         private System.Windows.Forms.Button btnRetirarse;
         private System.Windows.Forms.Button btnDoblar;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -93,7 +94,6 @@ namespace Cliente_Poker
         /// Saldo
         /// </summary>
         private double saldo;
-
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.SalaBlackJack"/>.

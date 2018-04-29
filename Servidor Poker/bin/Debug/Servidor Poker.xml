@@ -212,6 +212,11 @@
             Listado de salas activas del servidor
             </summary>
         </member>
+        <member name="F:Servidor_Poker.Program.usuariosConectados">
+            <summary>
+            Listado de usuario activos en el servidor
+            </summary>
+        </member>
         <member name="F:Servidor_Poker.Program.l">
             <summary>
             Objeto para control de uso de elementos comunes
@@ -523,6 +528,12 @@
             <summary>
             Inicializa los flujos del usuario de su Socket
             </summary>
+        </member>
+        <member name="M:Servidor_Poker.Usuario.getCredenciales">
+            <summary>
+            Devuelve las credenciales.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Servidor_Poker.Usuario.mandarMensaje(System.String)">
             <summary>

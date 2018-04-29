@@ -47,7 +47,7 @@ namespace Servidor_Poker
         private void InicializarConexion()
         {
             conexion = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
+            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");           
         }
 
         /// <summary>
@@ -72,7 +72,10 @@ namespace Servidor_Poker
                                                     credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
                 MySqlCommand cmd = new MySqlCommand(consulta, conexion);
                 //Salta excepcion si el server esta off
-                conexion.Open();
+                if (conexion!=null)
+                {
+                    conexion.Open();
+                }                
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -85,9 +88,14 @@ namespace Servidor_Poker
                     return false;
                 }
             }
-            catch (Exception)
-            {              
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
                 throw;
+            }
+            finally
+            {
+                conexion.Close();
             }
            
         }

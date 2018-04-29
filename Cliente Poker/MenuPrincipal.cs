@@ -39,7 +39,7 @@ namespace Cliente_Poker
         /// <summary>
         /// Posicion Y inicial para la colocación de botones de salas
         /// </summary>
-        int oriY = 30;
+        int oriY = 50;
 
         /// <summary>
         /// Posicion en pixel del centro del area del formulario
@@ -227,6 +227,12 @@ namespace Cliente_Poker
             {
                 boton.Location = new Point(ClientSize.Width / 2 - boton.Width / 2, boton.Location.Y);
             }
+        }
+
+        private void btnActualizarSalas_Click(object sender, EventArgs e)
+        {   
+            conexion.enviarMensaje(Clave.ListaSalas);
+            actualizarSalas();
         }
     }
 }

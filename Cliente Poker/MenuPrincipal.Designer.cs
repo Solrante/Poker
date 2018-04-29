@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
             this.btnSalir = new System.Windows.Forms.Button();
             this.lblUsuario = new System.Windows.Forms.Label();
+            this.btnActualizarSalas = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSalir
@@ -56,12 +57,26 @@
             this.lblUsuario.TabIndex = 1;
             this.lblUsuario.Text = "label1";
             // 
+            // btnActualizarSalas
+            // 
+            this.btnActualizarSalas.AutoSize = true;
+            this.btnActualizarSalas.BackColor = System.Drawing.Color.Sienna;
+            this.btnActualizarSalas.ForeColor = System.Drawing.Color.White;
+            this.btnActualizarSalas.Location = new System.Drawing.Point(180, 12);
+            this.btnActualizarSalas.Name = "btnActualizarSalas";
+            this.btnActualizarSalas.Size = new System.Drawing.Size(92, 23);
+            this.btnActualizarSalas.TabIndex = 2;
+            this.btnActualizarSalas.Text = "Actualizar Salas";
+            this.btnActualizarSalas.UseVisualStyleBackColor = false;
+            this.btnActualizarSalas.Click += new System.EventHandler(this.btnActualizarSalas_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.btnActualizarSalas);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.btnSalir);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -79,6 +94,7 @@
 
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label lblUsuario;
+        private System.Windows.Forms.Button btnActualizarSalas;
     }
 }
 

@@ -11,6 +11,8 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentación Cliente", "D
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentacion Servidor", "Documentacion Servidor\Documentacion Servidor.shfbproj", "{CC0893E0-5A14-4921-86A1-858AEA640BE2}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Poker Curro Installer", "Poker Curro Installer\Poker Curro Installer.vdproj", "{C70F6031-7BD1-48D2-A89E-D21E936518F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,8 @@ Global
 		{CC0893E0-5A14-4921-86A1-858AEA640BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC0893E0-5A14-4921-86A1-858AEA640BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC0893E0-5A14-4921-86A1-858AEA640BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C70F6031-7BD1-48D2-A89E-D21E936518F9}.Debug|Any CPU.ActiveCfg = Debug
+		{C70F6031-7BD1-48D2-A89E-D21E936518F9}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

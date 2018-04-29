@@ -24,6 +24,11 @@ namespace Servidor_Poker
         static private List<Sala> salas = new List<Sala>();
 
         /// <summary>
+        /// Listado de usuario activos en el servidor
+        /// </summary>
+        static private List<string> usuariosConectados = new List<string>();
+
+        /// <summary>
         /// Objeto para control de uso de elementos comunes
         /// </summary>
         static readonly private object l = new object();
@@ -87,7 +92,7 @@ namespace Servidor_Poker
         static void crearSalas()
         {
             salas.Add(new Sala("0,0,0", eSala.BLACKJACK));
-            //salas.Add(new Sala("1,0,0", eSala.BLACKJACK));
+            salas.Add(new Sala("1,0,0", eSala.BLACKJACK));
             //salas.Add(new Sala("2,0,0", eSala.BLACKJACK));
         }
 
@@ -122,6 +127,19 @@ namespace Servidor_Poker
                 {
                     sw.WriteLine(Clave.LoginValido);
                     sw.Flush();
+                    lock (l)
+                    {
+                        if (!usuariosConectados.Contains(credenciales))
+                        {
+                            Console.Write("Credenciales aun no logeadas : " + credenciales);
+                            usuariosConectados.Add(credenciales);
+                        }
+                        else
+                        {
+                            Console.Write("Credenciales ya logeadas : " + credenciales);
+                        }
+
+                    }
                     new Thread(hiloSalaEspera).Start(new Usuario(sCliente, bd.leerUsuarioCompleto(credenciales)));
                 }
                 else
@@ -157,7 +175,6 @@ namespace Servidor_Poker
                     }
                 }
             }
-
         }
 
         /// <summary>
@@ -175,34 +192,38 @@ namespace Servidor_Poker
             }
             while (usuario.Mensaje != Clave.Desconexion)
             {
-                //try
-                //{
-                    if (!usuario.Jugando)
+                if (!usuario.Jugando)
+                {
+                    usuario.leerMensaje();
+                    if (usuario.Mensaje == Clave.Desconexion)
                     {
-                        usuario.leerMensaje();
-                        if (usuario.Mensaje == Clave.Desconexion)
+                        lock (l)
                         {
-                            lock (l)
-                            {
-                                usuario.cerrarSesion();
-                            }
+                            usuariosConectados.Remove(usuario.getCredenciales());
+                            usuario.cerrarSesion();
                         }
-                        else if (usuario.Mensaje.Split(Clave.Separador)[0] == Clave.Sala)
+                    }
+                    else if (usuario.Mensaje.Split(Clave.Separador)[0] == Clave.Sala)
+                    {
+                        usuario.Jugando = true;
+                        int numSala = Convert.ToInt32(usuario.Mensaje.Split(Clave.Separador)[1]);
+                        lock (l)
                         {
-                            usuario.Jugando = true;
-                            int numSala = Convert.ToInt32(usuario.Mensaje.Split(Clave.Separador)[1]);
-                            lock (l)
+                            salas[numSala].Usuarios.Add(usuario);
+                            salas[numSala].Llena = true;
+                        }
+                    }
+                    if (usuario.Mensaje == Clave.ListaSalas)
+                    {
+                        lock (l)
+                        {
+                            foreach (Sala sl in salas)
                             {
-                                salas[numSala].Usuarios.Add(usuario);
-                                salas[numSala].Llena = true;
+                                usuario.mandarMensaje(sl.ToString());
                             }
                         }
                     }
-                //}
-                //catch (Exception)
-                //{
-                //    usuario.mandarMensaje(Clave.ComandoInvalido);
-                //}
+                }
             }
         }
 
@@ -284,16 +305,6 @@ namespace Servidor_Poker
                     usuario.leerMensaje();
                     if (usuario.Mensaje != Clave.Volver)
                     {
-                        if (usuario.Mensaje == Clave.ListaSalas)
-                        {
-                            lock (l)
-                            {
-                                foreach (Sala sl in salas)
-                                {
-                                    usuario.mandarMensaje(sl.ToString());
-                                }
-                            }
-                        }
                         gestor.ActualizarEstado();
                     }
                     else
@@ -308,7 +319,6 @@ namespace Servidor_Poker
                         usuario.mandarMensaje(usuario.ToString());
                         //Eliminamos al usuario de la sala
                         sala.Usuarios.Clear();
-                        Console.WriteLine("Saldo actual : " + usuario.Saldo);
                         usuario = null;
                         gestor = null;
                     }
