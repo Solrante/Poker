@@ -94,6 +94,7 @@ namespace Servidor_Poker
                 case Clave.Plantarse:
                     if (partidaEmpezada)
                     {
+                        Console.WriteLine("Crupier juega");
                         crupierJuega();
                     }
                     break;
@@ -151,6 +152,7 @@ namespace Servidor_Poker
                     usuario.mandarMensaje(Clave.Saldo + Clave.Separador + saldoDisponible);
                     manoCrupier.vaciarMano();
                     manoJugador.vaciarMano();
+                    usuario.Mensaje = "";
                     retirado = false;
                     partidaEmpezada = false;
                 }

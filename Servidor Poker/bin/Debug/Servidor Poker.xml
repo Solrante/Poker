@@ -50,7 +50,12 @@
             Definicion de conexion a la base de datos
             </summary>
         </member>
-        <member name="F:Servidor_Poker.BaseDatos.conexion">
+        <member name="F:Servidor_Poker.BaseDatos.conexionLectura">
+            <summary>
+            Conexion a la base de datos
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.BaseDatos.conexionEscritura">
             <summary>
             Conexion a la base de datos
             </summary>

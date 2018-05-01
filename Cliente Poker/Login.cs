@@ -47,7 +47,9 @@ namespace Cliente_Poker
             conexion.enviarMensaje(txtCorreo.Text + Clave.SeparadorCredenciales + txtContraseña.Text);
             //Se comprueba la respuesta del servidor a las credenciales mandadas , avisando de información erronea en la misma
             //o accediendo al sistema de ser correcta.
-            if (conexion.recibirMensaje() == Clave.LoginInvalido)
+            string debug = conexion.recibirMensaje();
+            Console.WriteLine(debug);
+            if (debug == Clave.LoginInvalido)
             {
                 lblError.Visible = true;
             }

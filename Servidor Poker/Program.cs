@@ -108,7 +108,6 @@ namespace Servidor_Poker
             NetworkStream ns = new NetworkStream(sCliente);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
-            bool loginInvalido = false;
             try
             {
                 credenciales = sr.ReadLine();
@@ -121,58 +120,36 @@ namespace Servidor_Poker
             {
                 credenciales = "";
             }
-            try
+            if (bd.usuarioRegistrado(credenciales) && !usuariosConectados.Contains(credenciales))
             {
-                if (bd.usuarioRegistrado(credenciales))
+                sw.WriteLine(Clave.LoginValido);
+                sw.Flush();
+                lock (l)
                 {
-                    sw.WriteLine(Clave.LoginValido);
-                    sw.Flush();
-                    lock (l)
-                    {
-                        if (!usuariosConectados.Contains(credenciales))
-                        {
-                            Console.Write("Credenciales aun no logeadas : " + credenciales);
-                            usuariosConectados.Add(credenciales);
-                        }
-                        else
-                        {
-                            Console.Write("Credenciales ya logeadas : " + credenciales);
-                        }
-
-                    }
+                    usuariosConectados.Add(credenciales);
                     new Thread(hiloSalaEspera).Start(new Usuario(sCliente, bd.leerUsuarioCompleto(credenciales)));
                 }
-                else
+
+            }
+            else
+            {                
+                sw.WriteLine(Clave.LoginInvalido);
+                sw.Flush();
+                if (sr != null)
                 {
-                    loginInvalido = true;
+                    sr.Close();
                 }
-            }
-            catch
-            {
-                loginInvalido = true;
-            }
-            finally
-            {
-                if (loginInvalido)
+                if (sw != null)
                 {
-                    sw.WriteLine(Clave.LoginInvalido);
-                    sw.Flush();
-                    if (sr != null)
-                    {
-                        sr.Close();
-                    }
-                    if (sw != null)
-                    {
-                        sw.Close();
-                    }
-                    if (ns != null)
-                    {
-                        ns.Close();
-                    }
-                    if (sCliente != null)
-                    {
-                        sCliente.Close();
-                    }
+                    sw.Close();
+                }
+                if (ns != null)
+                {
+                    ns.Close();
+                }
+                if (sCliente != null)
+                {
+                    sCliente.Close();
                 }
             }
         }
@@ -199,6 +176,7 @@ namespace Servidor_Poker
                     {
                         lock (l)
                         {
+                            bd.actualizarDatos(usuario.ToString());
                             usuariosConectados.Remove(usuario.getCredenciales());
                             usuario.cerrarSesion();
                         }
@@ -313,7 +291,6 @@ namespace Servidor_Poker
                         usuario.Saldo = gestor.getSaldo();
                         usuario.Jugando = false;
                         sala.Llena = false;
-                        //Insertamos nuevos valores en la bae da datos
                         bd.actualizarDatos(usuario.ToString());
                         //Mandamos al cliente la nueva información del usuario
                         usuario.mandarMensaje(usuario.ToString());

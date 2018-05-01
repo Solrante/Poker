@@ -11,7 +11,12 @@ namespace Servidor_Poker
         /// <summary>
         /// Conexion a la base de datos
         /// </summary>
-        private MySqlConnection conexion;
+        private MySqlConnection conexionLectura;
+
+        /// <summary>
+        /// Conexion a la base de datos
+        /// </summary>
+        private MySqlConnection conexionEscritura;
 
         /// <summary>
         /// Nombre del servidor
@@ -46,8 +51,8 @@ namespace Servidor_Poker
         /// </summary>
         private void InicializarConexion()
         {
-            conexion = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");           
+            conexionLectura = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
+            conexionEscritura = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
         }
 
         /// <summary>
@@ -56,7 +61,11 @@ namespace Servidor_Poker
         /// <param name="datos">Usuario recibido.</param>
         public void actualizarDatos(string datos)
         {
-            //Actualizar el nuevo valor de saldo del usuario
+            string consulta = string.Format("update usuarios set saldo = {1} where correo = \"{0}\"", datos.Split(Clave.SeparadorCredenciales)[0], datos.Split(Clave.SeparadorCredenciales)[1]);
+            conexionEscritura.Open();
+            MySqlCommand cmd = new MySqlCommand(consulta, conexionEscritura);
+            cmd.ExecuteNonQuery();
+            conexionEscritura.Close();
         }
 
         /// <summary>
@@ -66,38 +75,22 @@ namespace Servidor_Poker
         /// <returns> <c>true</c> si esta registado; de otra manera, <c>false</c>.</returns>
         public bool usuarioRegistrado(string credenciales)
         {
-            try
+            bool resultado = false;
+            if (credenciales.Contains(Clave.SeparadorCredenciales.ToString()))
             {
                 string consulta = string.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
-                                                    credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
-                MySqlCommand cmd = new MySqlCommand(consulta, conexion);
-                //Salta excepcion si el server esta off
-                if (conexion!=null)
-                {
-                    conexion.Open();
-                }                
+                                                               credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
+                MySqlCommand cmd = new MySqlCommand(consulta, conexionLectura);
+                conexionLectura.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    conexion.Close();
-                    return true;
+                    resultado = true;
                 }
-                else
-                {
-                    conexion.Close();
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-            finally
-            {
-                conexion.Close();
-            }
-           
+                reader.Close();
+                conexionLectura.Close();
+            }           
+            return resultado;
         }
 
         /// <summary>
@@ -110,8 +103,8 @@ namespace Servidor_Poker
             string datos = "";
             string consulta = string.Format("select * from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
                                             credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
-            MySqlCommand cmd = new MySqlCommand(consulta, conexion);
-            conexion.Open();
+            MySqlCommand cmd = new MySqlCommand(consulta, conexionLectura);
+            conexionLectura.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -121,6 +114,8 @@ namespace Servidor_Poker
                 datos += reader.GetString(2) + Clave.SeparadorCredenciales;
                 datos += reader.GetFloat("saldo");
             }
+            reader.Close();
+            conexionLectura.Close();
             return datos;
         }
     }
