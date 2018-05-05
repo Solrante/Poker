@@ -39,6 +39,21 @@ namespace Servidor_Poker
         private const string password = "";
 
         /// <summary>
+        /// Plantilla para actualizar saldo de usuario
+        /// </summary>
+        private const string queryActualizarSaldo = "update usuarios set saldo = {1} where correo = \"{0}\"";
+
+        /// <summary>
+        /// Plantilla para leer usuario
+        /// </summary>
+        private const string queryLeerUsuario = "select * from usuarios where correo = \"{0}\" and contraseña = \"{1}\"";
+
+        /// <summary>
+        /// Platinlla para registrar usuario
+        /// </summary>
+        private const string queryRegistrarUsuario = "insert into usuarios (correo , contraseña) values ('{0}','{1}')";
+
+        /// <summary>
         /// Inicializa una instancia de la clase <see cref="BaseDatos"/>.
         /// </summary>
         public BaseDatos()
@@ -61,11 +76,32 @@ namespace Servidor_Poker
         /// <param name="datos">Usuario recibido.</param>
         public void actualizarDatos(string datos)
         {
-            string consulta = string.Format("update usuarios set saldo = {1} where correo = \"{0}\"", datos.Split(Clave.SeparadorCredenciales)[0], datos.Split(Clave.SeparadorCredenciales)[1]);
+            string consulta = string.Format(queryActualizarSaldo,
+                datos.Split(Clave.SeparadorCredenciales)[0],
+                datos.Split(Clave.SeparadorCredenciales)[1]);
+
             conexionEscritura.Open();
             MySqlCommand cmd = new MySqlCommand(consulta, conexionEscritura);
             cmd.ExecuteNonQuery();
             conexionEscritura.Close();
+        }
+
+        /// <summary>
+        /// Registra un usuario en la base de datos
+        /// </summary>
+        /// <param name="credenciales">Datos del usuario a registrar.</param>
+        public void registrarUsuario(string credenciales)
+        {
+            if (credenciales.Contains(Clave.SeparadorCredenciales.ToString()))
+            {
+                string consulta = string.Format(queryRegistrarUsuario,
+                    credenciales.Split(Clave.SeparadorCredenciales)[0],
+                    credenciales.Split(Clave.SeparadorCredenciales)[1]);
+                conexionEscritura.Open();
+                MySqlCommand cmd = new MySqlCommand(consulta, conexionEscritura);
+                cmd.ExecuteNonQuery();
+                conexionEscritura.Close();
+            }
         }
 
         /// <summary>
@@ -78,8 +114,10 @@ namespace Servidor_Poker
             bool resultado = false;
             if (credenciales.Contains(Clave.SeparadorCredenciales.ToString()))
             {
-                string consulta = string.Format("select id from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
-                                                               credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
+                string consulta = string.Format(queryLeerUsuario,
+                    credenciales.Split(Clave.SeparadorCredenciales)[0],
+                    credenciales.Split(Clave.SeparadorCredenciales)[1]);
+
                 MySqlCommand cmd = new MySqlCommand(consulta, conexionLectura);
                 conexionLectura.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -89,7 +127,7 @@ namespace Servidor_Poker
                 }
                 reader.Close();
                 conexionLectura.Close();
-            }           
+            }
             return resultado;
         }
 
@@ -101,8 +139,10 @@ namespace Servidor_Poker
         public string leerUsuarioCompleto(string credenciales)
         {
             string datos = "";
-            string consulta = string.Format("select * from usuarios where correo = \"{0}\" and contraseña = \"{1}\"",
-                                            credenciales.Split(Clave.SeparadorCredenciales)[0], credenciales.Split(Clave.SeparadorCredenciales)[1]);
+            string consulta = string.Format(queryLeerUsuario,
+                credenciales.Split(Clave.SeparadorCredenciales)[0],
+                credenciales.Split(Clave.SeparadorCredenciales)[1]);
+
             MySqlCommand cmd = new MySqlCommand(consulta, conexionLectura);
             conexionLectura.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -116,6 +156,7 @@ namespace Servidor_Poker
             }
             reader.Close();
             conexionLectura.Close();
+
             return datos;
         }
     }

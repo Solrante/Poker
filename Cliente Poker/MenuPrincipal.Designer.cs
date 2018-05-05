@@ -51,7 +51,7 @@
             // 
             this.lblUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(13, 226);
+            this.lblUsuario.Location = new System.Drawing.Point(25, 22);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(35, 13);
             this.lblUsuario.TabIndex = 1;

@@ -93,7 +93,7 @@ namespace Servidor_Poker
         {
             salas.Add(new Sala("0,0,0", eSala.BLACKJACK));
             salas.Add(new Sala("1,0,0", eSala.BLACKJACK));
-            //salas.Add(new Sala("2,0,0", eSala.BLACKJACK));
+            salas.Add(new Sala("2,0,0", eSala.BLACKJACK));
         }
 
         /// <summary>
@@ -102,39 +102,63 @@ namespace Servidor_Poker
         /// <param name="cliente">Cliente.</param>
         static void hiloLogin(object cliente)
         {
-            string credenciales = "";
+            string mensaje = "";
             Socket sCliente = (Socket)cliente;
             IPEndPoint endPoint = (IPEndPoint)sCliente.RemoteEndPoint;
             NetworkStream ns = new NetworkStream(sCliente);
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
+            bool finConexion = true;
             try
             {
-                credenciales = sr.ReadLine();
+                mensaje = sr.ReadLine();
             }
             catch (IOException)
             {
-                credenciales = "";
+                mensaje = "";
             }
-            if (credenciales == null)
+            if (mensaje == null)
             {
-                credenciales = "";
+                mensaje = "";
             }
-            if (bd.usuarioRegistrado(credenciales) && !usuariosConectados.Contains(credenciales))
+            Console.WriteLine(mensaje);
+
+            string accion = mensaje.Split(Clave.Separador)[0];
+            Console.WriteLine("Accion : " + accion);
+            string credenciales = mensaje.Split(Clave.Separador)[1];
+            Console.WriteLine("Credenciales : " + credenciales);
+            bool usuarioRegistrado = bd.usuarioRegistrado(credenciales);
+            Console.WriteLine("Usuario registrado : " + usuarioRegistrado);
+            bool usuarioLogeado = usuariosConectados.Contains(credenciales);
+            Console.WriteLine("Usuario logeado : " + usuarioLogeado);
+            if (accion == Clave.Registro && usuarioRegistrado)
             {
-                sw.WriteLine(Clave.LoginValido);
-                sw.Flush();
+                mandarMensaje(sw, Clave.RegistroInvalido);
+                Console.WriteLine("Registro fallido");
+            }
+            if (accion == Clave.Registro && !usuarioRegistrado)
+            {
+                bd.registrarUsuario(credenciales);
+                Console.WriteLine("Registro completado");
+                mandarMensaje(sw, Clave.RegistroValido);
+            }
+            if (accion == Clave.Login && usuarioRegistrado && !usuarioLogeado)
+            {
+                finConexion = false;
+                mandarMensaje(sw, Clave.LoginValido);
                 lock (l)
                 {
-                    usuariosConectados.Add(credenciales);
+                    usuariosConectados.Add(mensaje);
                     new Thread(hiloSalaEspera).Start(new Usuario(sCliente, bd.leerUsuarioCompleto(credenciales)));
                 }
-
             }
-            else
-            {                
-                sw.WriteLine(Clave.LoginInvalido);
-                sw.Flush();
+            if (accion == Clave.Login && usuarioRegistrado && usuarioLogeado || accion == Clave.Login && !usuarioRegistrado)
+            {
+                mandarMensaje(sw, Clave.LoginInvalido);
+            }
+
+            if (finConexion)
+            {
                 if (sr != null)
                 {
                     sr.Close();
@@ -155,12 +179,25 @@ namespace Servidor_Poker
         }
 
         /// <summary>
+        /// Dado un flujo de escritura manda a través de este
+        /// un mensaje tambien recibido como parametro.
+        /// </summary>
+        /// <param name="sw">Flujo de escritura.</param>
+        /// <param name="mensaje">Mensaje a enviar.</param>
+        static private void mandarMensaje(StreamWriter sw, string mensaje)
+        {
+            sw.WriteLine(mensaje);
+            sw.Flush();
+        }
+
+        /// <summary>
         /// Gestiona la interaccion del usuario recibido como parametro en el menu principal del juego
         /// </summary>
         /// <param name="usu">Usuario.</param>
         static void hiloSalaEspera(object usu)
         {
             Usuario usuario = usu as Usuario;
+            Console.WriteLine("usuario a string : " + usuario.ToString());
             usuario.mandarMensaje(usuario.ToString());
             usuario.mandarMensaje(salas.Count() + "");
             foreach (Sala sala in salas)

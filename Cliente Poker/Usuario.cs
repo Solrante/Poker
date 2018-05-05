@@ -43,6 +43,7 @@ namespace Cliente_Poker
             Saldo = Convert.ToDouble(datos.Split(Clave.SeparadorCredenciales)[1]);
 
         }
+
         /// <summary>
         /// Devuelve un <see cref="System.String" /> que representa esta instancia.
         /// </summary>

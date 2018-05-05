@@ -80,6 +80,21 @@
             Contraseña de acceso
             </summary>
         </member>
+        <member name="F:Servidor_Poker.BaseDatos.queryActualizarSaldo">
+            <summary>
+            Plantilla para actualizar saldo de usuario
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.BaseDatos.queryLeerUsuario">
+            <summary>
+            Plantilla para leer usuario
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.BaseDatos.queryRegistrarUsuario">
+            <summary>
+            Platinlla para registrar usuario
+            </summary>
+        </member>
         <member name="M:Servidor_Poker.BaseDatos.#ctor">
             <summary>
             Inicializa una instancia de la clase <see cref="T:Servidor_Poker.BaseDatos"/>.
@@ -95,6 +110,12 @@
             Actualiza los datos del usuario recibido por parametro en la base da datos.
             </summary>
             <param name="datos">Usuario recibido.</param>
+        </member>
+        <member name="M:Servidor_Poker.BaseDatos.registrarUsuario(System.String)">
+            <summary>
+            Registra un usuario en la base de datos
+            </summary>
+            <param name="credenciales">Datos del usuario a registrar.</param>
         </member>
         <member name="M:Servidor_Poker.BaseDatos.usuarioRegistrado(System.String)">
             <summary>
@@ -202,6 +223,12 @@
             </summary>
             <returns>Valor númerico del total de cartas en la mano</returns>
         </member>
+        <member name="M:Servidor_Poker.Mano.esPrimeraMano">
+            <summary>
+            Devuelve si es mano inicial o no según las cartas contenidas
+            </summary>
+            <returns><c>true</c>, si es la mano inicial, <c>false</c> si no.</returns>
+        </member>
         <member name="T:Servidor_Poker.Program">
             <summary>
             Clase principal del programa
@@ -273,6 +300,14 @@
             Gestiona el login al servidor de un cliente recibido como parametro
             </summary>
             <param name="cliente">Cliente.</param>
+        </member>
+        <member name="M:Servidor_Poker.Program.mandarMensaje(System.IO.StreamWriter,System.String)">
+            <summary>
+            Dado un flujo de escritura manda a través de este
+            un mensaje tambien recibido como parametro.
+            </summary>
+            <param name="sw">Flujo de escritura.</param>
+            <param name="mensaje">Mensaje a enviar.</param>
         </member>
         <member name="M:Servidor_Poker.Program.hiloSalaEspera(System.Object)">
             <summary>
@@ -351,6 +386,23 @@
             <summary>
             Modificador del resultado de la partida
             </summary>
+        </member>
+        <member name="M:Servidor_Poker.Resultado.comprobarManos(Servidor_Poker.Mano,Servidor_Poker.Mano,System.Boolean)">
+            <summary>
+            Comprueba el estado de la partida según las manos recibidas como parametro y un condicionante
+            de fin de partida como booleano
+            </summary>
+            <returns><c>true</c>, Si las manos indican fin de partida, <c>false</c> de otra manera.</returns>
+            <param name="crupier">Crupier.</param>
+            <param name="jugador">Jugador.</param>
+            <param name="plantarse">Si el jugador eligio plantarse <c>true</c>.</param>
+        </member>
+        <member name="M:Servidor_Poker.Resultado.calcularValor(Servidor_Poker.Mano,Servidor_Poker.Mano)">
+            <summary>
+            Calcula el valor segun las manos recibidas como parametros
+            </summary>
+            <param name="crupier">Crupier.</param>
+            <param name="jugador">Jugador.</param>
         </member>
         <member name="M:Servidor_Poker.Resultado.calcularGanancia(System.Int32)">
             <summary>
@@ -680,6 +732,11 @@
             Clave de comunicacion.
             </summary>
         </member>
+        <member name="F:Servidor_Poker.Clave.Registro">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
         <member name="F:Servidor_Poker.Clave.ValorJugador">
             <summary>
             Clave de comunicacion.
@@ -688,6 +745,16 @@
         <member name="F:Servidor_Poker.Clave.ValorCrupier">
             <summary>
             Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Clave.RegistroValido">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Clave.RegistroInvalido">
+            <summary>
+            Clave de comunicacion
             </summary>
         </member>
         <member name="F:Servidor_Poker.Clave.LoginValido">

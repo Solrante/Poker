@@ -117,6 +117,11 @@ namespace Servidor_Poker
         public const string ComandoInvalido = "Comando Invalido";
 
         /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        public const string Registro = "Registro";
+
+        /// <summary>
         /// Clave de comunicacion.
         /// </summary>
         static public string ValorJugador = Valor + Separador + Jugador + Separador;
@@ -125,6 +130,16 @@ namespace Servidor_Poker
         /// Clave de comunicacion.
         /// </summary>
         static public string ValorCrupier = Valor + Separador + Crupier + Separador;
+
+        /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        static public string RegistroValido = Registro + Separador + Valido;
+
+        /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        static public string RegistroInvalido = Registro + Separador + Invalido;
 
         /// <summary>
         /// Clave de comunicacion.

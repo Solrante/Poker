@@ -35,6 +35,7 @@ namespace Cliente_Poker
             InitializeComponent();
             this.conexion = conexion;
         }
+
         /// <summary>
         /// Gestiona el evento Click del control btnEntrar.
         /// </summary>
@@ -42,24 +43,64 @@ namespace Cliente_Poker
         /// <param name="e">La instancia <see cref="EventArgs"/> contenedora de la información del evento.</param>
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            //Se abre y se mandan dichos datos a través de la conexión al servidor
-            conexion.abrirConexion();
-            conexion.enviarMensaje(txtCorreo.Text + Clave.SeparadorCredenciales + txtContraseña.Text);
-            //Se comprueba la respuesta del servidor a las credenciales mandadas , avisando de información erronea en la misma
-            //o accediendo al sistema de ser correcta.
-            string debug = conexion.recibirMensaje();
-            Console.WriteLine(debug);
-            if (debug == Clave.LoginInvalido)
+            if (!camposVacios())
             {
-                lblError.Visible = true;
+                //Se abre y se mandan dichos datos a través de la conexión al servidor
+                conexion.abrirConexion();
+                conexion.enviarMensaje(Clave.Login + Clave.Separador + txtCorreo.Text + Clave.SeparadorCredenciales + txtContraseña.Text);
+                //Se comprueba la respuesta del servidor a las credenciales mandadas , avisando de información erronea en la misma
+                //o accediendo al sistema de ser correcta.
+                string respuesta = conexion.recibirMensaje();
+                if (respuesta == Clave.LoginInvalido)
+                {
+                    mostrarError("Login invalido");
+                }
+                else if (respuesta == Clave.LoginValido)
+                {
+                    loginValido = true;
+                    DialogResult = DialogResult.OK;
+                }                
             }
             else
             {
-                loginValido = true;
-                DialogResult = DialogResult.OK;
+                mostrarError("Has de llenar ambos campos");
             }
-
         }
+
+        /// <summary>
+        /// Activa la etiqueta descriptiva de errores , con un mensaje recibido
+        /// </summary>
+        /// <param name="error">Mensaje de error a mostrar</param>
+        private void mostrarError(string error)
+        {
+            lblError.Text = error;
+            centrarControl(lblError);
+            lblError.Visible = true;
+        }
+
+        /// <summary>
+        /// Comprueba si los campos del usuario contiene datos       
+        /// </summary>
+        /// <returns>True si alguno esta vacio , de otra manera false</returns>
+        private bool camposVacios()
+        {
+            bool resultado = false;
+            if (txtCorreo.Text == "" || txtContraseña.Text == "")
+            {
+                return true;
+            }
+            return resultado;
+        }
+
+        /// <summary>
+        /// Centra un componente de manera horizontal en el formulario.
+        /// </summary>
+        /// <param name="c">Control a centrar.</param>
+        private void centrarControl(Control c)
+        {
+            c.Location = new Point(centroHorizontal - c.Width / 2, c.Location.Y);
+        }
+
         /// <summary>
         /// Gestiona el evento Load del formulario.
         /// </summary>
@@ -69,17 +110,27 @@ namespace Cliente_Poker
         {
             //Centro todos los elementos al medio de manera horizontal del formulario según su tamaño.
             centroHorizontal = ClientSize.Width / 2;
-            lblCorreo.Location = new Point(centroHorizontal - lblCorreo.Width / 2, lblCorreo.Location.Y);
-            lblContraseña.Location = new Point(centroHorizontal - lblContraseña.Width / 2, lblContraseña.Location.Y);
-            txtCorreo.Location = new Point(centroHorizontal - txtCorreo.Width / 2, txtCorreo.Location.Y);
-            txtContraseña.Location = new Point(centroHorizontal - txtContraseña.Width / 2, txtContraseña.Location.Y);
-            btnEntrar.Location = new Point(centroHorizontal - btnEntrar.Width / 2, btnEntrar.Location.Y);
-            lblError.Location = new Point(centroHorizontal - lblError.Width / 2, lblError.Location.Y);
+            centrarControl(lblCorreo);
+            centrarControl(lblContraseña);
+            centrarControl(txtCorreo);
+            centrarControl(txtContraseña);
+            centrarControl(btnEntrar);
+            centrarControl(lblError);
         }
 
+        /// <summary>
+        /// Gestiona el evento click del btnRegistrarse
+        /// </summary>
+        /// <param name="sender">Origen.</param>
+        /// <param name="e">Datos del evento.</param>
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            Process.Start("chrome.exe", "localhost");
+            //Process.Start("chrome.exe", "localhost");
+
+            Registro registro = new Registro(conexion);
+            Hide();
+            registro.ShowDialog();
+            Show();
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Cliente_Poker
         /// <summary>
         /// Estructura para mostrar información de usuario
         /// </summary>
-        string platillaInformacion = "{0} , Saldo : {1}";
+        string platillaInformacion = "Usuario : {0} , Saldo : {1}";
 
         /// <summary>
         /// Cantidad en pixels entre botones de salas en vertical
@@ -99,7 +99,7 @@ namespace Cliente_Poker
                 {
                     Environment.Exit(0);
                 }
-            }
+            }            
             recibirUsuario(conexion.recibirMensaje());
             recibirSalas(conexion.recibirMensaje());
         }
@@ -229,6 +229,11 @@ namespace Cliente_Poker
             }
         }
 
+        /// <summary>
+        /// Gestiona el evento click del btnActualizarSalas
+        /// </summary>
+        /// <param name="sender">Origen.</param>
+        /// <param name="e">Datos del evento.</param>
         private void btnActualizarSalas_Click(object sender, EventArgs e)
         {   
             conexion.enviarMensaje(Clave.ListaSalas);

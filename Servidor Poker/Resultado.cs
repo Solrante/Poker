@@ -50,6 +50,14 @@
         /// </summary>
         private eModificadorResultado modificador;
 
+        /// <summary>
+        /// Comprueba el estado de la partida según las manos recibidas como parametro y un condicionante
+        /// de fin de partida como booleano
+        /// </summary>
+        /// <returns><c>true</c>, Si las manos indican fin de partida, <c>false</c> de otra manera.</returns>
+        /// <param name="crupier">Crupier.</param>
+        /// <param name="jugador">Jugador.</param>
+        /// <param name="plantarse">Si el jugador eligio plantarse <c>true</c>.</param>
         public bool comprobarManos(Mano crupier, Mano jugador, bool plantarse = false)
         {
             if (plantarse)
@@ -65,6 +73,11 @@
             return false;
         }
 
+        /// <summary>
+        /// Calcula el valor segun las manos recibidas como parametros
+        /// </summary>
+        /// <param name="crupier">Crupier.</param>
+        /// <param name="jugador">Jugador.</param>
         private void calcularValor(Mano crupier, Mano jugador)
         {
 

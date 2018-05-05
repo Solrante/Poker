@@ -110,12 +110,37 @@
             <param name="sender">El origen del evento.</param>
             <param name="e">La instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
         </member>
+        <member name="M:Cliente_Poker.Login.mostrarError(System.String)">
+            <summary>
+            Activa la etiqueta descriptiva de errores , con un mensaje recibido
+            </summary>
+            <param name="error">Mensaje de error a mostrar</param>
+        </member>
+        <member name="M:Cliente_Poker.Login.camposVacios">
+            <summary>
+            Comprueba si los campos del usuario contiene datos       
+            </summary>
+            <returns>True si alguno esta vacio , de otra manera false</returns>
+        </member>
+        <member name="M:Cliente_Poker.Login.centrarControl(System.Windows.Forms.Control)">
+            <summary>
+            Centra un componente de manera horizontal en el formulario.
+            </summary>
+            <param name="c">Control a centrar.</param>
+        </member>
         <member name="M:Cliente_Poker.Login.Login_Load(System.Object,System.EventArgs)">
             <summary>
             Gestiona el evento Load del formulario.
             </summary>
             <param name="sender">El origen del evento.</param>
             <param name="e">La instancia <see cref="T:System.EventArgs"/> contenedora de la información del evento.</param>
+        </member>
+        <member name="M:Cliente_Poker.Login.btnRegistrarse_Click(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento click del btnRegistrarse
+            </summary>
+            <param name="sender">Origen.</param>
+            <param name="e">Datos del evento.</param>
         </member>
         <member name="F:Cliente_Poker.Login.components">
             <summary>
@@ -255,6 +280,13 @@
             <param name="sender">Origen del evento.</param>
             <param name="e">La instancia <see cref="T:System.EventArgs"/> contenedora de los datos del evento.</param>
         </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.btnActualizarSalas_Click(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento click del btnActualizarSalas
+            </summary>
+            <param name="sender">Origen.</param>
+            <param name="e">Datos del evento.</param>
+        </member>
         <member name="F:Cliente_Poker.MenuPrincipal.components">
             <summary>
             Variable del diseñador necesaria.
@@ -275,6 +307,85 @@
         <member name="M:Cliente_Poker.Program.Main">
             <summary>
             Punto de entrada principal para la aplicación.
+            </summary>
+        </member>
+        <member name="T:Cliente_Poker.Registro">
+            <summary>
+            Formulario de registro
+            </summary>
+            <seealso cref="T:System.Windows.Forms.Form" />
+        </member>
+        <member name="F:Cliente_Poker.Registro.conexion">
+            <summary>
+            Conexion al servidor
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Registro.centroHorizontal">
+            <summary>
+            Posicion en pixel del centro del area del formulario
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.Registro.#ctor(Cliente_Poker.ConexionServidor)">
+            <summary>
+            Inicializa una instancia de la clase <see cref="T:Cliente_Poker.Registro"/> .
+            </summary>
+            <param name="con">Conexion al servidor.</param>
+        </member>
+        <member name="M:Cliente_Poker.Registro.Click_Listener(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento Click de un control recibido como parametro
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">La instancia de <see cref="T:System.EventArgs"/> que contiene los datos del evento.</param>
+        </member>
+        <member name="M:Cliente_Poker.Registro.mostrarError(System.String)">
+            <summary>
+            Activa la etiqueta descriptiva de errores , con un mensaje recibido
+            </summary>
+            <param name="error">Mensaje de error a mostrar</param>
+        </member>
+        <member name="M:Cliente_Poker.Registro.camposVacios">
+            <summary>
+            Comprueba si los campos de registro estan vacios
+            </summary>
+            <returns>Devuelve true si alguno esta vacio , de otra forma false</returns>
+        </member>
+        <member name="M:Cliente_Poker.Registro.comprobarContraseñas(System.String,System.String)">
+            <summary>
+            Comprueba si dos cadenas son iguales , devolviendo tru si es asi , de otra manera false.
+            </summary>
+            <param name="pass1">Cadena uno.</param>
+            <param name="pass2">Cadena dos.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cliente_Poker.Registro.centrarControl(System.Windows.Forms.Control)">
+            <summary>
+            Centra un componente de manera horizontal en el formulario.
+            </summary>
+            <param name="c">Control a centrar.</param>
+        </member>
+        <member name="M:Cliente_Poker.Registro.Registro_Load(System.Object,System.EventArgs)">
+            <summary>
+            Gestiona el evento Load del formulario
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">Instancia de  <see cref="T:System.EventArgs"/> que contiene los datos del evento.</param>
+        </member>
+        <member name="F:Cliente_Poker.Registro.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Cliente_Poker.Registro.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Cliente_Poker.Registro.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:Cliente_Poker.eSala">
@@ -445,6 +556,11 @@
             Saldo
             </summary>
         </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.finMano">
+            <summary>
+            Indica si se esta en la fase de reinicio entre partidas
+            </summary>
+        </member>
         <member name="M:Cliente_Poker.SalaBlackJack.#ctor(Cliente_Poker.MenuPrincipal)">
             <summary>
             Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.SalaBlackJack"/>.
@@ -489,6 +605,13 @@
             </summary>
             <param name="respuesta">Carta.</param>
         </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.actualizarValor(System.String)">
+            <summary>
+            Actualiza el texto del valor del jugador o del crupier
+            segun una respuesta recibida 
+            </summary>
+            <param name="respuesta">Respuesta.</param>
+        </member>
         <member name="M:Cliente_Poker.SalaBlackJack.actualizarEstado(System.String)">
             <summary>
             Gestiona las respuestas del servidor recibidas como parametro
@@ -526,6 +649,14 @@
             </summary>
             <param name="l">Label a modificar.</param>
             <param name="s">Cadena a insertar.</param>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.CambiarActivo(System.Windows.Forms.Control,System.Boolean)">
+            <summary>
+            Cambia el estado de "Enable" de un control recibido segun un parametro
+            booleano tambien recibido 
+            </summary>
+            <param name="c">C.</param>
+            <param name="activo">Si ha de desactivarse <c>true</c> si no <c>false</c>.</param>
         </member>
         <member name="M:Cliente_Poker.SalaBlackJack.CambiarVisibilidad(System.Windows.Forms.Control,System.Boolean)">
             <summary>
@@ -1041,6 +1172,21 @@
         <member name="F:Cliente_Poker.Clave.ListaSalas">
             <summary>
             Clave de comunicacion.
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.Registro">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.RegistroValido">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.RegistroInvalido">
+            <summary>
+            Clave de comunicacion
             </summary>
         </member>
         <member name="F:Cliente_Poker.Clave.LoginValido">

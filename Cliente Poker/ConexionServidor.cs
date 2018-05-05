@@ -75,14 +75,13 @@ namespace Cliente_Poker
         /// <returns>The mensaje.</returns>
         public string recibirMensaje()
         {
+            string mensaje = ""; 
             if (conexionInicializada)
             {
-                return sr.ReadLine();
+                mensaje = sr.ReadLine();
             }
-            else
-            {
-                return "";
-            }
+            Console.WriteLine("-->" + mensaje);
+            return mensaje;
         }
 
         /// <summary>

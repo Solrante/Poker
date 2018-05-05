@@ -62,6 +62,10 @@ namespace Servidor_Poker
             return valor;
         }
 
+        /// <summary>
+        /// Devuelve si es mano inicial o no según las cartas contenidas
+        /// </summary>
+        /// <returns><c>true</c>, si es la mano inicial, <c>false</c> si no.</returns>
         public bool esPrimeraMano()
         {
             if (cartas.Count == 2)

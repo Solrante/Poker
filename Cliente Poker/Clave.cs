@@ -112,10 +112,24 @@ namespace Cliente_Poker
         public const string ListaSalas = "Lista salas";
 
         /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        public const string Registro = "Registro";
+
+        /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        static public string RegistroValido = Registro + Separador + Valido;
+
+        /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        static public string RegistroInvalido = Registro + Separador + Invalido;
+
+        /// <summary>
         /// Clave de comunicacion.
         /// </summary>
         static public string LoginValido = Login + Separador + Valido;
-
 
         /// <summary>
         /// Clave de comunicacion.

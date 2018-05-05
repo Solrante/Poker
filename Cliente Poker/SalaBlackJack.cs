@@ -96,6 +96,11 @@ namespace Cliente_Poker
         private double saldo;
 
         /// <summary>
+        /// Indica si se esta en la fase de reinicio entre partidas
+        /// </summary>
+        private bool finMano = false;
+
+        /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.SalaBlackJack"/>.
         /// </summary>
         /// <param name="menuPrincipal">Instancia del formulario principal del cliente.</param>
@@ -136,39 +141,42 @@ namespace Cliente_Poker
         /// <param name="e">Argumentos del evento.</param>
         private void ClickListener(object sender, EventArgs e)
         {
-            string mensaje = "";
-            bool ficha = false;
-            Button btn = sender as Button;
-            if (btn == btnFichaUno || btn == btnFichaDos || btn == btnFichaTres)
+            if (!finMano)
             {
-                mensaje = Clave.Ficha + Clave.Separador + btn.Tag.ToString();
-                ficha = true;
+                string mensaje = "";
+                bool ficha = false;
+                Button btn = sender as Button;
+                if (btn == btnFichaUno || btn == btnFichaDos || btn == btnFichaTres)
+                {
+                    mensaje = Clave.Ficha + Clave.Separador + btn.Tag.ToString();
+                    ficha = true;
+                }
+                if (btn == btnPedir)
+                {
+                    mensaje = Clave.Pedir;
+                    Invoke(visibilidad, btnDoblar, false);
+                    Invoke(visibilidad, btnRetirarse, false);
+                }
+                if (btn == btnPlantarse)
+                {
+                    mensaje = Clave.Plantarse;
+                }
+                if (btn == btnDoblar)
+                {
+                    mensaje = Clave.Doblar;
+                    Invoke(visibilidad, btnDoblar, false);
+                }
+                if (btn == btnRetirarse)
+                {
+                    mensaje = Clave.Retirarse;
+                }
+                if (ficha)
+                {
+                    cambiarVisibilidadFichas(false);
+                }
+                conexion.enviarMensaje(mensaje);
+                bRecogerRespuesta = true;
             }
-            if (btn == btnPedir)
-            {
-                mensaje = Clave.Pedir;
-                Invoke(visibilidad, btnDoblar, false);
-                Invoke(visibilidad, btnRetirarse, false);
-            }
-            if (btn == btnPlantarse)
-            {
-                mensaje = Clave.Plantarse;
-            }
-            if (btn == btnDoblar)
-            {
-                mensaje = Clave.Doblar;
-                Invoke(visibilidad, btnDoblar, false);
-            }
-            if (btn == btnRetirarse)
-            {
-                mensaje = Clave.Retirarse;
-            }
-            if (ficha)
-            {
-                cambiarVisibilidadFichas(false);
-            }
-            conexion.enviarMensaje(mensaje);
-            bRecogerRespuesta = true;
         }
 
         /// <summary>
@@ -248,6 +256,11 @@ namespace Cliente_Poker
             }
         }
 
+        /// <summary>
+        /// Actualiza el texto del valor del jugador o del crupier
+        /// segun una respuesta recibida 
+        /// </summary>
+        /// <param name="respuesta">Respuesta.</param>
         private void actualizarValor(string respuesta)
         {
             if (respuesta.Split(Clave.Separador)[1] == Clave.Jugador)
@@ -266,8 +279,7 @@ namespace Cliente_Poker
         /// </summary>
         /// <param name="respuesta">Respuesta.</param>
         private void actualizarEstado(string respuesta)
-        {
-            Console.WriteLine("-->" + respuesta);
+        {           
             switch (respuesta.Split(Clave.Separador)[0])
             {
                 case Clave.Carta:
@@ -282,6 +294,7 @@ namespace Cliente_Poker
                     break;
                 case Clave.FinMano:
                     Invoke(textoLabel, lblResultado, respuesta.Split(Clave.Separador)[1]);
+                    finMano = !finMano;
                     reset();
                     break;
                 case Clave.FinEnvio:
@@ -312,7 +325,7 @@ namespace Cliente_Poker
                 cartaCrupier1.Image = null;
                 cartaJugador1.Image = null;
                 comprobarSaldo();
-              
+                finMano = !finMano;
             }
         }
 
@@ -364,11 +377,16 @@ namespace Cliente_Poker
             l.Text = s;
         }
 
+        /// <summary>
+        /// Cambia el estado de "Enable" de un control recibido segun un parametro
+        /// booleano tambien recibido 
+        /// </summary>
+        /// <param name="c">C.</param>
+        /// <param name="activo">Si ha de desactivarse <c>true</c> si no <c>false</c>.</param>
         private void CambiarActivo(Control c, bool activo)
         {            
                 c.Enabled = !activo;
         }
-
 
         /// <summary>
         /// Cambia la visibilidad de un control recibido como parametro
