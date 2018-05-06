@@ -273,7 +273,6 @@ namespace Cliente_Poker
             }
         }
 
-
         /// <summary>
         /// Gestiona las respuestas del servidor recibidas como parametro
         /// </summary>
@@ -414,5 +413,14 @@ namespace Cliente_Poker
             }
         }
 
+        /// <summary>
+        /// Gestiona el evento FormClosing del formulario.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">Instancia de <see cref="FormClosingEventArgs"/> que contiene los datos del evento.</param>
+        private void SalaBlackJack_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MenuPrincipal.MenuPrincipal_FormClosing(sender,e);
+        }
     }
 }

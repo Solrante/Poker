@@ -63,9 +63,9 @@ namespace Cliente_Poker
         {
             if (conexionInicializada)
             {
-                sw.WriteLine(mensaje);
-                Console.WriteLine("<--" + mensaje);
+                sw.WriteLine(mensaje);                
                 sw.Flush();
+                Console.WriteLine("<--" + mensaje);
             }
         }
 

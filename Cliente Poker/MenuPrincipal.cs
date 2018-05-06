@@ -99,7 +99,7 @@ namespace Cliente_Poker
                 {
                     Environment.Exit(0);
                 }
-            }            
+            }
             recibirUsuario(conexion.recibirMensaje());
             recibirSalas(conexion.recibirMensaje());
         }
@@ -110,7 +110,7 @@ namespace Cliente_Poker
         /// <param name="respuesta">Datos del usuario.</param>
         public void recibirUsuario(string respuesta)
         {
-            usuario = new Usuario(respuesta);        
+            usuario = new Usuario(respuesta);
             lblUsuario.Text = String.Format(platillaInformacion, usuario.Correo, usuario.Saldo);
         }
 
@@ -178,8 +178,7 @@ namespace Cliente_Poker
         /// <param name="e">Instancia <see cref="EventArgs"/> contenedora de la información del evento.</param>
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            conexion.enviarMensaje(Clave.Desconexion);
-            Environment.Exit(0);
+            MenuPrincipal_FormClosing(null, null);
         }
 
         /// <summary>
@@ -191,15 +190,23 @@ namespace Cliente_Poker
         {
             Button btn = sender as Button;
             conexion.enviarMensaje((string)btn.Tag);
-            Hide();
-            if (btn.Text.Split(Clave.Separador)[1].Trim() == eSala.POKER.ToString())
+            if (conexion.recibirMensaje() != Clave.SalaLlena)
             {
-                //Si se implementan salas de poker se abririán aqui.
+                Hide();
+                if (btn.Text.Split(Clave.Separador)[1].Trim() == eSala.POKER.ToString())
+                {
+                    //Si se implementan salas de poker se abririán aqui.
+                }
+                else
+                {
+                    blackJack = new SalaBlackJack(this);
+                    blackJack.Show();
+                }
             }
             else
             {
-                blackJack = new SalaBlackJack(this);
-                blackJack.Show();
+                MessageBox.Show("Sala Llena , se actualizaran las salas");
+                actualizarSalas();
             }
         }
 
@@ -235,9 +242,21 @@ namespace Cliente_Poker
         /// <param name="sender">Origen.</param>
         /// <param name="e">Datos del evento.</param>
         private void btnActualizarSalas_Click(object sender, EventArgs e)
-        {   
+        {
             conexion.enviarMensaje(Clave.ListaSalas);
             actualizarSalas();
+        }
+
+        /// <summary>
+        /// Gestiona el evengo FormClosing del formulario.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">Instancia de  <see cref="FormClosingEventArgs"/> que contiene la información del evento.</param>
+        public void MenuPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            conexion.enviarMensaje(Clave.Desconexion);
+            Environment.Exit(0);
+
         }
     }
 }

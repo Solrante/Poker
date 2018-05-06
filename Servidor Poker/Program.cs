@@ -109,19 +109,8 @@ namespace Servidor_Poker
             StreamReader sr = new StreamReader(ns);
             StreamWriter sw = new StreamWriter(ns);
             bool finConexion = true;
-            try
-            {
-                mensaje = sr.ReadLine();
-            }
-            catch (IOException)
-            {
-                mensaje = "";
-            }
-            if (mensaje == null)
-            {
-                mensaje = "";
-            }
-            Console.WriteLine(mensaje);
+
+            mensaje = leerMensaje(sr);
 
             string accion = mensaje.Split(Clave.Separador)[0];
             Console.WriteLine("Accion : " + accion);
@@ -131,15 +120,14 @@ namespace Servidor_Poker
             Console.WriteLine("Usuario registrado : " + usuarioRegistrado);
             bool usuarioLogeado = usuariosConectados.Contains(credenciales);
             Console.WriteLine("Usuario logeado : " + usuarioLogeado);
+
             if (accion == Clave.Registro && usuarioRegistrado)
             {
                 mandarMensaje(sw, Clave.RegistroInvalido);
-                Console.WriteLine("Registro fallido");
             }
             if (accion == Clave.Registro && !usuarioRegistrado)
             {
                 bd.registrarUsuario(credenciales);
-                Console.WriteLine("Registro completado");
                 mandarMensaje(sw, Clave.RegistroValido);
             }
             if (accion == Clave.Login && usuarioRegistrado && !usuarioLogeado)
@@ -148,7 +136,7 @@ namespace Servidor_Poker
                 mandarMensaje(sw, Clave.LoginValido);
                 lock (l)
                 {
-                    usuariosConectados.Add(mensaje);
+                    usuariosConectados.Add(credenciales);
                     new Thread(hiloSalaEspera).Start(new Usuario(sCliente, bd.leerUsuarioCompleto(credenciales)));
                 }
             }
@@ -191,6 +179,29 @@ namespace Servidor_Poker
         }
 
         /// <summary>
+        /// Dado un flujo de lectura recoge un dato del mismo y lo devuelve
+        /// </summary>
+        /// <param name="sr">Flujo para leer</param>
+        /// <returns>Mensaje recibido</returns>
+        static private string leerMensaje(StreamReader sr)
+        {
+            string mensaje = "";
+            try
+            {
+                mensaje = sr.ReadLine();
+            }
+            catch (IOException)
+            {
+                mensaje = "";
+            }
+            if (mensaje == null)
+            {
+                mensaje = "";
+            }
+            return mensaje;
+        }
+
+        /// <summary>
         /// Gestiona la interaccion del usuario recibido como parametro en el menu principal del juego
         /// </summary>
         /// <param name="usu">Usuario.</param>
@@ -200,10 +211,7 @@ namespace Servidor_Poker
             Console.WriteLine("usuario a string : " + usuario.ToString());
             usuario.mandarMensaje(usuario.ToString());
             usuario.mandarMensaje(salas.Count() + "");
-            foreach (Sala sala in salas)
-            {
-                usuario.mandarMensaje(sala.ToString());
-            }
+            listarSalas(usuario);
             while (usuario.Mensaje != Clave.Desconexion)
             {
                 if (!usuario.Jugando)
@@ -219,27 +227,46 @@ namespace Servidor_Poker
                         }
                     }
                     else if (usuario.Mensaje.Split(Clave.Separador)[0] == Clave.Sala)
-                    {
-                        usuario.Jugando = true;
+                    {                        
                         int numSala = Convert.ToInt32(usuario.Mensaje.Split(Clave.Separador)[1]);
                         lock (l)
                         {
-                            salas[numSala].Usuarios.Add(usuario);
-                            salas[numSala].Llena = true;
+                            if (salas[numSala].Llena)
+                            {
+                                usuario.mandarMensaje(Clave.SalaLlena);
+                                listarSalas(usuario);
+                            }
+                            else
+                            {
+                                usuario.mandarMensaje(Clave.SalaDisponible);
+                                salas[numSala].Usuarios.Add(usuario);
+                                salas[numSala].Llena = true;
+                                usuario.Jugando = true;
+                            }
                         }
                     }
                     if (usuario.Mensaje == Clave.ListaSalas)
                     {
-                        lock (l)
-                        {
-                            foreach (Sala sl in salas)
-                            {
-                                usuario.mandarMensaje(sl.ToString());
-                            }
-                        }
+                        listarSalas(usuario);
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Manda a un usuario los datos de las salas actuales
+        /// </summary>
+        /// <param name="usuario">Usuario a quien mandar informacion</param>
+        static public void listarSalas(Usuario usuario)
+        {
+            lock (l)
+            {
+                foreach (Sala sala in salas)
+                {
+                    usuario.mandarMensaje(sala.ToString());
+                }
+            }
+
         }
 
         /// <summary>

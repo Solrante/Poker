@@ -244,6 +244,7 @@
             this.Name = "SalaBlackJack";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SalaBlackJack";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SalaBlackJack_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.cartaJugador1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cartaCrupier1)).EndInit();
             this.ResumeLayout(false);

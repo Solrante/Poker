@@ -287,6 +287,13 @@
             <param name="sender">Origen.</param>
             <param name="e">Datos del evento.</param>
         </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.MenuPrincipal_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Gestiona el evengo FormClosing del formulario.
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">Instancia de  <see cref="T:System.Windows.Forms.FormClosingEventArgs"/> que contiene la información del evento.</param>
+        </member>
         <member name="F:Cliente_Poker.MenuPrincipal.components">
             <summary>
             Variable del diseñador necesaria.
@@ -671,6 +678,13 @@
             Si la variable de clase es correcta , lee una respuesta del servidor y la manda
             al metodo de actualizarEstado
             </summary>
+        </member>
+        <member name="M:Cliente_Poker.SalaBlackJack.SalaBlackJack_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Gestiona el evento FormClosing del formulario.
+            </summary>
+            <param name="sender">Origen del evento.</param>
+            <param name="e">Instancia de <see cref="T:System.Windows.Forms.FormClosingEventArgs"/> que contiene los datos del evento.</param>
         </member>
         <member name="F:Cliente_Poker.SalaBlackJack.components">
             <summary>
@@ -1175,6 +1189,16 @@
             </summary>
         </member>
         <member name="F:Cliente_Poker.Clave.Registro">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.SalaLlena">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.Clave.SalaDisponible">
             <summary>
             Clave de comunicacion
             </summary>

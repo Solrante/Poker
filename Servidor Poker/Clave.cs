@@ -122,6 +122,16 @@ namespace Servidor_Poker
         public const string Registro = "Registro";
 
         /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        public const string SalaLlena = "Sala llena";
+
+        /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        public const string SalaDisponible = "Sala disponible";
+
+        /// <summary>
         /// Clave de comunicacion.
         /// </summary>
         static public string ValorJugador = Valor + Separador + Jugador + Separador;

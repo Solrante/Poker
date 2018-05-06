@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cliente_Poker
@@ -92,7 +86,6 @@ namespace Cliente_Poker
             return resultado;
         }
 
-
         /// <summary>
         /// Comprueba si dos cadenas son iguales , devolviendo tru si es asi , de otra manera false.
         /// </summary>
@@ -126,7 +119,6 @@ namespace Cliente_Poker
         private void Registro_Load(object sender, EventArgs e)
         {
             centroHorizontal = ClientSize.Width / 2;
-
             centrarControl(lblCorreo);
             centrarControl(lblContraseña);
             centrarControl(lblError);
@@ -134,7 +126,6 @@ namespace Cliente_Poker
             centrarControl(tbContraseñaUno);
             centrarControl(tbContraseñaDos);
             centrarControl(btnRegistro);
-
         }
     }
 }

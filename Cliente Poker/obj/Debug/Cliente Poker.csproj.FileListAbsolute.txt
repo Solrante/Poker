@@ -36,5 +36,4 @@ C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Cliente Poker\obj\Debug
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Cliente Poker\obj\Debug\Cliente Poker.csproj.CoreCompileInputs.cache
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Cliente Poker\obj\Debug\Cliente Poker.exe
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Cliente Poker\obj\Debug\Cliente Poker.pdb
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Cliente Poker\obj\Debug\Cliente Poker.csprojResolveAssemblyReference.cache
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Cliente Poker\obj\Debug\Cliente_Poker.Registro.resources

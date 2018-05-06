@@ -119,6 +119,16 @@ namespace Cliente_Poker
         /// <summary>
         /// Clave de comunicacion
         /// </summary>
+        public const string SalaLlena = "Sala llena";
+
+        /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
+        public const string SalaDisponible = "Sala disponible";
+
+        /// <summary>
+        /// Clave de comunicacion
+        /// </summary>
         static public string RegistroValido = Registro + Separador + Valido;
 
         /// <summary>

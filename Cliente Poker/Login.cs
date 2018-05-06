@@ -125,8 +125,6 @@ namespace Cliente_Poker
         /// <param name="e">Datos del evento.</param>
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            //Process.Start("chrome.exe", "localhost");
-
             Registro registro = new Registro(conexion);
             Hide();
             registro.ShowDialog();

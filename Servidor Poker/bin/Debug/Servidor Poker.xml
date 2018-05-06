@@ -309,11 +309,24 @@
             <param name="sw">Flujo de escritura.</param>
             <param name="mensaje">Mensaje a enviar.</param>
         </member>
+        <member name="M:Servidor_Poker.Program.leerMensaje(System.IO.StreamReader)">
+            <summary>
+            Dado un flujo de lectura recoge un dato del mismo y lo devuelve
+            </summary>
+            <param name="sr">Flujo para leer</param>
+            <returns>Mensaje recibido</returns>
+        </member>
         <member name="M:Servidor_Poker.Program.hiloSalaEspera(System.Object)">
             <summary>
             Gestiona la interaccion del usuario recibido como parametro en el menu principal del juego
             </summary>
             <param name="usu">Usuario.</param>
+        </member>
+        <member name="M:Servidor_Poker.Program.listarSalas(Servidor_Poker.Usuario)">
+            <summary>
+            Manda a un usuario los datos de las salas actuales
+            </summary>
+            <param name="usuario">Usuario a quien mandar informacion</param>
         </member>
         <member name="M:Servidor_Poker.Program.inicializarEscuchaServer">
             <summary>
@@ -733,6 +746,16 @@
             </summary>
         </member>
         <member name="F:Servidor_Poker.Clave.Registro">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Clave.SalaLlena">
+            <summary>
+            Clave de comunicacion
+            </summary>
+        </member>
+        <member name="F:Servidor_Poker.Clave.SalaDisponible">
             <summary>
             Clave de comunicacion
             </summary>

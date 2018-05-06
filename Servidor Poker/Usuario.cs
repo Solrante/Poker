@@ -132,9 +132,12 @@ namespace Servidor_Poker
         /// <param name="mensaje">Mensaje a enviar</param>
         public void mandarMensaje(string mensaje)
         {
-            sw.WriteLine(mensaje);
-            sw.Flush();
-            //TODO salta excepcion al salir un cliente
+            try
+            {
+                sw.WriteLine(mensaje);
+                sw.Flush();
+            }
+            catch (IOException) { }
         }
 
         /// <summary>
@@ -160,6 +163,7 @@ namespace Servidor_Poker
                 mensaje = Clave.Desconexion;
             }
             Mensaje = mensaje;
+            Console.WriteLine("<-- : " + mensaje);
         }
 
         /// <summary>
