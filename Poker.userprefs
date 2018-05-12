@@ -1,6 +1,11 @@
 ﻿<Properties StartupConfiguration="{2CEC152F-FFBE-4701-AC56-674F4182A570}|Default">
   <MonoDevelop.Ide.ItemProperties.Cliente_220Poker PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Servidor Poker/BaseDatos.cs">
+    <Files>
+      <File FileName="Servidor Poker/BaseDatos.cs" Line="79" Column="14" />
+      <File FileName="Servidor Poker/Program.cs" Line="91" Column="30" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

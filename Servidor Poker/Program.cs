@@ -72,18 +72,23 @@ namespace Servidor_Poker
             random = new Random();
             //Creamos conexion a la base da datos
             bd = new BaseDatos();
-            //Creamos los objetos tipo sala y lanzamos un hilo para cada una
-            crearSalas();
-            lanzarSalas();
-            inicializarEscuchaServer();
-            Socket sCliente = null;
-            Console.WriteLine("En espera");
-            while (enEjecucion)
+            if (bd.baseDeDatosActiva)
             {
-                sCliente = s.Accept();
-                new Thread(hiloLogin).Start(sCliente);
+                //Creamos los objetos tipo sala y lanzamos un hilo para cada una
+                crearSalas();
+                lanzarSalas();
+                inicializarEscuchaServer();
+                Socket sCliente = null;
+                Console.WriteLine("En espera");
+                while (enEjecucion)
+                {
+                    sCliente = s.Accept();
+                    new Thread(hiloLogin).Start(sCliente);
+                }
+                s.Close();
             }
-            s.Close();
+            Console.WriteLine("No se pudo abrir la BD , se detiende la ejecución");
+            Console.ReadKey();
         }
 
         /// <summary>

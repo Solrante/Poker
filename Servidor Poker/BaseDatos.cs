@@ -54,6 +54,11 @@ namespace Servidor_Poker
         private const string queryRegistrarUsuario = "insert into usuarios (correo , contraseña) values ('{0}','{1}')";
 
         /// <summary>
+        /// Indica si las conexiones de abrieron correctamente.
+        /// </summary>
+        public bool baseDeDatosActiva = false;
+
+        /// <summary>
         /// Inicializa una instancia de la clase <see cref="BaseDatos"/>.
         /// </summary>
         public BaseDatos()
@@ -66,8 +71,17 @@ namespace Servidor_Poker
         /// </summary>
         private void InicializarConexion()
         {
-            conexionLectura = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
-            conexionEscritura = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
+            try
+            {
+                conexionLectura = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
+                conexionEscritura = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
+                baseDeDatosActiva = true;
+            }
+            catch (MySqlException)
+            {
+                baseDeDatosActiva = false;
+            }
+
         }
 
         /// <summary>
