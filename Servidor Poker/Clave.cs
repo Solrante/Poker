@@ -1,5 +1,4 @@
-﻿using System;
-namespace Servidor_Poker
+﻿namespace Servidor_Poker
 {
     /// <summary>
     /// Contenedor de claves de comunicacion

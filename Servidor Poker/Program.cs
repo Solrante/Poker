@@ -87,6 +87,7 @@ namespace Servidor_Poker
                 }
                 s.Close();
             }
+
             Console.WriteLine("No se pudo abrir la BD , se detiende la ejecución");
             Console.ReadKey();
         }
@@ -118,13 +119,9 @@ namespace Servidor_Poker
             mensaje = leerMensaje(sr);
 
             string accion = mensaje.Split(Clave.Separador)[0];
-            Console.WriteLine("Accion : " + accion);
             string credenciales = mensaje.Split(Clave.Separador)[1];
-            Console.WriteLine("Credenciales : " + credenciales);
             bool usuarioRegistrado = bd.usuarioRegistrado(credenciales);
-            Console.WriteLine("Usuario registrado : " + usuarioRegistrado);
             bool usuarioLogeado = usuariosConectados.Contains(credenciales);
-            Console.WriteLine("Usuario logeado : " + usuarioLogeado);
 
             if (accion == Clave.Registro && usuarioRegistrado)
             {
@@ -213,7 +210,6 @@ namespace Servidor_Poker
         static void hiloSalaEspera(object usu)
         {
             Usuario usuario = usu as Usuario;
-            Console.WriteLine("usuario a string : " + usuario.ToString());
             usuario.mandarMensaje(usuario.ToString());
             usuario.mandarMensaje(salas.Count() + "");
             listarSalas(usuario);
@@ -226,9 +222,8 @@ namespace Servidor_Poker
                     {
                         lock (l)
                         {
-                            bd.actualizarDatos(usuario.ToString());
-                            usuariosConectados.Remove(usuario.getCredenciales());
-                            usuario.cerrarSesion();
+                            sacarUsuario(usuario);
+                            break;
                         }
                     }
                     else if (usuario.Mensaje.Split(Clave.Separador)[0] == Clave.Sala)
@@ -242,7 +237,7 @@ namespace Servidor_Poker
                                 listarSalas(usuario);
                             }
                             else
-                            {
+                            {                                
                                 usuario.mandarMensaje(Clave.SalaDisponible);
                                 salas[numSala].Usuarios.Add(usuario);
                                 salas[numSala].Llena = true;
@@ -255,7 +250,18 @@ namespace Servidor_Poker
                         listarSalas(usuario);
                     }
                 }
-            }
+            }            
+        }
+
+        /// <summary>
+        /// Gestiona la salida de un usuario del sistema
+        /// </summary>
+        /// <param name="usuario"></param>
+        private static void sacarUsuario(Usuario usuario)
+        {            
+            bd.actualizarDatos(usuario.ToString());
+            usuariosConectados.Remove(usuario.getCredenciales());
+            usuario.cerrarSesion();           
         }
 
         /// <summary>
@@ -342,31 +348,38 @@ namespace Servidor_Poker
                 {
                     //Se comprueba si el usuario para jugar es nulo , de ser así se guarda el usuario de la lista
                     if (usuario == null)
-                    {
+                    {                        
                         usuario = sala.Usuarios[0];
                     }
                     if (gestor == null)
-                    {
+                    {                        
                         gestor = new GestorJuegoBlackJack(usuario);
                     }
                     usuario.leerMensaje();
-                    if (usuario.Mensaje != Clave.Volver)
+                    if (usuario.Mensaje != Clave.Volver && usuario.Mensaje != Clave.Desconexion)
                     {
                         gestor.ActualizarEstado();
                     }
                     else
-                    {
+                    {                        
                         //Si se elige volver al menu principal
                         usuario.Saldo = gestor.getSaldo();
                         usuario.Jugando = false;
                         sala.Llena = false;
                         bd.actualizarDatos(usuario.ToString());
                         //Mandamos al cliente la nueva información del usuario
-                        usuario.mandarMensaje(usuario.ToString());
+                        if (usuario.Mensaje != Clave.Desconexion)
+                        {
+                            usuario.mandarMensaje(usuario.ToString());
+                        }
+                        else
+                        {
+                            sacarUsuario(usuario);
+                            usuario = null;
+                        }
                         //Eliminamos al usuario de la sala
-                        sala.Usuarios.Clear();
-                        usuario = null;
-                        gestor = null;
+                        sala.Usuarios.Clear();                       
+                        gestor = null;                        
                     }
                 }
             }

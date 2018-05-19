@@ -80,7 +80,6 @@
         /// <param name="jugador">Jugador.</param>
         private void calcularValor(Mano crupier, Mano jugador)
         {
-
             if (crupier.valorNumerico() > limitePuntuacion)
             {
                 Valor = rJugador;

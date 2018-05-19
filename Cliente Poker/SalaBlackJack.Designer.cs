@@ -44,6 +44,8 @@
             this.lblValorCrupier = new System.Windows.Forms.Label();
             this.lblValorJugador = new System.Windows.Forms.Label();
             this.lblSaldo = new System.Windows.Forms.Label();
+            this.lblCrupier = new System.Windows.Forms.Label();
+            this.lblJugador = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cartaJugador1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cartaCrupier1)).BeginInit();
             this.SuspendLayout();
@@ -219,12 +221,34 @@
             this.lblSaldo.Size = new System.Drawing.Size(0, 18);
             this.lblSaldo.TabIndex = 15;
             // 
+            // lblCrupier
+            // 
+            this.lblCrupier.AutoSize = true;
+            this.lblCrupier.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCrupier.Location = new System.Drawing.Point(199, 12);
+            this.lblCrupier.Name = "lblCrupier";
+            this.lblCrupier.Size = new System.Drawing.Size(51, 16);
+            this.lblCrupier.TabIndex = 16;
+            this.lblCrupier.Text = "Crupier";
+            // 
+            // lblJugador
+            // 
+            this.lblJugador.AutoSize = true;
+            this.lblJugador.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJugador.Location = new System.Drawing.Point(199, 192);
+            this.lblJugador.Name = "lblJugador";
+            this.lblJugador.Size = new System.Drawing.Size(58, 16);
+            this.lblJugador.TabIndex = 17;
+            this.lblJugador.Text = "Jugador";
+            // 
             // SalaBlackJack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblJugador);
+            this.Controls.Add(this.lblCrupier);
             this.Controls.Add(this.lblSaldo);
             this.Controls.Add(this.lblValorJugador);
             this.Controls.Add(this.lblValorCrupier);
@@ -240,6 +264,7 @@
             this.Controls.Add(this.btnFichaDos);
             this.Controls.Add(this.btnFichaUno);
             this.Controls.Add(this.btnSalirSala);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SalaBlackJack";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -269,5 +294,7 @@
         private System.Windows.Forms.Label lblValorCrupier;
         private System.Windows.Forms.Label lblValorJugador;
         private System.Windows.Forms.Label lblSaldo;
+        private System.Windows.Forms.Label lblCrupier;
+        private System.Windows.Forms.Label lblJugador;
     }
 }

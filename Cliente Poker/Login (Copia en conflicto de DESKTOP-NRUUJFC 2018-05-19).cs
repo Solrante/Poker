@@ -46,27 +46,20 @@ namespace Cliente_Poker
             if (!camposVacios())
             {
                 //Se abre y se mandan dichos datos a través de la conexión al servidor
-                if (conexion.abrirConexion())
+                conexion.abrirConexion();
+                conexion.enviarMensaje(Clave.Login + Clave.Separador + txtCorreo.Text + Clave.SeparadorCredenciales + txtContraseña.Text);
+                //Se comprueba la respuesta del servidor a las credenciales mandadas , avisando de información erronea en la misma
+                //o accediendo al sistema de ser correcta.
+                string respuesta = conexion.recibirMensaje();
+                if (respuesta == Clave.LoginInvalido)
                 {
-                    conexion.enviarMensaje(Clave.Login + Clave.Separador + txtCorreo.Text + Clave.SeparadorCredenciales + txtContraseña.Text);
-                    //Se comprueba la respuesta del servidor a las credenciales mandadas , avisando de información erronea en la misma
-                    //o accediendo al sistema de ser correcta.
-                    string respuesta = conexion.recibirMensaje();
-                    if (respuesta == Clave.LoginInvalido)
-                    {
-                        mostrarError("Login invalido");
-                    }
-                    else if (respuesta == Clave.LoginValido)
-                    {
-                        loginValido = true;
-                        DialogResult = DialogResult.OK;
-                    }
+                    mostrarError("Login invalido");
                 }
-                else
+                else if (respuesta == Clave.LoginValido)
                 {
-                    mostrarError("Servidor inactivo , prueba más tarde.");
-                }
-                                
+                    loginValido = true;
+                    DialogResult = DialogResult.OK;
+                }                
             }
             else
             {

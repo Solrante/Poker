@@ -125,7 +125,6 @@ namespace Servidor_Poker
             return Correo + Clave.SeparadorCredenciales + Contraseña;
         }
 
-
         /// <summary>
         /// Envia un mensaje al usuario a través de su flujo de datos
         /// </summary>
@@ -163,7 +162,7 @@ namespace Servidor_Poker
                 mensaje = Clave.Desconexion;
             }
             Mensaje = mensaje;
-            Console.WriteLine("<-- : " + mensaje);
+            Console.WriteLine("<-- : " + mensaje);            
         }
 
         /// <summary>

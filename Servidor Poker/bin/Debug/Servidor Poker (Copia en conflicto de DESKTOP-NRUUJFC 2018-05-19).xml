@@ -19,7 +19,7 @@
             Conjuto de cartas que conforman la bajara
             </summary>
         </member>
-        <member name="F:Servidor_Poker.Baraja.barajaJuego">
+        <member name="F:Servidor_Poker.Baraja.cartasRepartidas">
             <summary>
             Lista de cartas ya repartidas
             </summary>
@@ -29,7 +29,7 @@
             Inicializa una instancia de la clase <see cref="T:Servidor_Poker.Baraja"/>.
             </summary>
         </member>
-        <member name="M:Servidor_Poker.Baraja.definirContenido(System.Boolean)">
+        <member name="M:Servidor_Poker.Baraja.definirContenido">
             <summary>
             Llena el contenido de la bajara con cartas.
             </summary>

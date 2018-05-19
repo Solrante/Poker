@@ -21,7 +21,7 @@ namespace Servidor_Poker
         /// <summary>
         /// Lista de cartas ya repartidas
         /// </summary>
-        private List<Carta> cartasRepartidas = new List<Carta>();
+        private List<Carta> barajaJuego = new List<Carta>();
 
         /// <summary>
         /// Inicializa una instancia de la clase <see cref="Baraja"/>.
@@ -30,18 +30,26 @@ namespace Servidor_Poker
         {
             aleatorio = new Random();
             definirContenido();
+            reiniciar();
         }
 
         /// <summary>
         /// Llena el contenido de la bajara con cartas.
         /// </summary>
-        private void definirContenido()
+        private void definirContenido(bool reinicio = false)
         {
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 13; j++)
                 {
-                    contenido[i, j] = new Carta((ePalo)i, (eCarta)j);
+                    if (!reinicio)
+                    {
+                        contenido[i, j] = new Carta((ePalo)i, (eCarta)j);
+                    }
+                    else
+                    {
+                        barajaJuego.Add(new Carta((ePalo)i, (eCarta)j));
+                    }
                 }
             }
         }
@@ -53,12 +61,10 @@ namespace Servidor_Poker
         public Carta sacarCarta()
         {
             Carta carta = null;
-            carta = contenido[aleatorio.Next(0, 3), aleatorio.Next(0, 12)];
-            while (cartasRepartidas.Contains(carta))
-            {
-                carta = contenido[aleatorio.Next(0, 3), aleatorio.Next(0, 12)];
-            }
-            cartasRepartidas.Add(carta);
+            int tamaño = barajaJuego.Count;
+            int posicion = aleatorio.Next(0, barajaJuego.Count - 1);
+            carta = barajaJuego[posicion];
+            barajaJuego.RemoveAt(posicion);
             return carta;
         }
 
@@ -67,7 +73,8 @@ namespace Servidor_Poker
         /// </summary>
         public void reiniciar()
         {
-            cartasRepartidas.Clear();
+            barajaJuego.Clear();
+            definirContenido(true);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Cliente_Poker
         /// <summary>
         /// Indica si la inicialización de la conexion con el servidor se ha completado
         /// </summary>
-        private bool conexionInicializada = false;
+        public bool conexionInicializada = false;
 
         /// <summary>
         /// IP de conexión al servidor.
@@ -89,23 +89,11 @@ namespace Cliente_Poker
         /// </summary>
         public bool abrirConexion()
         {
-            bool socketAbierto = false;
             try
             {
                 servidor = new IPEndPoint(IPAddress.Parse(IP_SERVIDOR), puerto);
                 sServidor = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 sServidor.Connect(servidor);
-                socketAbierto = true;
-            }
-            catch (SocketException ex)
-            {
-                Console.WriteLine("Error de conexión con servidor: {0}\nCódigo de error: {1}({2})",
-                                  ex.Message, (SocketError)ex.ErrorCode, ex.ErrorCode);
-            }
-            catch (OutOfMemoryException) { }
-            catch (ArgumentOutOfRangeException) { }
-            if (socketAbierto)
-            {
                 if (sServidor != null)
                 {
                     ns = new NetworkStream(sServidor);
@@ -117,8 +105,16 @@ namespace Cliente_Poker
                     conexionInicializada = true;
                 }
             }
+            catch (SocketException ex)
+            {
+                Console.WriteLine("Error de conexión con servidor: {0}\nCódigo de error: {1}({2})",
+                                  ex.Message, (SocketError)ex.ErrorCode, ex.ErrorCode);
+            }
+            catch (OutOfMemoryException) { }
+            catch (ArgumentOutOfRangeException) { }
 
-            return socketAbierto;
+            return conexionInicializada;
+
         }
 
         /// <summary>

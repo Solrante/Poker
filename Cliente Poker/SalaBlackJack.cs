@@ -287,6 +287,7 @@ namespace Cliente_Poker
                 case Clave.Saldo:
                     saldo = Convert.ToInt32(respuesta.Split(Clave.Separador)[1]);
                     Invoke(textoLabel, lblSaldo, saldo.ToString());
+                    comprobarSaldo();
                     break;
                 case Clave.Valor:
                     actualizarValor(respuesta);
@@ -307,7 +308,7 @@ namespace Cliente_Poker
         /// </summary>
         private void reset()
         {
-            Thread.Sleep(4000);
+            Thread.Sleep(500);
             lock (l)
             {
                 Invoke(textoLabel, lblResultado, "");
@@ -332,7 +333,7 @@ namespace Cliente_Poker
         /// Comprueba el saldo actual activando o desactivando las fichas si se tiene el suficiente o no.
         /// </summary>
         private void comprobarSaldo()
-        {           
+        {
             Invoke(activo, btnFichaUno, Convert.ToInt32(btnFichaUno.Tag) > saldo);
             Invoke(activo, btnFichaDos, Convert.ToInt32(btnFichaDos.Tag) > saldo);
             Invoke(activo, btnFichaTres, Convert.ToInt32(btnFichaTres.Tag) > saldo);

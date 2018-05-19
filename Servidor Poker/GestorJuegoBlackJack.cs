@@ -76,7 +76,7 @@ namespace Servidor_Poker
         /// Actualiza el estado de la partida
         /// </summary>
         public void ActualizarEstado()
-        {
+        {            
             switch (usuario.Mensaje.Split(Clave.Separador)[0].Trim())
             {
                 case Clave.Ficha:
@@ -94,7 +94,6 @@ namespace Servidor_Poker
                 case Clave.Plantarse:
                     if (partidaEmpezada)
                     {
-                        Console.WriteLine("Crupier juega");
                         crupierJuega();
                     }
                     break;
@@ -152,6 +151,7 @@ namespace Servidor_Poker
                     usuario.mandarMensaje(Clave.Saldo + Clave.Separador + saldoDisponible);
                     manoCrupier.vaciarMano();
                     manoJugador.vaciarMano();
+                    bar.reiniciar();
                     usuario.Mensaje = "";
                     retirado = false;
                     partidaEmpezada = false;
@@ -173,6 +173,7 @@ namespace Servidor_Poker
                 if (resultado.comprobarManos(manoCrupier, manoJugador))
                 {
                     finMano();
+                    break;
                 }
             }
             //Una vez sacas las cartas y no haber resultado por pasarse o blackjack le indicamos al resultado que fuerce el calculo del resultado

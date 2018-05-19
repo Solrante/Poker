@@ -258,5 +258,15 @@ namespace Cliente_Poker
             Environment.Exit(0);
 
         }
+
+        /// <summary>
+        /// Gestiona el evento Tick del objeto timer del formulario
+        /// </summary>
+        /// <param name="sender">Timer del formulario</param>
+        /// <param name="e">Instancia de EventArgs que contiene los datos sobre el evento</param>
+        private void tmrActualizarSalas_Tick(object sender, EventArgs e)
+        {
+            btnActualizarSalas.PerformClick();
+        }
     }
 }

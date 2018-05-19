@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuPrincipal));
             this.btnSalir = new System.Windows.Forms.Button();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.btnActualizarSalas = new System.Windows.Forms.Button();
+            this.tmrActualizarSalas = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnSalir
@@ -70,6 +72,12 @@
             this.btnActualizarSalas.UseVisualStyleBackColor = false;
             this.btnActualizarSalas.Click += new System.EventHandler(this.btnActualizarSalas_Click);
             // 
+            // tmrActualizarSalas
+            // 
+            this.tmrActualizarSalas.Enabled = true;
+            this.tmrActualizarSalas.Interval = 15000;
+            this.tmrActualizarSalas.Tick += new System.EventHandler(this.tmrActualizarSalas_Tick);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -97,6 +105,7 @@
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Button btnActualizarSalas;
+        private System.Windows.Forms.Timer tmrActualizarSalas;
     }
 }
 

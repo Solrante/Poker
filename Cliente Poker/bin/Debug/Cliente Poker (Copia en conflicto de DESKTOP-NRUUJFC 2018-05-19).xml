@@ -294,13 +294,6 @@
             <param name="sender">Origen del evento.</param>
             <param name="e">Instancia de  <see cref="T:System.Windows.Forms.FormClosingEventArgs"/> que contiene la información del evento.</param>
         </member>
-        <member name="M:Cliente_Poker.MenuPrincipal.tmrActualizarSalas_Tick(System.Object,System.EventArgs)">
-            <summary>
-            Gestiona el evento Tick del objeto timer del formulario
-            </summary>
-            <param name="sender">Timer del formulario</param>
-            <param name="e">Instancia de EventArgs que contiene los datos sobre el evento</param>
-        </member>
         <member name="F:Cliente_Poker.MenuPrincipal.components">
             <summary>
             Variable del diseñador necesaria.

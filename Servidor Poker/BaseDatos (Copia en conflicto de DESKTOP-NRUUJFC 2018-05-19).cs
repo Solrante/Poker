@@ -75,9 +75,7 @@ namespace Servidor_Poker
                 conexionLectura = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
                 conexionEscritura = new MySqlConnection("SERVER=" + server + ";" + "DATABASE=" + database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";");
                 conexionLectura.Open();
-                conexionLectura.Close();
-                conexionEscritura.Open();                               
-                conexionEscritura.Close();
+                conexionEscritura.Open();
                 baseDeDatosActiva = true;
             }
             catch (MySqlException) { }
@@ -93,7 +91,7 @@ namespace Servidor_Poker
             string consulta = string.Format(queryActualizarSaldo,
                 datos.Split(Clave.SeparadorCredenciales)[0],
                 datos.Split(Clave.SeparadorCredenciales)[1]);
-            conexionEscritura.Open();
+
             MySqlCommand cmd = new MySqlCommand(consulta, conexionEscritura);
             cmd.ExecuteNonQuery();
             conexionEscritura.Close();
@@ -107,7 +105,6 @@ namespace Servidor_Poker
         {
             if (credenciales.Contains(Clave.SeparadorCredenciales.ToString()))
             {
-                conexionEscritura.Open();
                 string consulta = string.Format(queryRegistrarUsuario,
                     credenciales.Split(Clave.SeparadorCredenciales)[0],
                     credenciales.Split(Clave.SeparadorCredenciales)[1]);
@@ -127,7 +124,6 @@ namespace Servidor_Poker
             bool resultado = false;
             if (credenciales.Contains(Clave.SeparadorCredenciales.ToString()))
             {
-                conexionLectura.Open();
                 string consulta = string.Format(queryLeerUsuario,
                     credenciales.Split(Clave.SeparadorCredenciales)[0],
                     credenciales.Split(Clave.SeparadorCredenciales)[1]);
@@ -155,7 +151,7 @@ namespace Servidor_Poker
             string consulta = string.Format(queryLeerUsuario,
                 credenciales.Split(Clave.SeparadorCredenciales)[0],
                 credenciales.Split(Clave.SeparadorCredenciales)[1]);
-            conexionLectura.Open();
+
             MySqlCommand cmd = new MySqlCommand(consulta, conexionLectura);
             MySqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())

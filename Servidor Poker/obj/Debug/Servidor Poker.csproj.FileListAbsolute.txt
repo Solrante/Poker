@@ -19,9 +19,8 @@ C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debu
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\Servidor Poker.exe
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\Servidor Poker.pdb
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\MySql.Data.xml
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csprojResolveAssemblyReference.cache
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csproj.CoreCompileInputs.cache
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.exe
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.pdb
-C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\bin\Debug\MySql.Data.dll
+C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csprojAssemblyReference.cache
 C:\Users\Cristian\Dropbox\Ciclo\CS2\Proyecto Curro\Poker\Servidor Poker\obj\Debug\Servidor Poker.csproj.CopyComplete
