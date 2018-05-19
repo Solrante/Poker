@@ -327,6 +327,12 @@
             </summary>
             <param name="usu">Usuario.</param>
         </member>
+        <member name="M:Servidor_Poker.Program.sacarUsuario(Servidor_Poker.Usuario)">
+            <summary>
+            Gestiona la salida de un usuario del sistema
+            </summary>
+            <param name="usuario"></param>
+        </member>
         <member name="M:Servidor_Poker.Program.listarSalas(Servidor_Poker.Usuario)">
             <summary>
             Manda a un usuario los datos de las salas actuales
