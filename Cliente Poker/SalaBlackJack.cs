@@ -101,6 +101,11 @@ namespace Cliente_Poker
         private bool finMano = false;
 
         /// <summary>
+        /// Contiene el valor base de la apuesta
+        /// </summary>
+        private int apuesta = 0;
+
+        /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="T:Cliente_Poker.SalaBlackJack"/>.
         /// </summary>
         /// <param name="menuPrincipal">Instancia del formulario principal del cliente.</param>
@@ -149,11 +154,13 @@ namespace Cliente_Poker
                 if (btn == btnFichaUno || btn == btnFichaDos || btn == btnFichaTres)
                 {
                     mensaje = Clave.Ficha + Clave.Separador + btn.Tag.ToString();
+                    apuesta = Convert.ToInt32(btn.Tag.ToString());                   
                     ficha = true;
                 }
                 if (btn == btnPedir)
                 {
                     mensaje = Clave.Pedir;
+
                     Invoke(visibilidad, btnDoblar, false);
                     Invoke(visibilidad, btnRetirarse, false);
                 }
@@ -278,7 +285,7 @@ namespace Cliente_Poker
         /// </summary>
         /// <param name="respuesta">Respuesta.</param>
         private void actualizarEstado(string respuesta)
-        {           
+        {
             switch (respuesta.Split(Clave.Separador)[0])
             {
                 case Clave.Carta:
@@ -337,6 +344,10 @@ namespace Cliente_Poker
             Invoke(activo, btnFichaUno, Convert.ToInt32(btnFichaUno.Tag) > saldo);
             Invoke(activo, btnFichaDos, Convert.ToInt32(btnFichaDos.Tag) > saldo);
             Invoke(activo, btnFichaTres, Convert.ToInt32(btnFichaTres.Tag) > saldo);
+            if (saldo < apuesta)
+            {
+                Invoke(visibilidad, btnDoblar, false);
+            }
         }
 
         /// <summary>
@@ -384,8 +395,8 @@ namespace Cliente_Poker
         /// <param name="c">C.</param>
         /// <param name="activo">Si ha de desactivarse <c>true</c> si no <c>false</c>.</param>
         private void CambiarActivo(Control c, bool activo)
-        {            
-                c.Enabled = !activo;
+        {
+            c.Enabled = !activo;
         }
 
         /// <summary>
@@ -421,7 +432,7 @@ namespace Cliente_Poker
         /// <param name="e">Instancia de <see cref="FormClosingEventArgs"/> que contiene los datos del evento.</param>
         private void SalaBlackJack_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MenuPrincipal.MenuPrincipal_FormClosing(sender,e);
+            MenuPrincipal.MenuPrincipal_FormClosing(sender, e);
         }
     }
 }

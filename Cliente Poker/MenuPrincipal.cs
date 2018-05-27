@@ -155,7 +155,7 @@ namespace Cliente_Poker
                 btn.Tag = Clave.Sala + Clave.Separador + sala.NumSala + "";
                 btn.Location = new Point(centroHorizontal - btn.Width / 2, oriY);
                 //Desactivo el boton si la sala ya esta ocupada
-                btn.Enabled = !sala.Llena;
+                btn.Enabled = comprobarEntrada(sala);
                 btn.BackColor = Color.Sienna;
                 btn.ForeColor = Color.White;
                 botonesSalas.Add(btn);
@@ -169,6 +169,22 @@ namespace Cliente_Poker
                 }
                 oriY += separaciónVerticalBotones;
             }
+        }
+
+        /// <summary>
+        /// Genera un resultado booleano segun si un usuario puede o no acceder a una sala
+        /// </summary>
+        /// <param name="sala">Sala de referencia</param>
+        /// <returns>Devuelve true si el usuario cumple los requisitos , de otra manera false</returns>
+        private bool comprobarEntrada(Sala sala)
+        {
+            bool res = !sala.Llena;
+            if (res && sala.CuotaEntrada > usuario.Saldo)
+            {
+                res = false;
+            }
+
+            return res;
         }
 
         /// <summary>
@@ -189,25 +205,34 @@ namespace Cliente_Poker
         private void btnSala_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            conexion.enviarMensaje((string)btn.Tag);
-            if (conexion.recibirMensaje() != Clave.SalaLlena)
+            int indiceSala = Convert.ToInt32(((string)btn.Tag).Split(Clave.Separador)[1]);
+            if (usuario.Saldo > salas[indiceSala].CuotaEntrada)
             {
-                Hide();
-                if (btn.Text.Split(Clave.Separador)[1].Trim() == eSala.POKER.ToString())
+                conexion.enviarMensaje((string)btn.Tag);
+                if (conexion.recibirMensaje() != Clave.SalaLlena)
                 {
-                    //Si se implementan salas de poker se abririán aqui.
+                    Hide();
+                    if (btn.Text.Split(Clave.Separador)[1].Trim() == eSala.POKER.ToString())
+                    {
+                        //Si se implementan salas de poker se abririán aqui.
+                    }
+                    else
+                    {
+                        blackJack = new SalaBlackJack(this);
+                        blackJack.Show();
+                    }
                 }
                 else
                 {
-                    blackJack = new SalaBlackJack(this);
-                    blackJack.Show();
+                    MessageBox.Show("Sala Llena , se actualizaran las salas");
+                    actualizarSalas();
                 }
             }
             else
             {
-                MessageBox.Show("Sala Llena , se actualizaran las salas");
-                actualizarSalas();
+                MessageBox.Show("Saldo inferior a la cuotra de entrada de la sala");
             }
+
         }
 
         /// <summary>
@@ -219,7 +244,7 @@ namespace Cliente_Poker
             {
                 sala.actualizarDatos(conexion.recibirMensaje());
                 //Si el nuevo estado de sala ha cambiado se ajustara el boton
-                botonesSalas[salas.IndexOf(sala)].Enabled = !sala.Llena;
+                botonesSalas[salas.IndexOf(sala)].Enabled = comprobarEntrada(sala);
             }
         }
 

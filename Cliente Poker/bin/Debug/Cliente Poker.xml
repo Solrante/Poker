@@ -254,6 +254,13 @@
             Genera botones según las salas contenidas por el listado de salas de la instancia".
             </summary>
         </member>
+        <member name="M:Cliente_Poker.MenuPrincipal.comprobarEntrada(Cliente_Poker.Sala)">
+            <summary>
+            Genera un resultado booleano segun si un usuario puede o no acceder a una sala
+            </summary>
+            <param name="sala">Sala de referencia</param>
+            <returns>Devuelve true si el usuario cumple los requisitos , de otra manera false</returns>
+        </member>
         <member name="M:Cliente_Poker.MenuPrincipal.btnSalir_Click(System.Object,System.EventArgs)">
             <summary>
             Gestiona el evento Click del control btnSalir.
@@ -573,6 +580,11 @@
         <member name="F:Cliente_Poker.SalaBlackJack.finMano">
             <summary>
             Indica si se esta en la fase de reinicio entre partidas
+            </summary>
+        </member>
+        <member name="F:Cliente_Poker.SalaBlackJack.apuesta">
+            <summary>
+            Contiene el valor base de la apuesta
             </summary>
         </member>
         <member name="M:Cliente_Poker.SalaBlackJack.#ctor(Cliente_Poker.MenuPrincipal)">

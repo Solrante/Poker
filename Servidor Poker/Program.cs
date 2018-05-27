@@ -97,9 +97,9 @@ namespace Servidor_Poker
         /// </summary>
         static void crearSalas()
         {
-            salas.Add(new Sala("0,0,0", eSala.BLACKJACK));
-            salas.Add(new Sala("1,0,0", eSala.BLACKJACK));
-            salas.Add(new Sala("2,0,0", eSala.BLACKJACK));
+            salas.Add(new Sala("0,0,25", eSala.BLACKJACK));
+            salas.Add(new Sala("1,0,25", eSala.BLACKJACK));
+            salas.Add(new Sala("2,0,25", eSala.BLACKJACK));
         }
 
         /// <summary>
